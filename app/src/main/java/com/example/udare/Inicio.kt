@@ -27,11 +27,6 @@ class Inicio : AppCompatActivity() {
             popupWindow.showAtLocation(popupButton, Gravity.BOTTOM, 0, 600)
         }
 
-        /*val closeButton = popupView.findViewById<Button>(R.id.buttonClosePopup)
-        closeButton.setOnClickListener {
-            popupWindow.dismiss()
-        }*/
-
         popupView.setOnTouchListener { _ , _ ->
             if (popupWindow.isShowing) {
                 popupWindow.dismiss()
