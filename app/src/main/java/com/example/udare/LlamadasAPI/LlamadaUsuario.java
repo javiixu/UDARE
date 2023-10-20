@@ -22,5 +22,4 @@ public class LlamadaUsuario {
     Call<List<Usuario>> call = apiUsuario.getUsers();
 
 
-
 }
