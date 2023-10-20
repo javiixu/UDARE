@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">UDARE</string>
+    <string name="titulo_notificacion">Notificación Simple</string>
 </resources>
