@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.PopupWindow
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.udare.Adapter.FotoAdapter
 
 class Inicio : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,5 +36,20 @@ class Inicio : AppCompatActivity() {
             }
             true
         }
+
+        val photoRecyclerView: RecyclerView = findViewById(R.id.viewer)
+
+        val fotoList = listOf(
+                R.drawable.foto1,
+                R.drawable.foto2,
+                R.drawable.foto3
+
+                // Agrega más imágenes aquí
+        )
+
+        val photoAdapter = FotoAdapter(fotoList)
+        photoRecyclerView.adapter = photoAdapter
+        photoRecyclerView.layoutManager = LinearLayoutManager(this)
+
     }
 }
