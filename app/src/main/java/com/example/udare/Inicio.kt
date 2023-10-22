@@ -1,5 +1,6 @@
 package com.example.udare
 
+import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -16,9 +17,13 @@ import android.widget.Button
 import android.widget.PopupWindow
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import android.content.Intent
+import android.app.PendingIntent
 
 class Inicio : AppCompatActivity() {
-
+    companion object {
+        const val CHANNELID = "channel"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
@@ -43,45 +48,47 @@ class Inicio : AppCompatActivity() {
             true
         }
 
-        // Verificar y crear el canal de notificación (requerido a partir de Android 8.0)
-        createNotificationChannel()
+        createChannel()
+        createNotification()
 
-        // Llamar al método para mostrar la notificación
-
-
-        if (NotificationManagerCompat.from(this).areNotificationsEnabled()) {
-            showNotification()
-        } else {
-            // No tienes permiso para mostrar notificaciones, toma medidas adecuadas
-        }
     }
 
-    fun createNotificationChannel() {
+    fun createChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channelId = "mi_canal_id"
-            val channelName = "Mi Canal"
-            val channelDescription = "Descripción del canal"
-
-            val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT).apply {
-                description = channelDescription
+            val channel = NotificationChannel(
+                CHANNELID,
+                "MySuperChannel",
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                description = "SUSCRIBETE"
             }
 
-            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
             notificationManager.createNotificationChannel(channel)
         }
     }
 
-    fun showNotification() {
-        val channelId = "mi_canal_id" // El mismo ID que se usó al crear el canal
-        val builder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.udare_notificacion) // Icono pequeño de la notificación
+    fun createNotification() {
+        val intent = Intent(this, Inicio::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+
+        val flag = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
+        val pendingIntent:PendingIntent = PendingIntent.getActivity(this, 0, intent, flag)
+
+        val builder = NotificationCompat.Builder(this, CHANNELID)
+            .setSmallIcon(androidx.core.R.drawable.notification_bg) // Icono pequeño de la notificación
             .setContentTitle("Título de la notificación")
             .setContentText("Contenido de la notificación")
-            .setPriority(NotificationCompat.PRIORITY_HIGH) // Prioridad de la notificación
+            .setContentIntent(pendingIntent)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT) // Prioridad de la notificación
 
 
-        val notificationManager = NotificationManagerCompat.from(this)
-        notificationManager.notify(1, builder.build())
+        with(NotificationManagerCompat.from(this)) {
+            notify(1,builder.build())
+        }
 
     }
 }
