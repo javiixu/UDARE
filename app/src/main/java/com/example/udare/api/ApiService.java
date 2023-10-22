@@ -1,4 +1,4 @@
-package com.example.udare.Interfaces;
+package com.example.udare.api;
 
 import com.example.udare.Modelo.Usuario;
 
@@ -6,9 +6,9 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 
-public interface UsuarioAPI {
+public interface ApiService {
+
     @GET("/users")
-    public Call<List<Usuario>> getUsers();
+    Call<List<Usuario>> getAllUsers();
 }
