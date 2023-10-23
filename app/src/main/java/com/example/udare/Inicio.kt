@@ -70,6 +70,7 @@ class Inicio : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("MissingPermission")
     fun createNotification() {
         val intent = Intent(this, Inicio::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
