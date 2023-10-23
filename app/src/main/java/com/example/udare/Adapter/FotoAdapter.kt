@@ -21,7 +21,7 @@ class FotoAdapter (private val fotos: List<Int>) : RecyclerView.Adapter<FotoAdap
     }
 
     override fun onBindViewHolder(holder: FotoHolder, position: Int) {
-        val fotoResId = fotos[position]
+        //val fotoResId = fotos[position]
         val standardSize = 1200 // Tamaño estándar en píxeles
 
         val options = RequestOptions()
@@ -29,7 +29,7 @@ class FotoAdapter (private val fotos: List<Int>) : RecyclerView.Adapter<FotoAdap
             .centerCrop()
 
         Glide.with(holder.imageView)
-            .load(fotoResId)
+            .load("https://loremflickr.com/320/240?random=3")
             .apply(options)
             .into(holder.imageView)
     }

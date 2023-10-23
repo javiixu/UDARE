@@ -69,8 +69,7 @@ class Inicio : AppCompatActivity() {
         val fotoList = listOf(
                 R.drawable.foto1,
                 R.drawable.foto2,
-                R.drawable.foto3
-
+                R.drawable.foto3,
                 // Agrega más imágenes aquí
         )
 
