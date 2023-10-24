@@ -47,5 +47,11 @@ public class Usuario {
         this.posts = posts;
     }
 
+    public Perfil getPerfil() {
+        return perfil;
+    }
 
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
 }

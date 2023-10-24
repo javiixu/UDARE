@@ -29,7 +29,7 @@ class FotoAdapter (private val fotos: List<Int>) : RecyclerView.Adapter<FotoAdap
             .centerCrop()
 
         Glide.with(holder.imageView)
-            .load("https://loremflickr.com/320/240?random=3")
+            .load("https://testudare.s3.eu-west-3.amazonaws.com/169808470849611c4dcddeb988162d976e93ae5512264.jpg")
             .apply(options)
             .into(holder.imageView)
     }
