@@ -1,34 +1,32 @@
 package com.example.udare.repositorios;
 
 import com.example.udare.Modelo.Post;
-import com.example.udare.Modelo.Usuario;
 import com.example.udare.api.ApiClient;
 import com.example.udare.api.ApiService;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UsuarioRepository {
+public class PostRepository {
     private final ApiService apiService;
 
-    public UsuarioRepository() {
+    public PostRepository() {
         apiService = ApiClient.getClient().create(ApiService.class);
     }
 
-    public void obtenerUsuarios(final UsuarioCallback callback) {
-        Call<List<Usuario>> call = apiService.getAllUsers();
-        call.enqueue(new Callback<List<Usuario>>() {
+
+    public void obtenerPosts(final PostRepository.PostCallback callback) {
+        Call<List<Post>> call = apiService.getAllPosts();
+        call.enqueue(new Callback<List<Post>>() {
             @Override
-            public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if (response.isSuccessful()) {
-                    List<Usuario> usuarios = response.body();
-                    if (usuarios != null) {
-                        callback.onSuccess(usuarios);
+                    List<Post> posts = response.body();
+                    if (posts != null) {
+                        callback.onSuccess(posts);
                     } else {
-                        callback.onError("Lista de usuarios nula");
+                        callback.onError("Lista de posts nula");
                     }
                 } else {
                     callback.onError("Error en la respuesta: " + response.message());
@@ -36,14 +34,15 @@ public class UsuarioRepository {
             }
 
             @Override
-            public void onFailure(Call<List<Usuario>> call, Throwable t) {
+            public void onFailure(Call<List<Post>> call, Throwable t) {
                 callback.onError("Error en la llamada: " + t.getMessage());
             }
         });
     }
 
-    public interface UsuarioCallback {
-        void onSuccess(List<Usuario> usuarios);
+    public interface PostCallback {
+        void onSuccess(List<Post> posts);
         void onError(String mensajeError);
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.udare.api;
 
+import com.example.udare.Modelo.Post;
 import com.example.udare.Modelo.Usuario;
 
 import java.util.List;
@@ -11,4 +12,7 @@ public interface ApiService {
 
     @GET("/users")
     Call<List<Usuario>> getAllUsers();
+
+    @GET("/posts")
+    Call<List<Post>> getAllPosts();
 }

@@ -12,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.udare.Adapter.FotoAdapter
+import com.example.udare.Modelo.Post
 import com.example.udare.Modelo.Usuario
+import com.example.udare.repositorios.PostRepository
 import com.example.udare.repositorios.UsuarioRepository
 
 class Inicio : AppCompatActivity() {
@@ -25,7 +27,7 @@ class Inicio : AppCompatActivity() {
 
         //prueba llamada al backend para obtener los usuarios
         usuarioRepository.obtenerUsuarios(object : UsuarioRepository.UsuarioCallback {
-            override fun onSuccess(usuariosList: List<Usuario>) {
+            override fun onSuccess(usuariosList: MutableList<Usuario>) {
                 // Procesa la lista de usuarios aquí
                 for (usuario in usuariosList) {
                     // Realiza alguna operación con cada usuario, si es necesario
@@ -40,7 +42,18 @@ class Inicio : AppCompatActivity() {
         })
 
 
+        val postRepository = PostRepository()
 
+        postRepository.obtenerPosts((object : PostRepository.PostCallback{
+            override fun onSuccess(posts: MutableList<Post>) {
+
+                Log.d("tag-prueba1","Nombre de usuario: ${posts[0].image}")
+            }
+
+            override fun onError(mensajeError: String?) {
+
+            }
+        }))
 
 
 
