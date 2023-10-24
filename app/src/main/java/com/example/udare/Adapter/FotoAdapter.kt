@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.udare.R
 
-class FotoAdapter (private val fotos: List<Int>) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
+class FotoAdapter (private val fotos: List<String>) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
 
     class FotoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.foto_viewer)
@@ -21,7 +21,7 @@ class FotoAdapter (private val fotos: List<Int>) : RecyclerView.Adapter<FotoAdap
     }
 
     override fun onBindViewHolder(holder: FotoHolder, position: Int) {
-        //val fotoResId = fotos[position]
+        val fotoResId = fotos[position]
         val standardSize = 1200 // Tamaño estándar en píxeles
 
         val options = RequestOptions()
@@ -29,7 +29,7 @@ class FotoAdapter (private val fotos: List<Int>) : RecyclerView.Adapter<FotoAdap
             .centerCrop()
 
         Glide.with(holder.imageView)
-            .load("https://testudare.s3.eu-west-3.amazonaws.com/169808470849611c4dcddeb988162d976e93ae5512264.jpg")
+            .load(fotoResId)
             .apply(options)
             .into(holder.imageView)
     }
