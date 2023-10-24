@@ -21,10 +21,9 @@ import android.content.Intent
 import android.app.PendingIntent
 
 class Inicio : AppCompatActivity() {
-    companion object {
-        const val CHANNELID = "channel"
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        lateinit var notificationManager: Notificacion
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
 
@@ -47,49 +46,10 @@ class Inicio : AppCompatActivity() {
             }
             true
         }
-
-        createChannel()
-        createNotification()
-
-    }
-
-    fun createChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                CHANNELID,
-                "MySuperChannel",
-                NotificationManager.IMPORTANCE_DEFAULT
-            ).apply {
-                description = "SUSCRIBETE"
-            }
-
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-            notificationManager.createNotificationChannel(channel)
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    fun createNotification() {
-        val intent = Intent(this, Inicio::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-
-        val flag = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
-        val pendingIntent:PendingIntent = PendingIntent.getActivity(this, 0, intent, flag)
-
-        val builder = NotificationCompat.Builder(this, CHANNELID)
-            .setSmallIcon(androidx.core.R.drawable.notification_bg) // Icono pequeño de la notificación
-            .setContentTitle("Título de la notificación")
-            .setContentText("Contenido de la notificación")
-            .setContentIntent(pendingIntent)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT) // Prioridad de la notificación
-
-
-        with(NotificationManagerCompat.from(this)) {
-            notify(1,builder.build())
-        }
+        notificationManager = Notificacion(this)
+        notificationManager.createNotification()
 
     }
+
+
 }
