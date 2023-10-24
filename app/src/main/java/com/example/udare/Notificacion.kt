@@ -48,8 +48,8 @@ class Notificacion(val context: Context) {
     fun createNotification() {
         val builder = NotificationCompat.Builder(context, CHANNELID)
             .setSmallIcon(androidx.core.R.drawable.notification_bg) // Icono pequeño de la notificación
-            .setContentTitle("Título de la notificación")
-            .setContentText("Contenido de la notificación")
+            .setContentTitle("Reto diario pendiente")
+            .setContentText("Tienes disponible un reto diario sin completar. ¡A por él!")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT) // Prioridad de la notificación
 
 
