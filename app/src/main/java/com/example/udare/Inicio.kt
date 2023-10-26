@@ -52,8 +52,6 @@ class Inicio : AppCompatActivity() {
         thread {
             checkAndShowNotification()
         }
-
-
     }
     private fun checkAndShowNotification() {
         val desiredHour = 12
