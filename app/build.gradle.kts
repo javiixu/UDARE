@@ -76,4 +76,19 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+
+
+    val camerax_version : String = "1.2.0"
+    // CameraX fundamental libraries
+    implementation("androidx.camera:camera-core:${camerax_version}")
+    implementation("androidx.camera:camera-camera2:${camerax_version}")
+    // CameraX Lifecycle Library
+    implementation("androidx.camera:camera-lifecycle:$camerax_version")
+    // CameraX View class
+    implementation("androidx.camera:camera-view:$camerax_version")
+
+    //other useful stuff
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.concurrent:concurrent-futures-ktx:1.1.0")
+
 }

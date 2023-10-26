@@ -1,5 +1,6 @@
 package com.example.udare
 
+
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,8 @@ import com.example.udare.Modelo.Post
 import com.example.udare.Modelo.Usuario
 import com.example.udare.repositorios.PostRepository
 import com.example.udare.repositorios.UsuarioRepository
+import android.content.Intent
+
 
 class Inicio : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,6 +91,12 @@ class Inicio : AppCompatActivity() {
                 popupWindow.dismiss()
             }
             true
+
+        popupButton.setOnClickListener(){
+            Intent(this, SeleccionarRetoActivity::class.java).also{
+                startActivity(it)
+            }
+
         }
 
     }
