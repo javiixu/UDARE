@@ -31,7 +31,6 @@ class Inicio : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
 
-
         val popupButton = findViewById<Button>(R.id.retos)
         val popupView = LayoutInflater.from(this).inflate(R.layout.activity_popup, null)
         val popupWindow = PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
