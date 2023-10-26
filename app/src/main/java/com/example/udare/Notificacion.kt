@@ -21,7 +21,7 @@ import android.content.Intent
 import android.app.PendingIntent
 import androidx.core.content.ContextCompat.getSystemService
 
-class Notificacion(val context: Context) {
+public class Notificacion(val context: Context) {
     companion object {
         const val CHANNELID = "channel"
     }
@@ -36,7 +36,7 @@ class Notificacion(val context: Context) {
                 "MySuperChannel",
                 NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
-                description = "SUSCRIBETE"
+                description = "DESCRIPTION"
             }
 
             val notificationManager = context.getSystemService(NotificationManager::class.java)
@@ -48,8 +48,8 @@ class Notificacion(val context: Context) {
     fun createNotification() {
         val builder = NotificationCompat.Builder(context, CHANNELID)
             .setSmallIcon(androidx.core.R.drawable.notification_bg) // Icono pequeño de la notificación
-            .setContentTitle("Título de la notificación")
-            .setContentText("Contenido de la notificación")
+            .setContentTitle("Tienes un reto diario pendiente")
+            .setContentText("¡Atrévete|")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT) // Prioridad de la notificación
 
 
