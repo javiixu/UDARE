@@ -1,23 +1,43 @@
 package com.example.udare
 
+import android.content.ContentValues
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.icu.text.SimpleDateFormat
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.provider.MediaStore
+import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.view.LifecycleCameraController
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
 import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class SeleccionarRetoActivity : AppCompatActivity() {
+    //variables for cameraX
+    private val REQUIRED_PERMISSIONS = arrayOf(android.Manifest.permission.CAMERA)
+    private lateinit var cameraController: LifecycleCameraController
     override fun onCreate(savedInstanceState: Bundle?) {
+        //TODO Check in Database if the challenge has already been done
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_seleccionar_reto)
 
-
-
-
+        //TIMER MANAGMENT
         //current Calendar
         var current = Calendar.getInstance()
 
@@ -55,17 +75,85 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
         //starts the timer for the challenge
         val tvChallengeTimer = findViewById<TextView>(R.id.tvChallengeTimer)
-
-
         doTimer(difference, tvChallengeTimer)
 
 
+        //CAMERA MANGAMENT
+        if(allPermissionsGranted()){
+            startCamera()
+        } else{
+            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, 0)
+        }
+
+
+        //BUTTON workflow
+        var btnSocialChallenge = findViewById<Button>(R.id.btnSocialChallenge)
+        var btnCultureChallenge = findViewById<Button>(R.id.btnCultureChallenge)
+        var btnSportChallenge = findViewById<Button>(R.id.btnSportChallenge)
+        var btnCookingChallenge = findViewById<Button>(R.id.btnCookingChallenge)
+        var btnGrowthChallenge = findViewById<Button>(R.id.btnGrowthChallenge)
+
+
+        /*
+         //TODO set the name of the buttons via the database
+        btnSocialChallenge.text =
+        btnCultureChallenge.text =
+        btnSportChallenge.text =
+        btnCookingChallenge.text =
+        btnGrowthChallenge.text =
+
+         */
+
+        var choosenChallenge: String  = "choosen Challenge"
+
+
+        //for every challenge handle what happens when this challenge gets clicked
+        btnCookingChallenge.setOnClickListener(){
+            choosenChallenge = btnCookingChallenge.text.toString()
+            Intent(this,HacerFotoActivity::class.java).also{
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
+                startActivity(it)
+            }
+
+        }
+
+        btnGrowthChallenge.setOnClickListener(){
+            choosenChallenge = btnGrowthChallenge.text.toString()
+            Intent(this,HacerFotoActivity::class.java).also{
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
+                startActivity(it)
+            }
+        }
+
+        btnSocialChallenge.setOnClickListener(){
+            choosenChallenge = btnSocialChallenge.text.toString()
+            Intent(this,HacerFotoActivity::class.java).also{
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
+                startActivity(it)
+            }
+        }
+
+        btnCultureChallenge.setOnClickListener(){
+            choosenChallenge = btnSocialChallenge.text.toString()
+            Intent(this,HacerFotoActivity::class.java).also{
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
+                startActivity(it)
+            }
+       }
+
+        btnSportChallenge.setOnClickListener(){
+            choosenChallenge = btnSocialChallenge.text.toString()
+            Intent(this,HacerFotoActivity::class.java).also{
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
+                startActivity(it)
+            }
+        }
 
     }
 
 
-
-    fun doTimer(difference : Long, tvTimer : TextView){
+    //function to manage timer
+    private fun doTimer(difference : Long, tvTimer : TextView){
         var countDownTimer = object : CountDownTimer(difference, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
@@ -95,6 +183,19 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         }.start()
     }
 
+    //start the camera preview
+    private fun startCamera(){
+        val previewView = findViewById<androidx.camera.view.PreviewView>(R.id.viewFinder)
+        cameraController = LifecycleCameraController(baseContext)
+        cameraController.bindToLifecycle(this)
+        cameraController.cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
+        previewView.controller = cameraController
+    }
 
+
+    //check if all necessary permissions are granted
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
+    }
 }
 
