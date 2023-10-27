@@ -71,26 +71,7 @@ class Inicio : AppCompatActivity() {
 
 
         val popupButton = findViewById<Button>(R.id.retos)
-        val popupView = LayoutInflater.from(this).inflate(R.layout.activity_popup, null)
-        val popupWindow = PopupWindow(
-            popupView,
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
 
-        popupWindow.setBackgroundDrawable(ColorDrawable(android.graphics.Color.BLACK))
-        popupWindow.isFocusable = true
-        popupWindow.isOutsideTouchable = true
-
-        popupButton.setOnClickListener {
-            popupWindow.showAtLocation(popupButton, Gravity.BOTTOM, 0, 600)
-        }
-
-        popupView.setOnTouchListener { _, _ ->
-            if (popupWindow.isShowing) {
-                popupWindow.dismiss()
-            }
-            true
 
         popupButton.setOnClickListener(){
             Intent(this, SeleccionarRetoActivity::class.java).also{
