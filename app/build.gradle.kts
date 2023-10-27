@@ -54,9 +54,9 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.13.0")
     implementation ("androidx.recyclerview:recyclerview:1.2.0")
     implementation("androidx.core:core-ktx:1.9.0")
-    implementation ("com.squareup.retrofit2:retrofit:2.6.2")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.google.code.gson:gson:2.8.2")
-    implementation ("com.squareup.retrofit2:converter-gson:2.6.2")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.7.2")
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
@@ -75,5 +75,21 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+
+
+    val camerax_version : String = "1.2.0"
+    // CameraX fundamental libraries
+    implementation("androidx.camera:camera-core:${camerax_version}")
+    implementation("androidx.camera:camera-camera2:${camerax_version}")
+    // CameraX Lifecycle Library
+    implementation("androidx.camera:camera-lifecycle:$camerax_version")
+    // CameraX View class
+    implementation("androidx.camera:camera-view:$camerax_version")
+
+    //other useful stuff
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.concurrent:concurrent-futures-ktx:1.1.0")
 
 }

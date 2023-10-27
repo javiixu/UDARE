@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.udare.R
 
-class FotoAdapter (private val fotos: List<Int>) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
+class FotoAdapter (private val fotos: List<String>) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
 
     class FotoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.foto_viewer)

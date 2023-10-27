@@ -3,14 +3,14 @@ package com.example.udare.Modelo;
 public class Perfil {
     private String nombre;
     private String bio;
-    private String urlFoto;
+    private String profilePic;
     private String[] followers;
     private String[] following;
 
-    public Perfil(String nombre, String bio, String urlFoto, String[] followers, String[] following) {
+    public Perfil(String nombre, String bio, String profilePic, String[] followers, String[] following) {
         this.nombre = nombre;
         this.bio = bio;
-        this.urlFoto = urlFoto;
+        this.profilePic = profilePic;
         this.followers = followers;
         this.following = following;
     }
@@ -32,11 +32,11 @@ public class Perfil {
     }
 
     public String getUrlFoto() {
-        return urlFoto;
+        return profilePic;
     }
 
     public void setUrlFoto(String urlFoto) {
-        this.urlFoto = urlFoto;
+        this.profilePic = urlFoto;
     }
 
     public String[] getFollowers() {

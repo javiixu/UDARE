@@ -10,6 +10,14 @@
     <uses-permission android:name="android.permission.SET_ALARM" />
 
 
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -22,14 +30,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Popup"
-            android:exported="false" />
+
+            android:name=".HacerFotoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SeleccionarRetoActivity"
+            android:exported="true">
+        </activity>
+
         <activity
             android:name=".Inicio"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
