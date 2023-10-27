@@ -1,6 +1,16 @@
 package com.example.udare
 
 
+import android.annotation.SuppressLint
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.AlarmManager
+import android.content.Context
+import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +19,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.PopupWindow
+
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import android.content.Intent
+import android.app.PendingIntent
+import java.util.Calendar
+import kotlin.concurrent.thread
+import kotlin.system.exitProcess
+
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,8 +39,11 @@ import com.example.udare.repositorios.UsuarioRepository
 import android.content.Intent
 
 
+
 class Inicio : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
 
@@ -80,5 +102,30 @@ class Inicio : AppCompatActivity() {
 
         }
 
+        thread {
+            checkAndShowNotification()
+        }
     }
+    private fun checkAndShowNotification() {
+        val desiredHour = 12
+        val desiredMinute = 0
+        lateinit var notificationManager: Notificacion
+        notificationManager = Notificacion(this)
+        var toSound = true
+        while (toSound) {
+            val currentTime = Calendar.getInstance()
+            val currentHour = currentTime.get(Calendar.HOUR_OF_DAY)
+            val currentMinute = currentTime.get(Calendar.MINUTE)
+
+            if (currentHour == desiredHour && currentMinute == desiredMinute) {
+                notificationManager.createNotification()
+
+                toSound = false
+            }
+
+            Thread.sleep(1000)
+        }
+
+    }
+
 }
