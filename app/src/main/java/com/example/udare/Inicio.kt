@@ -1,33 +1,12 @@
 package com.example.udare
 
 
-import android.annotation.SuppressLint
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.AlarmManager
-import android.content.Context
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.widget.Button
-import android.widget.PopupWindow
-
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import android.content.Intent
-import android.app.PendingIntent
 import java.util.Calendar
 import kotlin.concurrent.thread
-import kotlin.system.exitProcess
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
