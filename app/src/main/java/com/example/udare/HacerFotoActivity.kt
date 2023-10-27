@@ -1,6 +1,7 @@
 package com.example.udare
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -29,6 +30,15 @@ class HacerFotoActivity : AppCompatActivity() {
         var btnTakePhoto = findViewById<Button>(R.id.btnTakePhoto)
         var tvChoosenChallenge = findViewById<TextView>(R.id.tvChoosenChallenge)
         var btnSwitchCamera = findViewById<Button>(R.id.btnSwitchCamera)
+        var btnBackFromTakingPhoto = findViewById<Button>(R.id.btnBackFromTakingPhoto)
+
+        //handle getting back to the main activity
+        btnBackFromTakingPhoto.setOnClickListener(){
+            Intent(this, Inicio::class.java).also{
+                startActivity(it)
+            }
+        }
+
 
         //start the Camera in this view to
         startCamera()

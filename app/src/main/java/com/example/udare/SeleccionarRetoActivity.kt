@@ -92,6 +92,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         var btnSportChallenge = findViewById<Button>(R.id.btnSportChallenge)
         var btnCookingChallenge = findViewById<Button>(R.id.btnCookingChallenge)
         var btnGrowthChallenge = findViewById<Button>(R.id.btnGrowthChallenge)
+        var btnBackFromChallengeSelect = findViewById<Button>(R.id.btnBackFromChallengeSelect)
 
 
         /*
@@ -106,6 +107,11 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
         var choosenChallenge: String  = "choosen Challenge"
 
+
+        //challenge going back to main activity
+        btnBackFromChallengeSelect.setOnClickListener(){
+            finish()
+        }
 
         //for every challenge handle what happens when this challenge gets clicked
         btnCookingChallenge.setOnClickListener(){
@@ -148,6 +154,8 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 startActivity(it)
             }
         }
+
+
 
     }
 
