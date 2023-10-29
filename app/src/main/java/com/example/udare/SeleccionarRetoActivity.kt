@@ -20,6 +20,10 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.view.LifecycleCameraController
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.udare.Modelo.Reto
+import com.example.udare.Modelo.Usuario
+import com.example.udare.repositorios.RetoRepository
+import com.example.udare.repositorios.UsuarioRepository
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
@@ -95,17 +99,50 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         var btnBackFromChallengeSelect = findViewById<Button>(R.id.btnBackFromChallengeSelect)
 
 
-        /*
-         //TODO set the name of the buttons via the database
-        btnSocialChallenge.text =
-        btnCultureChallenge.text =
-        btnSportChallenge.text =
-        btnCookingChallenge.text =
-        btnGrowthChallenge.text =
+        val retoRepository = RetoRepository()
+        var retosDeportes  = mutableListOf<Reto>()
+        var retosSocial = mutableListOf<Reto>()
+        var retosCultura = mutableListOf<Reto>()
+        var retosCrecimientoPersonal = mutableListOf<Reto>()
+        var retosCocina = mutableListOf<Reto>()
 
-         */
 
-        var choosenChallenge: String  = "choosen Challenge"
+        //prueba llamada al backend para obtener los retos
+        retoRepository.obtenerRetos(object : RetoRepository.RetoCallback {
+            override fun onSuccess(retoList: MutableList<Reto>) {
+                // Procesa la lista de retos aquí
+                for (reto in retoList) {
+                    when (reto.category) {
+                        "deportes" -> retosDeportes.add(reto)
+                        "cultura"-> retosCultura.add(reto)
+                        "social" -> retosSocial.add(reto)
+                        "cocina"-> retosCocina.add(reto)
+                        "crecimientopersonal"-> retosCrecimientoPersonal.add(reto)
+                        else -> { // Note the block
+                            print("ERROR: reto no esta en una categoria")
+                        }
+                    }
+                }
+            }
+
+            override fun onError(mensajeError: String) {
+                // Maneja el error en la llamada a la API, si ocurre algún error
+                Log.d("tag-prueba", "Error: $mensajeError")
+            }
+        })
+
+
+
+
+        btnSocialChallenge.text = retosSocial.get(0).title
+        btnCultureChallenge.text = retosCultura.get(0).title
+        btnSportChallenge.text = retosDeportes.get(0).title
+        btnCookingChallenge.text = retosCocina.get(0).title
+        btnGrowthChallenge.text = retosCrecimientoPersonal.get(0).title
+
+
+
+        var choosenChallenge = "choosen Challenge"
 
 
         //challenge going back to main activity

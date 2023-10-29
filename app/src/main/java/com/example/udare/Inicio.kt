@@ -36,6 +36,18 @@ class Inicio : AppCompatActivity() {
                 for (usuario in usuariosList) {
                     // Realiza alguna operación con cada usuario, si es necesario
                     Log.d("tag-prueba", "Nombre de usuario: ${usuario.username}")
+
+                    /* TODO
+                    if(usuario.id == 'xxxx'){
+                        //set daily Challenge completed in the registered user class accordingly
+                        // if the user has completed challenge do not give the option to take
+                        // a foto, otherwise give him the option
+                    }
+                    else{
+
+                    }
+
+                     */
                 }
             }
 

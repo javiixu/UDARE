@@ -7,12 +7,20 @@ public class Usuario {
     private String[] posts;
     private Perfil perfil;
 
-    public Usuario(String username, String password, String email, String[] posts, Perfil perfil) {
+    private Boolean dailyChallengeCompleted;
+
+    private String id;
+
+    public Usuario(String username, String password, String email, String[] posts, Perfil perfil,
+                   Boolean dailyChallengeCompleted, String id) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.posts = posts;
         this.perfil = perfil;
+        this.dailyChallengeCompleted = dailyChallengeCompleted;
+        this.id = id;
+
     }
 
     public String getUsername() {
@@ -53,5 +61,21 @@ public class Usuario {
 
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
+    }
+
+    public Boolean getDailyChallengeCompleted() {
+        return dailyChallengeCompleted;
+    }
+
+    public void setDailyChallengeCompleted(Boolean dailyChallengeCompleted) {
+        this.dailyChallengeCompleted = dailyChallengeCompleted;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
