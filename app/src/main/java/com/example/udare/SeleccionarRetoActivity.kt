@@ -123,6 +123,11 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                         }
                     }
                 }
+                btnSocialChallenge.text = retosSocial.get(0).title
+                btnCultureChallenge.text = retosCultura.get(0).title
+                btnSportChallenge.text = retosDeportes.get(0).title
+                btnCookingChallenge.text = retosCocina.get(0).title
+                btnGrowthChallenge.text = retosCrecimientoPersonal.get(0).title
             }
 
             override fun onError(mensajeError: String) {
@@ -134,11 +139,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
 
 
-        btnSocialChallenge.text = retosSocial.get(0).title
-        btnCultureChallenge.text = retosCultura.get(0).title
-        btnSportChallenge.text = retosDeportes.get(0).title
-        btnCookingChallenge.text = retosCocina.get(0).title
-        btnGrowthChallenge.text = retosCrecimientoPersonal.get(0).title
+
 
 
 

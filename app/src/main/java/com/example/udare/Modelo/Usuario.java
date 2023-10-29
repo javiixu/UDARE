@@ -9,17 +9,17 @@ public class Usuario {
 
     private Boolean dailyChallengeCompleted;
 
-    private String id;
+    private String _id;
 
     public Usuario(String username, String password, String email, String[] posts, Perfil perfil,
-                   Boolean dailyChallengeCompleted, String id) {
+                   Boolean dailyChallengeCompleted, String _id) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.posts = posts;
         this.perfil = perfil;
         this.dailyChallengeCompleted = dailyChallengeCompleted;
-        this.id = id;
+        this._id = _id;
 
     }
 
@@ -72,10 +72,10 @@ public class Usuario {
     }
 
     public String getId() {
-        return id;
+        return _id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this._id = id;
     }
 }
