@@ -2,22 +2,31 @@ package com.example.udare
 
 
 
+import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import java.util.Calendar
-import kotlin.concurrent.thread
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.udare.Adapter.FotoAdapter
 import com.example.udare.Modelo.Post
 import com.example.udare.Modelo.Usuario
 import com.example.udare.repositorios.PostRepository
+import com.example.udare.repositorios.PostRepository.PostCallback
 import com.example.udare.repositorios.UsuarioRepository
-import android.content.Intent
-
-
+import com.google.gson.Gson
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
+import java.io.FileOutputStream
+import java.util.Calendar
+import kotlin.concurrent.thread
 
 class Inicio : AppCompatActivity() {
 
@@ -27,16 +36,16 @@ class Inicio : AppCompatActivity() {
         setContentView(R.layout.activity_inicio)
 
 
-        val usuarioRepository = UsuarioRepository()
+        //subirFotoPrueba()
 
-        //prueba llamada al backend para obtener los usuarios
+
+
+        //Obtiene todos los usuarios del backend
+        val usuarioRepository = UsuarioRepository()
         usuarioRepository.obtenerUsuarios(object : UsuarioRepository.UsuarioCallback {
             override fun onSuccess(usuariosList: MutableList<Usuario>) {
-                // Procesa la lista de usuarios aquí
                 for (usuario in usuariosList) {
-                    // Realiza alguna operación con cada usuario, si es necesario
                     Log.d("tag-prueba", "Nombre de usuario: ${usuario.username}")
-
                     /* TODO
                     if(usuario.id == 'xxxx'){
                         //set daily Challenge completed in the registered user class accordingly
@@ -44,9 +53,7 @@ class Inicio : AppCompatActivity() {
                         // a foto, otherwise give him the option
                     }
                     else{
-
                     }
-
                      */
                 }
             }
@@ -58,8 +65,10 @@ class Inicio : AppCompatActivity() {
         })
 
 
-        val postRepository = PostRepository()
 
+
+        //Obtiene todos los posts del backend
+        val postRepository = PostRepository()
         postRepository.obtenerPosts((object : PostRepository.PostCallback {
             override fun onSuccess(posts: MutableList<Post>) {
 
@@ -83,9 +92,8 @@ class Inicio : AppCompatActivity() {
         }))
 
 
+
         val popupButton = findViewById<Button>(R.id.retos)
-
-
         popupButton.setOnClickListener(){
             Intent(this, SeleccionarRetoActivity::class.java).also{
                 startActivity(it)
@@ -97,6 +105,7 @@ class Inicio : AppCompatActivity() {
             checkAndShowNotification()
         }
     }
+
     private fun checkAndShowNotification() {
         val desiredHour = 12
         val desiredMinute = 0
@@ -117,6 +126,40 @@ class Inicio : AppCompatActivity() {
             Thread.sleep(1000)
         }
 
+    }
+
+
+    fun subirFotoPrueba() {
+        try {
+            val imageName = "fotopaisaje"
+            val resourceId = resources.getIdentifier(imageName, "drawable", packageName)
+            val drawable = resources.getDrawable(resourceId, null)
+            val bitmap = (drawable as BitmapDrawable).bitmap
+
+            val file = File(this.applicationContext.filesDir, "fotopaisaje.jpg")
+            val fileOutputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
+            fileOutputStream.flush()
+            fileOutputStream.close()
+
+            val post = Post()
+            post.caption = "paseando por la naturaleza!!"
+            post.userID = "652436d13df7259a08be9f6f"
+            post.challengeID = "652eb4074c5c257aa8831c88"
+
+            val postRepository = PostRepository()
+            postRepository.subirPostConImagen(file, post, object : PostRepository.PostCallback {
+                override fun onSuccess(posts: MutableList<Post>?) {
+                    Log.d("tag-prueba", "Post subido correctamente")
+                }
+
+                override fun onError(mensajeError: String?) {
+                    Log.d("tag-prueba", "Error: $mensajeError")
+                }
+            })
+        } catch (e: Exception) {
+            Log.e("tag-foto", "Error al subir la foto: ${e.message}")
+        }
     }
 
 }
