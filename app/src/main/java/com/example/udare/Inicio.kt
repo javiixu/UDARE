@@ -98,7 +98,14 @@ class Inicio : AppCompatActivity() {
             Intent(this, SeleccionarRetoActivity::class.java).also{
                 startActivity(it)
             }
+        }
 
+
+        val btnTestPerfil = findViewById<Button>(R.id.btnTestPerfil)
+        btnTestPerfil.setOnClickListener(){
+            Intent(this, PerfilActivity::class.java).also{
+                startActivity(it)
+            }
         }
 
         thread {
