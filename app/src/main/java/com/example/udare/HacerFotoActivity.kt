@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -15,6 +16,8 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.view.LifecycleCameraController
 import androidx.core.content.ContextCompat
+import com.example.udare.Modelo.Usuario
+import com.example.udare.repositorios.UsuarioRepository
 import kotlinx.coroutines.delay
 import java.util.Date
 import java.util.Locale
@@ -40,6 +43,12 @@ class HacerFotoActivity : AppCompatActivity() {
         }
 
 
+
+
+
+
+
+
         //start the Camera in this view to
         startCamera()
 
@@ -59,6 +68,11 @@ class HacerFotoActivity : AppCompatActivity() {
         btnTakePhoto.setOnClickListener(){
             takePhoto()
             //TODO how can we retun to main here????
+
+
+            //TODO setting dailyChallenge completed for this user in the database
+            // how???
+
             //finish()
         }
 

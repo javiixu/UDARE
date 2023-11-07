@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat
@@ -28,12 +29,18 @@ import java.io.FileOutputStream
 import java.util.Calendar
 import kotlin.concurrent.thread
 
+
 class Inicio : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
+
+
+        //Buttons & Views
+        val btnTestPerfil = findViewById<Button>(R.id.btnTestPerfil)
+        val popupButton = findViewById<Button>(R.id.retos)
+
 
 
         //subirFotoPrueba()
@@ -46,15 +53,23 @@ class Inicio : AppCompatActivity() {
             override fun onSuccess(usuariosList: MutableList<Usuario>) {
                 for (usuario in usuariosList) {
                     Log.d("tag-prueba", "Nombre de usuario: ${usuario.username}")
-                    /* TODO
-                    if(usuario.id == 'xxxx'){
-                        //set daily Challenge completed in the registered user class accordingly
+
+
+                    //the user id  of the app owner is set to David S. id for testing
+                    if(usuario.getId() == THIS_USER_ID ){
+
                         // if the user has completed challenge do not give the option to take
                         // a foto, otherwise give him the option
+
+                        //if user has completed the daily challenge disable the popup button
+                        if(usuario.dailyChallengeCompleted){
+                            popupButton.visibility = View.GONE
+                        }
                     }
-                    else{
-                    }
-                     */
+
+
+
+
                 }
             }
 
@@ -93,7 +108,7 @@ class Inicio : AppCompatActivity() {
 
 
 
-        val popupButton = findViewById<Button>(R.id.retos)
+
         popupButton.setOnClickListener(){
             Intent(this, SeleccionarRetoActivity::class.java).also{
                 startActivity(it)
@@ -101,7 +116,7 @@ class Inicio : AppCompatActivity() {
         }
 
 
-        val btnTestPerfil = findViewById<Button>(R.id.btnTestPerfil)
+
         btnTestPerfil.setOnClickListener(){
             Intent(this, PerfilActivity::class.java).also{
                 startActivity(it)

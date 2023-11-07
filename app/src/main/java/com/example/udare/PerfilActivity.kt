@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 
@@ -22,6 +23,16 @@ class PerfilActivity : AppCompatActivity() {
         //Buttons & Views
         var btnChangeProfilePicture: Button
         var ivProfilePicture : ImageView
+        val tvSocialPoints = findViewById<TextView>(R.id.tvSocialPoints)
+        val tvSportPoints = findViewById<TextView>(R.id.tvSportPoints)
+        val tvGrowthPoints = findViewById<TextView>(R.id.tvGrowthPoints)
+        val tvCulturePoints = findViewById<TextView>(R.id.tvCulturePoints)
+        val tvCookingPoints = findViewById<TextView>(R.id.tvCookingPoints)
+        val btnUserAlbum = findViewById<Button>(R.id.btnUserAlbum)
+        val btnRankingFriends = findViewById<Button>(R.id.btnRankingFriends)
+
+
+        //TODO set the points via the database
 
 
         var imageUri : Uri
