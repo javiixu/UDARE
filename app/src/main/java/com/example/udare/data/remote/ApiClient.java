@@ -1,4 +1,4 @@
-package com.example.udare.api;
+package com.example.udare.data.remote;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

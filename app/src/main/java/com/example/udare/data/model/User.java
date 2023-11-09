@@ -1,23 +1,23 @@
-package com.example.udare.Modelo;
+package com.example.udare.data.model;
 
-public class Usuario {
+public class User {
     private String username;
     private String password;
     private String email;
     private String[] posts;
-    private Perfil perfil;
+    private Profile profile;
 
     private Boolean dailyChallengeCompleted;
 
     private String _id;
 
-    public Usuario(String username, String password, String email, String[] posts, Perfil perfil,
-                   Boolean dailyChallengeCompleted, String _id) {
+    public User(String username, String password, String email, String[] posts, Profile profile,
+                Boolean dailyChallengeCompleted, String _id) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.posts = posts;
-        this.perfil = perfil;
+        this.profile = profile;
         this.dailyChallengeCompleted = dailyChallengeCompleted;
         this._id = _id;
 
@@ -55,12 +55,12 @@ public class Usuario {
         this.posts = posts;
     }
 
-    public Perfil getPerfil() {
-        return perfil;
+    public Profile getPerfil() {
+        return profile;
     }
 
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
+    public void setPerfil(Profile profile) {
+        this.profile = profile;
     }
 
     public Boolean getDailyChallengeCompleted() {

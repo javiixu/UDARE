@@ -1,11 +1,11 @@
-package com.example.udare.Modelo;
+package com.example.udare.data.model;
 
-public class Reto {
+public class Challenge {
     private String  title;
     private String descrition;
     private String category;
 
-    public Reto(String title, String descrition, String category) {
+    public Challenge(String title, String descrition, String category) {
         this.title = title;
         this.descrition = descrition;
         this.category = category;

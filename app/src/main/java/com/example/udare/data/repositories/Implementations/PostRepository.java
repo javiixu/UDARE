@@ -1,13 +1,17 @@
-package com.example.udare.repositorios;
+package com.example.udare.data.repositories.Implementations;
 
-import com.example.udare.Modelo.Post;
-import com.example.udare.api.ApiClient;
-import com.example.udare.api.ApiService;
+import com.example.udare.data.model.Post;
+import com.example.udare.data.remote.ApiClient;
+import com.example.udare.data.remote.ApiService;
+import com.example.udare.data.repositories.Interfaces.IPostRepository;
 import com.google.gson.Gson;
 
 import java.io.File;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -16,32 +20,35 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostRepository {
-    private final ApiService apiService;
 
-    public PostRepository() {
-        apiService = ApiClient.getClient().create(ApiService.class);
+public class PostRepository implements IPostRepository {
+    final ApiService apiService;
+
+    @Inject
+    public PostRepository(ApiService apiService) {
+        this.apiService = apiService;
     }
 
-    public void subirPostConImagen(File file, Post post, final PostCallback callback) {
+    @Override
+    public void uploadPost(File file, Post post, final PostRepository.callbackUploadPost callback) {
 
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file);
         MultipartBody.Part bodyImage = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
         MultipartBody.Part bodyPost = MultipartBody.Part.createFormData("post", null, RequestBody.create(MediaType.parse("application/json"), new Gson().toJson(post)));
 
-        Call<ResponseBody> call = apiService.guardarPost(bodyImage,bodyPost);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<Post> call = apiService.uploadPost(bodyImage,bodyPost);
+        call.enqueue(new Callback<Post>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<Post> call, Response<Post> response) {
                 if (response.isSuccessful()) {
-                    // Lógica adicional en caso de éxito
+                    Post uploadedPost = response.body();
+                    callback.onSuccess(uploadedPost);
                 } else {
                     callback.onError("Error en la respuesta de subir imagen: " + response.message());
                 }
             }
-
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<Post> call, Throwable t) {
                 // Manejar el error
                 callback.onError("Error en la llamada: " + t.getMessage());
             }
@@ -52,8 +59,8 @@ public class PostRepository {
 
 
 
-
-    public void obtenerPosts(final PostRepository.PostCallback callback) {
+    @Override
+    public void getAllPosts(final PostRepository.callbackGetAllPosts callback) {
         Call<List<Post>> call = apiService.getAllPosts();
         call.enqueue(new Callback<List<Post>>() {
             @Override
@@ -77,8 +84,13 @@ public class PostRepository {
         });
     }
 
-    public interface PostCallback {
+    public interface callbackGetAllPosts {
         void onSuccess(List<Post> posts);
+        void onError(String mensajeError);
+    }
+
+    public interface callbackUploadPost {
+        void onSuccess(Post post);
         void onError(String mensajeError);
     }
 

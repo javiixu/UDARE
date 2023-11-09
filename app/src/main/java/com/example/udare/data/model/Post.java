@@ -1,4 +1,4 @@
-package com.example.udare.Modelo;
+package com.example.udare.data.model;
 
 import java.util.Date;
 

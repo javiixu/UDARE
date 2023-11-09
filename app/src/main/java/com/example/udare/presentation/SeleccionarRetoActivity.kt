@@ -1,40 +1,34 @@
-package com.example.udare
+package com.example.udare.presentation
 
-import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.icu.text.SimpleDateFormat
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
 import androidx.camera.view.LifecycleCameraController
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.udare.Modelo.Reto
-import com.example.udare.Modelo.Usuario
-import com.example.udare.repositorios.RetoRepository
-import com.example.udare.repositorios.UsuarioRepository
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.temporal.ChronoUnit
+import com.example.udare.data.model.Challenge
+import com.example.udare.R
+import com.example.udare.data.repositories.Implementations.ChallengeRepository
+import com.example.udare.services.implementations.ChallengeService
+import com.example.udare.services.interfaces.IChallengeService
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
-import java.util.Date
-import java.util.Locale
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SeleccionarRetoActivity : AppCompatActivity() {
     //variables for cameraX
     private val REQUIRED_PERMISSIONS = arrayOf(android.Manifest.permission.CAMERA)
     private lateinit var cameraController: LifecycleCameraController
+
+    @Inject
+    lateinit var challengeService : IChallengeService
     override fun onCreate(savedInstanceState: Bundle?) {
         //TODO Check in Database if the challenge has already been done
 
@@ -98,26 +92,22 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         var btnGrowthChallenge = findViewById<Button>(R.id.btnGrowthChallenge)
         var btnBackFromChallengeSelect = findViewById<Button>(R.id.btnBackFromChallengeSelect)
 
-
-        val retoRepository = RetoRepository()
-        var retosDeportes  = mutableListOf<Reto>()
-        var retosSocial = mutableListOf<Reto>()
-        var retosCultura = mutableListOf<Reto>()
-        var retosCrecimientoPersonal = mutableListOf<Reto>()
-        var retosCocina = mutableListOf<Reto>()
+        var retosDeportes  = mutableListOf<Challenge>()
+        var retosSocial = mutableListOf<Challenge>()
+        var retosCultura = mutableListOf<Challenge>()
+        var retosCrecimientoPersonal = mutableListOf<Challenge>()
+        var retosCocina = mutableListOf<Challenge>()
 
 
-        //prueba llamada al backend para obtener los retos
-        retoRepository.obtenerRetos(object : RetoRepository.RetoCallback {
-            override fun onSuccess(retoList: MutableList<Reto>) {
-                // Procesa la lista de retos aquí
-                for (reto in retoList) {
+        challengeService.getAllChallenges(object: ChallengeRepository.ChallengeCallback {
+            override fun onSuccess(challenges: List<Challenge>) {
+                for (reto in challenges) {
                     when (reto.category) {
                         "deportes" -> retosDeportes.add(reto)
-                        "cultura"-> retosCultura.add(reto)
+                        "cultura" -> retosCultura.add(reto)
                         "social" -> retosSocial.add(reto)
-                        "cocina"-> retosCocina.add(reto)
-                        "crecimientopersonal"-> retosCrecimientoPersonal.add(reto)
+                        "cocina" -> retosCocina.add(reto)
+                        "crecimientopersonal" -> retosCrecimientoPersonal.add(reto)
                         else -> { // Note the block
                             print("ERROR: reto no esta en una categoria")
                         }
@@ -129,19 +119,10 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 btnCookingChallenge.text = retosCocina.get(0).title
                 btnGrowthChallenge.text = retosCrecimientoPersonal.get(0).title
             }
-
-            override fun onError(mensajeError: String) {
-                // Maneja el error en la llamada a la API, si ocurre algún error
+            override fun onError(mensajeError: String?) {
                 Log.d("tag-prueba", "Error: $mensajeError")
             }
         })
-
-
-
-
-
-
-
 
         var choosenChallenge = "choosen Challenge"
 
@@ -154,7 +135,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         //for every challenge handle what happens when this challenge gets clicked
         btnCookingChallenge.setOnClickListener(){
             choosenChallenge = btnCookingChallenge.text.toString()
-            Intent(this,HacerFotoActivity::class.java).also{
+            Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 startActivity(it)
             }
@@ -163,7 +144,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
         btnGrowthChallenge.setOnClickListener(){
             choosenChallenge = btnGrowthChallenge.text.toString()
-            Intent(this,HacerFotoActivity::class.java).also{
+            Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 startActivity(it)
             }
@@ -171,7 +152,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
         btnSocialChallenge.setOnClickListener(){
             choosenChallenge = btnSocialChallenge.text.toString()
-            Intent(this,HacerFotoActivity::class.java).also{
+            Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 startActivity(it)
             }
@@ -179,7 +160,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
         btnCultureChallenge.setOnClickListener(){
             choosenChallenge = btnSocialChallenge.text.toString()
-            Intent(this,HacerFotoActivity::class.java).also{
+            Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 startActivity(it)
             }
@@ -187,7 +168,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
         btnSportChallenge.setOnClickListener(){
             choosenChallenge = btnSocialChallenge.text.toString()
-            Intent(this,HacerFotoActivity::class.java).also{
+            Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 startActivity(it)
             }

@@ -1,4 +1,4 @@
-package com.example.udare.ui.theme
+package com.example.udare.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

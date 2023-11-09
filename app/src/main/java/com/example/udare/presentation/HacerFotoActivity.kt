@@ -1,4 +1,4 @@
-package com.example.udare
+package com.example.udare.presentation
 
 import android.content.ContentValues
 import android.content.Intent
@@ -15,7 +15,7 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.view.LifecycleCameraController
 import androidx.core.content.ContextCompat
-import kotlinx.coroutines.delay
+import com.example.udare.R
 import java.util.Date
 import java.util.Locale
 

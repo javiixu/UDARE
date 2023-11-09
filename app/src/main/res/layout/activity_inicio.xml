@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Inicio">
+    tools:context=".presentation.Inicio">
 
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <Button
-            android:id="@+id/retos"
+            android:id="@+id/challenges"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 

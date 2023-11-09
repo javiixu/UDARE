@@ -1,13 +1,13 @@
-package com.example.udare.Modelo;
+package com.example.udare.data.model;
 
-public class Perfil {
+public class Profile {
     private String nombre;
     private String bio;
     private String profilePic;
     private String[] followers;
     private String[] following;
 
-    public Perfil(String nombre, String bio, String profilePic, String[] followers, String[] following) {
+    public Profile(String nombre, String bio, String profilePic, String[] followers, String[] following) {
         this.nombre = nombre;
         this.bio = bio;
         this.profilePic = profilePic;
