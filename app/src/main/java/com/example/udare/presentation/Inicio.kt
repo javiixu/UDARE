@@ -1,14 +1,17 @@
-package com.example.udare.presentation
+package com.example.udare
 
 
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.udare.Adapter.FotoAdapter
@@ -47,7 +50,14 @@ class Inicio : AppCompatActivity() {
         setContentView(R.layout.activity_inicio)
 
 
+        //Buttons & Views
+        val btnTestPerfil = findViewById<Button>(R.id.btnTestPerfil)
+        val popupButton = findViewById<Button>(R.id.retos)
+
+
+
         //subirFotoPrueba()
+
 
 
         //Obtiene todos los usuarios del backend
@@ -55,6 +65,23 @@ class Inicio : AppCompatActivity() {
             override fun onSuccess(users: List<User>) {
                 for (usuario in users) {
                     Log.d("tag-prueba", "Nombre de usuario: ${usuario.username}")
+
+
+                    //the user id  of the app owner is set to David S. id for testing
+                    if(usuario.getId() == THIS_USER_ID ){
+
+                        // if the user has completed challenge do not give the option to take
+                        // a foto, otherwise give him the option
+
+                        //if user has completed the daily challenge disable the popup button
+                        if(usuario.dailyChallengeCompleted){
+                            popupButton.visibility = View.GONE
+                        }
+                    }
+
+
+
+
                 }
             }
 
@@ -85,14 +112,22 @@ class Inicio : AppCompatActivity() {
             override fun onError(mensajeError: String?) {
 
             }
-        })
+        }))
+
 
         val popupButton = findViewById<Button>(R.id.challenges)
         popupButton.setOnClickListener(){
             Intent(this, SeleccionarRetoActivity::class.java).also{
                 startActivity(it)
             }
+        }
 
+
+
+        btnTestPerfil.setOnClickListener(){
+            Intent(this, PerfilActivity::class.java).also{
+                startActivity(it)
+            }
         }
 
         thread {
@@ -125,12 +160,12 @@ class Inicio : AppCompatActivity() {
 
     fun subirFotoPrueba() {
         try {
-            val imageName = "foto2"
+            val imageName = "fotopaisaje"
             val resourceId = resources.getIdentifier(imageName, "drawable", packageName)
             val drawable = resources.getDrawable(resourceId, null)
             val bitmap = (drawable as BitmapDrawable).bitmap
 
-            val file = File(this.applicationContext.filesDir, "foto2.jpg")
+            val file = File(this.applicationContext.filesDir, "fotopaisaje.jpg")
             val fileOutputStream = FileOutputStream(file)
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
             fileOutputStream.flush()
@@ -151,8 +186,6 @@ class Inicio : AppCompatActivity() {
                     Log.d("tag-prueba", "Error: $mensajeError")
                 }
             })
-
-
         } catch (e: Exception) {
             Log.e("tag-foto", "Error al subir la foto: ${e.message}")
         }

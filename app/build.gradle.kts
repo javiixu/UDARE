@@ -109,4 +109,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.concurrent:concurrent-futures-ktx:1.1.0")
 
+
+    //for round profile pics
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
 }
