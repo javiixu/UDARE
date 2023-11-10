@@ -17,8 +17,8 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.view.LifecycleCameraController
 import androidx.core.content.ContextCompat
 import com.example.udare.R
-import com.example.udare.Modelo.Usuario
-import com.example.udare.repositorios.UsuarioRepository
+import com.example.udare.data.model.User
+import com.example.udare.data.repositories.Implementations.UserRepository
 import kotlinx.coroutines.delay
 import java.util.Date
 import java.util.Locale

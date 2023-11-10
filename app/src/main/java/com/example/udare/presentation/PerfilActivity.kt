@@ -1,4 +1,4 @@
-package com.example.udare
+package com.example.udare.presentation
 
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.udare.R
 
 class PerfilActivity : AppCompatActivity() {
 

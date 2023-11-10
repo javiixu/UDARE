@@ -2,7 +2,6 @@ package com.example.udare
 
 
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -11,21 +10,20 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.udare.Adapter.FotoAdapter
 import com.example.udare.data.model.Post
 import com.example.udare.data.model.User
-import com.example.udare.R
 import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.data.repositories.Implementations.UserRepository
-import com.example.udare.services.implementations.UserService
+import com.example.udare.presentation.Notificacion
+import com.example.udare.presentation.PerfilActivity
+import com.example.udare.presentation.SeleccionarRetoActivity
 import com.example.udare.services.interfaces.IChallengeService
 import com.example.udare.services.interfaces.IPostService
 import com.example.udare.services.interfaces.IUserService
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 import java.io.File
 import java.io.FileOutputStream
 import java.util.Calendar
@@ -52,7 +50,7 @@ class Inicio : AppCompatActivity() {
 
         //Buttons & Views
         val btnTestPerfil = findViewById<Button>(R.id.btnTestPerfil)
-        val popupButton = findViewById<Button>(R.id.retos)
+        val popupButton = findViewById<Button>(R.id.challenges)
 
 
 
@@ -112,10 +110,9 @@ class Inicio : AppCompatActivity() {
             override fun onError(mensajeError: String?) {
 
             }
-        }))
+        })
 
 
-        val popupButton = findViewById<Button>(R.id.challenges)
         popupButton.setOnClickListener(){
             Intent(this, SeleccionarRetoActivity::class.java).also{
                 startActivity(it)
