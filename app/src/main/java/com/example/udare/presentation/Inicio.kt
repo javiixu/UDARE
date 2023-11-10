@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -52,6 +53,7 @@ class Inicio : AppCompatActivity() {
         //Buttons & Views
         val btnTestPerfil = findViewById<Button>(R.id.btnTestPerfil)
         val popupButton = findViewById<Button>(R.id.challenges)
+
 
 
 
@@ -102,7 +104,7 @@ class Inicio : AppCompatActivity() {
                     fotoList.add(post.image)
                 }
 
-                val photoAdapter = FotoAdapter(fotoList)
+                val photoAdapter = FotoAdapter(fotoList, this@Inicio)
                 photoRecyclerView.adapter = photoAdapter
                 photoRecyclerView.layoutManager = LinearLayoutManager(this@Inicio)
 
@@ -187,6 +189,10 @@ class Inicio : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e("tag-foto", "Error al subir la foto: ${e.message}")
         }
+
+
     }
+
+
 
 }
