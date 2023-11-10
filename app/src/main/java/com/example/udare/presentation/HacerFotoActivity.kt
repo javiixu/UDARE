@@ -1,4 +1,4 @@
-package com.example.udare
+package com.example.udare.presentation
 
 import android.content.ContentValues
 import android.content.Intent

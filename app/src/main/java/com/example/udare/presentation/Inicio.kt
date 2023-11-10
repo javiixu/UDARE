@@ -1,4 +1,4 @@
-package com.example.udare
+package com.example.udare.presentation
 
 
 
@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.udare.Adapter.FotoAdapter
+import com.example.udare.R
 import com.example.udare.data.model.Post
 import com.example.udare.data.model.User
 import com.example.udare.data.repositories.Implementations.PostRepository

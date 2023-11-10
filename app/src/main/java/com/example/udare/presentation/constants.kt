@@ -1,4 +1,4 @@
-package com.example.udare
+package com.example.udare.presentation
 
 //for now, this is David S. Id, for testing purpose,
 // later we can set this to the id of the registered user
