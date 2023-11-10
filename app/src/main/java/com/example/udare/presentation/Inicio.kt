@@ -96,7 +96,7 @@ class Inicio : AppCompatActivity() {
         postService.getAllPosts(object : PostRepository.callbackGetAllPosts {
             override fun onSuccess(posts: MutableList<Post>) {
 
-                val photoRecyclerView: RecyclerView = findViewById(R.id.viewer)
+                val photoRecyclerView: RecyclerView = findViewById(R.id.RecyclerFotos)
 
                 val fotoList = mutableListOf<String>()
 

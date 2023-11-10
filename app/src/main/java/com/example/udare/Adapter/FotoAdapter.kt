@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.udare.R
+import com.example.udare.presentation.ComentariosActivity
 import com.example.udare.presentation.HacerFotoActivity
 
 
@@ -43,7 +44,7 @@ class FotoAdapter (private val fotos: List<String>, private val context: Context
 
         holder.textViewClick.setOnClickListener {
             // Crear un Intent para iniciar la nueva actividad (HacerFotoActivity)
-            val intent = Intent(context, HacerFotoActivity::class.java)
+            val intent = Intent(context, ComentariosActivity::class.java)
             context.startActivity(intent)
         }
 
