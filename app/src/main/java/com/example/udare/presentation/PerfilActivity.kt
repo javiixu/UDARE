@@ -14,8 +14,19 @@ import android.widget.TextView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.udare.R
+import com.example.udare.data.model.User
+import com.example.udare.data.repositories.Implementations.UserRepository
+import com.example.udare.services.interfaces.IUserService
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+
+@AndroidEntryPoint
 class PerfilActivity : AppCompatActivity() {
+    @Inject
+    lateinit var userService: IUserService
+    lateinit var thisUser: User
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +43,42 @@ class PerfilActivity : AppCompatActivity() {
         val btnUserAlbum = findViewById<Button>(R.id.btnUserAlbum)
         val btnRankingFriends = findViewById<Button>(R.id.btnRankingFriends)
 
+        //TODO
+        //check if user has profile picture
+        //if not set default profile picture
+        // if user updates profile pic send it to database
 
-        //TODO set the points via the database
+        //get the data of the user, who is logged in and display his points
+        userService.getUserById(THIS_USER_ID, object : UserRepository.callbackGetUserById {
+            override fun onSuccess(user: User) {
+                thisUser = user
+                tvCookingPoints.text = thisUser.profile.pointsCooking.toString()
+                tvCulturePoints.text = thisUser.profile.pointsCulture.toString()
+                tvSocialPoints.text = thisUser.profile.pointsSocial.toString()
+                tvSportPoints.text = thisUser.profile.pointsSport.toString()
+                tvGrowthPoints.text = thisUser.profile.pointsGrowth.toString()
+
+
+                //user does not have profile pic, the standard profile pic just stays
+                //otherwise we have to set it
+                if(thisUser.profile.profilePic != "Unspecified"){
+                    Log.d("tag-prueba",thisUser.profile.profilePic)
+                    ivProfilePicture =  (thisUser.profile.profilePic) as ImageView
+                }
+
+
+            }
+
+            override fun onError(mensajeError: String?) {
+                Log.d("tag-PerfilActivity","Error in getUserById")
+            }
+
+        })
+
+
+
+
+
 
 
         var imageUri : Uri
@@ -41,6 +86,8 @@ class PerfilActivity : AppCompatActivity() {
         // initializing Profile Picture and Change profile Button
         btnChangeProfilePicture = findViewById(R.id.btnChangeProfilePicture)
         ivProfilePicture = findViewById(R.id.profilePicture)
+
+
 
 
         // Registers a photo picker activity launcher in single-select mode.

@@ -3,14 +3,15 @@ package com.example.udare.presentation
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -19,12 +20,23 @@ import androidx.core.content.ContextCompat
 import com.example.udare.R
 import com.example.udare.data.model.User
 import com.example.udare.data.repositories.Implementations.UserRepository
+import com.example.udare.services.interfaces.IUserService
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import java.util.Date
 import java.util.Locale
+import javax.inject.Inject
 
+
+@AndroidEntryPoint
 class HacerFotoActivity : AppCompatActivity() {
     private lateinit var cameraController: LifecycleCameraController
+    private lateinit var thisUser : User
+
+
+    @Inject
+    lateinit var userService: IUserService
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +47,9 @@ class HacerFotoActivity : AppCompatActivity() {
         var tvChoosenChallenge = findViewById<TextView>(R.id.tvChoosenChallenge)
         var btnSwitchCamera = findViewById<Button>(R.id.btnSwitchCamera)
         var btnBackFromTakingPhoto = findViewById<Button>(R.id.btnBackFromTakingPhoto)
+
+        //set the choosen challenge to the correct name
+        tvChoosenChallenge.text = intent.getStringExtra("EXTRA_CHOOSEN_CHALLENGE")
 
         //handle getting back to the main activity
         btnBackFromTakingPhoto.setOnClickListener(){
@@ -62,17 +77,83 @@ class HacerFotoActivity : AppCompatActivity() {
         //handle
         btnTakePhoto.setOnClickListener(){
             takePhoto()
-            //TODO how can we retun to main here????
 
 
-            //TODO setting dailyChallenge completed for this user in the database
-            // how???
+            //get the data of the user, who is logged in and modify his points
+            userService.getUserById(THIS_USER_ID, object : UserRepository.callbackGetUserById {
+                override fun onSuccess(user: User) {
+                    thisUser = user
 
-            //finish()
+                    //update that the user has completed the daily challenge
+                    //TODO ACTIVATE THIS AGAIN
+                    //thisUser.dailyChallengeCompleted = true
+
+
+                    //update the users points in the according challenge
+                    val categoryChallenge =  intent.getStringExtra("EXTRA_CATEGORY_CHALLENGE")
+                    when (categoryChallenge) {
+                        "sport" -> thisUser.profile.pointsSport += 100
+                        "culture" -> thisUser.profile.pointsCulture += 100
+                        "social" -> thisUser.profile.pointsSocial += 100
+                        "cooking" -> thisUser.profile.pointsCooking += 100
+                        "growth" -> thisUser.profile.pointsGrowth += 100
+                        else -> { // Note the block
+                            print("ERROR: reto no esta en una categoria")
+                        }
+                    }
+
+                    Log.d("tag-HacerFotoActivity","getUserById was successful")
+
+                }
+
+                override fun onError(mensajeError: String?) {
+                    Log.d("tag-HacerFotoActivity","Error in getUserById")
+                }
+
+            })
+
+
+
+            //only after 5 sec update User in DB
+            Handler(Looper.getMainLooper()).postDelayed({
+                if(thisUser == null){
+                    Log.d("tag-HacerFotoActivity","UPDATE USER PROBLEM, user is 0")
+                }
+                //update user in DB
+                userService.updateUser(THIS_USER_ID, thisUser, object : UserRepository.callbackUpdateUser{
+                    override fun onSuccess(user: User) {
+                        Log.d("tag-HacerFotoActivity","User updated correctly")
+                    }
+
+                    override fun onError(mensajeError: String) {
+                        Log.d("tag-HacerFotoActivity","Error updating user")
+                    }
+
+                })
+            }, 5000)
+
+
+
+
+            //set the view to the „success“ layout
+            setContentView(R.layout.activity_hacer_foto_challenge_completed)
+
+
+            //returns to main and clears the activity stack after a small delay
+            Handler(Looper.getMainLooper()).postDelayed({
+                //TODO test this further, was copied from Stack Overflow
+                val intent = Intent(this, Inicio::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                finish()
+            }, 7000)
+
+
+            //TODO make sure the image is uploaded correctly
+
         }
 
-        //set the choosen challenge to the correct name
-        tvChoosenChallenge.text = intent.getStringExtra("EXTRA_CHOOSEN_CHALLENGE")
+
 
     }
 

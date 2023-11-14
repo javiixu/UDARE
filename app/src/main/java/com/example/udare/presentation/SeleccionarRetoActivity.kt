@@ -114,11 +114,11 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                         }
                     }
                 }
-                btnSocialChallenge.text = retosSocial.get(0).title
-                btnCultureChallenge.text = retosCultura.get(0).title
-                btnSportChallenge.text = retosDeportes.get(0).title
-                btnCookingChallenge.text = retosCocina.get(0).title
-                btnGrowthChallenge.text = retosCrecimientoPersonal.get(0).title
+                btnSocialChallenge.text = retosSocial.get(0).title + "\n" + "SOCIAL"
+                btnCultureChallenge.text = retosCultura.get(0).title + "\n" + "CULTURA"
+                btnSportChallenge.text = retosDeportes.get(0).title + "\n" + "DEPORTE"
+                btnCookingChallenge.text = retosCocina.get(0).title + "\n" + "COCINAR"
+                btnGrowthChallenge.text = retosCrecimientoPersonal.get(0).title + "\n" +"CRECIMIENTO PERSONAL"
             }
             override fun onError(mensajeError: String?) {
                 Log.d("tag-prueba", "Error: $mensajeError")
@@ -135,42 +135,47 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
         //for every challenge handle what happens when this challenge gets clicked
         btnCookingChallenge.setOnClickListener(){
-            choosenChallenge = btnCookingChallenge.text.toString()
+            choosenChallenge = btnCookingChallenge.text.toString().substringBefore("\n")
             Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
+                it.putExtra("EXTRA_CATEGORY_CHALLENGE", "cooking")
                 startActivity(it)
             }
 
         }
 
         btnGrowthChallenge.setOnClickListener(){
-            choosenChallenge = btnGrowthChallenge.text.toString()
+            choosenChallenge = btnGrowthChallenge.text.toString().substringBefore("\n")
             Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
+                it.putExtra("EXTRA_CATEGORY_CHALLENGE", "growth")
                 startActivity(it)
             }
         }
 
         btnSocialChallenge.setOnClickListener(){
-            choosenChallenge = btnSocialChallenge.text.toString()
+            choosenChallenge = btnSocialChallenge.text.toString().substringBefore("\n")
             Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
+                it.putExtra("EXTRA_CATEGORY_CHALLENGE", "social")
                 startActivity(it)
             }
         }
 
         btnCultureChallenge.setOnClickListener(){
-            choosenChallenge = btnSocialChallenge.text.toString()
+            choosenChallenge = btnCultureChallenge.text.toString().substringBefore("\n")
             Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
+                it.putExtra("EXTRA_CATEGORY_CHALLENGE", "culture")
                 startActivity(it)
             }
        }
 
         btnSportChallenge.setOnClickListener(){
-            choosenChallenge = btnSocialChallenge.text.toString()
+            choosenChallenge = btnSportChallenge.text.toString().substringBefore("\n")
             Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
+                it.putExtra("EXTRA_CATEGORY_CHALLENGE", "sport")
                 startActivity(it)
             }
         }
