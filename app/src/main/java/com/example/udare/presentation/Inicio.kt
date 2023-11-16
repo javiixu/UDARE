@@ -57,7 +57,6 @@ class Inicio : AppCompatActivity() {
 
 
 
-        //subirFotoPrueba()
 
 
 
@@ -79,7 +78,6 @@ class Inicio : AppCompatActivity() {
                             popupButton.visibility = View.GONE
                         }
                     }
-
 
 
 
@@ -158,40 +156,7 @@ class Inicio : AppCompatActivity() {
     }
 
 
-    fun subirFotoPrueba() {
-        try {
-            val imageName = "fotopaisaje"
-            val resourceId = resources.getIdentifier(imageName, "drawable", packageName)
-            val drawable = resources.getDrawable(resourceId, null)
-            val bitmap = (drawable as BitmapDrawable).bitmap
 
-            val file = File(this.applicationContext.filesDir, "fotopaisaje.jpg")
-            val fileOutputStream = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
-            fileOutputStream.flush()
-            fileOutputStream.close()
-
-            val post = Post()
-            post.caption = "paseando por la naturaleza!!"
-            post.userID = "652436d13df7259a08be9f6f"
-            post.challengeID = "652eb4074c5c257aa8831c88"
-
-
-            postService.uploadPost(file,post,object : PostRepository.callbackUploadPost {
-                override fun onSuccess(post: Post) {
-                    Log.d("tag-prueba", "Post subido correctamente")
-                }
-
-                override fun onError(mensajeError: String?) {
-                    Log.d("tag-prueba", "Error: $mensajeError")
-                }
-            })
-        } catch (e: Exception) {
-            Log.e("tag-foto", "Error al subir la foto: ${e.message}")
-        }
-
-
-    }
 
 
 
