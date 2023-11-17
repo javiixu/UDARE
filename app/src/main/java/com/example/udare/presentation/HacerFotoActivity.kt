@@ -146,6 +146,9 @@ class HacerFotoActivity : AppCompatActivity() {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
                 finish()
+                lateinit var notificationManager: NotificacionPatrocinado
+                notificationManager = NotificacionPatrocinado(this)
+                notificationManager.createNotification()
             }, 7000)
 
 
