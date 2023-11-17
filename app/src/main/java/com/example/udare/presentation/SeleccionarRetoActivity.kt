@@ -30,6 +30,13 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
     @Inject
     lateinit var challengeService : IChallengeService
+
+    private var deportesPatrocinado = false
+    private var socialPatrocinado = false
+    private var culturaPatrocinado = false
+    private var crecimientoPatrocinado = false
+    private var cocinaPatrocinado = false
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         //TODO Check in Database if the challenge has already been done
 
@@ -119,6 +126,29 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 btnSportChallenge.text = retosDeportes.get(0).title + "\n" + "DEPORTE"
                 btnCookingChallenge.text = retosCocina.get(0).title + "\n" + "COCINAR"
                 btnGrowthChallenge.text = retosCrecimientoPersonal.get(0).title + "\n" +"CRECIMIENTO PERSONAL"
+
+                //socialPatrocinado = retosSocial.get(0).patrocinado
+                //culturaPatrocinado = retosCultura.get(0).patrocinado
+                //deportesPatrocinado = retosDeportes.get(0).patrocinado
+                //cocinaPatrocinado = retosCocina.get(0).patrocinado
+                //crecimientoPatrocinado = retosCrecimientoPersonal.get(0).patrocinado
+
+                deportesPatrocinado = true //solo para las pruebas
+                if(socialPatrocinado){
+                    btnSocialChallenge.setBackgroundColor(android.graphics.Color.parseColor("#FFD700"))
+                }
+                if(culturaPatrocinado){
+                    btnCultureChallenge.setBackgroundColor(android.graphics.Color.parseColor("#FFD700"))
+                }
+                if(deportesPatrocinado){
+                    btnSportChallenge.setBackgroundColor(android.graphics.Color.parseColor("#FFD700"))
+                }
+                if(cocinaPatrocinado){
+                    btnCookingChallenge.setBackgroundColor(android.graphics.Color.parseColor("#FFD700"))
+                }
+                if(crecimientoPatrocinado){
+                    btnGrowthChallenge.setBackgroundColor(android.graphics.Color.parseColor("#FFD700"))
+                }
             }
             override fun onError(mensajeError: String?) {
                 Log.d("tag-prueba", "Error: $mensajeError")
