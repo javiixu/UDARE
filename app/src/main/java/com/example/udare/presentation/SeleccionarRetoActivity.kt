@@ -157,7 +157,6 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
         var choosenChallenge = "choosen Challenge"
 
-
         //challenge going back to main activity
         btnBackFromChallengeSelect.setOnClickListener(){
             finish()
@@ -169,6 +168,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
             Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "cooking")
+                it.putExtra("PATROCINADO", cocinaPatrocinado)
                 startActivity(it)
             }
 
@@ -179,6 +179,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
             Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "growth")
+                it.putExtra("PATROCINADO", crecimientoPatrocinado)
                 startActivity(it)
             }
         }
@@ -188,6 +189,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
             Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "social")
+                it.putExtra("PATROCINADO", socialPatrocinado)
                 startActivity(it)
             }
         }
@@ -197,6 +199,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
             Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "culture")
+                it.putExtra("PATROCINADO", culturaPatrocinado)
                 startActivity(it)
             }
        }
@@ -206,6 +209,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
             Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "sport")
+                it.putExtra("PATROCINADO", deportesPatrocinado)
                 startActivity(it)
             }
         }
