@@ -73,7 +73,24 @@ public class UserService implements IUserService {
     }
 
 
+    @Override
+    public void updateUserImage(File file, User user,String userId, UserRepository.callbackUpdateUserImage callback) {
+        userRepository.updateUserImage(file, user, userId, new UserRepository.callbackUpdateUserImage() {
+            @Override
+            public void onSuccess(User user) {
+                callback.onSuccess(user);
+            }
 
-
-
+            @Override
+            public void onError(String mensajeError) {
+                callback.onError(mensajeError);
+            }
+        });
+    }
 }
+
+
+
+
+
+

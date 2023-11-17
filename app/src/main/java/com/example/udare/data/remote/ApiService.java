@@ -44,5 +44,13 @@ public interface ApiService {
             @Body User updateUserData
     );
 
+    @Multipart
+    @PUT("users/updateImage/{id}")
+    Call<User> updateUserByIdImage(
+            @Part MultipartBody.Part image,
+            @Part MultipartBody.Part user,
+            @Path("id") String userId
+    );
+
 
 }
