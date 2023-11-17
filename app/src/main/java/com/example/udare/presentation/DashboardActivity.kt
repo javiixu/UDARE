@@ -7,6 +7,8 @@ import com.example.udare.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
+import android.widget.Button
+
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
@@ -15,20 +17,40 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var myuid : String
     private lateinit var actionBar: ActionBar
 
+    private lateinit var btnAddBlogs : Button
+    private lateinit var btnProfile : Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
         actionBar = supportActionBar!!
-        actionBar.title = "Perfil"
 
         firebaseAuth = FirebaseAuth.getInstance()
         checkUser()
 
-        val fragment = HomeFragment()
+        val homeFragment = HomeFragment()
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.content, fragment)
+        transaction.replace(R.id.content, homeFragment)
         transaction.commit()
+
+        btnAddBlogs = findViewById(R.id.btnAddBlogs)
+        btnProfile = findViewById(R.id.btnProfile)
+
+
+        btnAddBlogs.setOnClickListener {
+            val addPostFragment = AddPostFragment()
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.content, addPostFragment)
+            transaction.commit()
+        }
+
+        btnProfile.setOnClickListener {
+            val profileFragment = ProfileFragment()
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.content, profileFragment)
+            transaction.commit()
+        }
 
     }
 

@@ -158,7 +158,7 @@ class LoginActivity : AppCompatActivity() {
                         reference.child(uid ?: "").setValue(hashMap)
                     }
                     Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, Inicio::class.java)
+                    val intent = Intent(this, DashboardActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                     finish()

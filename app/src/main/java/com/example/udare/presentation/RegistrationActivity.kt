@@ -3,6 +3,7 @@ package com.example.udare.presentation
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
@@ -10,12 +11,22 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.example.udare.R
+import com.example.udare.data.model.Profile
+import com.example.udare.data.model.User
+import com.example.udare.data.repositories.Implementations.UserRepository
+import com.example.udare.services.implementations.UserService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class RegistrationActivity : AppCompatActivity() {
+
+    @Inject
+    public lateinit var userService: UserService
 
     private lateinit var email : EditText
     private lateinit var password : EditText
@@ -25,6 +36,8 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var existAccount: TextView
     private lateinit var mProgress : ProgressBar
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var user : User
+    private lateinit var uid : String
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -64,6 +77,10 @@ class RegistrationActivity : AppCompatActivity() {
                 return@setOnClickListener
             } else {
                 registerUser(emaill, passwordd, namee)
+                uid = mAuth.currentUser?.uid.toString()
+                Log.d("tag-prueba", "UID: $uid")
+//                Print that the User is going to send to backend
+                sendUserToBack(emaill, passwordd, namee, uid)
             }
         }
     }
@@ -102,6 +119,27 @@ class RegistrationActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 mProgress.visibility = ProgressBar.GONE
                 Toast.makeText(this, "" + exception.message, Toast.LENGTH_SHORT).show() }
+    }
+
+    private fun sendUserToBack(email: String, password: String, name: String, uid: String) {
+//        Empty Array of posts
+        var posts = emptyArray<String>()
+
+        var profile : Profile = Profile("","","", emptyArray<String>(), emptyArray<String>())
+
+        user = User(name, password, email, posts, profile, false, uid)
+        Log.d("tag-prueba", "User to send: $user")
+
+
+        userService.createUser(object : UserRepository.callbackPostUser {
+            override fun onSuccess(user: User) {
+                Toast.makeText(this@RegistrationActivity, "User created", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onError(mensajeError: String?) {
+                Toast.makeText(this@RegistrationActivity, "Error: $mensajeError", Toast.LENGTH_SHORT).show()
+            }
+        }, user)
     }
 
 //    override fun onSupportNavigateUp(): Boolean {
