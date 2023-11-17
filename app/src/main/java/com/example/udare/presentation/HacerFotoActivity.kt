@@ -143,7 +143,7 @@ class HacerFotoActivity : AppCompatActivity() {
         )
     }
 
-    fun subirFoto(file : File?) {
+    fun subirFoto(file : File) {
         try {
 
             val post = Post()
