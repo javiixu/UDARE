@@ -1,8 +1,11 @@
 package com.example.udare.presentation
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +14,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.udare.Adapter.CommentsAdapter
 import com.example.udare.R
 import com.example.udare.data.model.CommentData
@@ -93,8 +95,22 @@ class ComentariosActivity : AppCompatActivity() {
         sendButton.setOnClickListener {
             val comentario = comentarioListener.text.toString()
             comentarioListener.setText("")
+            hideKeyboard(comentarioListener)
             postService.addComment(postId, THIS_USER_ID, comentario, object : PostRepository.callbackAddComment {
                     override fun onSuccess(post: Post) {
+                        userService.getUserById(THIS_USER_ID, object : UserRepository.callbackGetUserById {
+                            override fun onSuccess(user: User) {
+                                val profilePic = user.profile.profilePic
+                                val username = user.username
+                                val elem = CommentData(comentario, profilePic, username)
+                                Lista.add(elem)
+                                updateCommentList(Lista)
+                            }
+
+                            override fun onError(mensajeError: String?) {
+                                Log.d("tag-comments", "Error in getUserById")
+                            }
+                        })
                         Log.d("tag-comment", "Comentario subido")
                     }
 
@@ -105,5 +121,10 @@ class ComentariosActivity : AppCompatActivity() {
             )
         }
 
+    }
+
+    private fun hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
