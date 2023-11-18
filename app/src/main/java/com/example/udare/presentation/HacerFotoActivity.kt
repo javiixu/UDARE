@@ -24,7 +24,6 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.view.LifecycleCameraController
 import androidx.core.content.ContextCompat
 import com.example.udare.R
-
 import com.example.udare.data.model.User
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IUserService
@@ -33,18 +32,12 @@ import kotlinx.coroutines.delay
 import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
-
-
 import com.example.udare.data.model.Post
 import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.services.implementations.PostService
 import com.example.udare.services.interfaces.IPostService
-import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
-import java.io.FileOutputStream
-import java.util.Date
-import java.util.Locale
-import javax.inject.Inject
+
 
 
 @AndroidEntryPoint
