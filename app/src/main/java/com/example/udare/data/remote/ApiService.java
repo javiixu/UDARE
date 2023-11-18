@@ -35,7 +35,7 @@ public interface ApiService {
             @Part MultipartBody.Part post
     );
 
-    @POST("/api/posts/{postId}/comment")
+    @POST("/posts/{postId}/addComment")
     Call<Post> addComment(
             @Path("postId") String postId,
             @Body CommentData commentData

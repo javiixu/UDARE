@@ -96,13 +96,13 @@ class Inicio : AppCompatActivity() {
 
                 val photoRecyclerView: RecyclerView = findViewById(R.id.RecyclerFotos)
 
-                val fotoList = mutableListOf<String>()
+               /* val fotoList = mutableListOf<String>()
 
                 for(post in posts){
                     fotoList.add(post.image)
-                }
+                }*/
 
-                val photoAdapter = FotoAdapter(fotoList, this@Inicio)
+                val photoAdapter = FotoAdapter(posts, this@Inicio)
                 photoRecyclerView.adapter = photoAdapter
                 photoRecyclerView.layoutManager = LinearLayoutManager(this@Inicio)
 

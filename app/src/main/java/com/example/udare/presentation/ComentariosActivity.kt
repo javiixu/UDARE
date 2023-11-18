@@ -15,8 +15,10 @@ import com.example.udare.R
 import com.example.udare.data.model.Post
 import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.services.interfaces.IPostService
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class ComentariosActivity : AppCompatActivity() {
 
     @Inject
@@ -54,11 +56,11 @@ class ComentariosActivity : AppCompatActivity() {
             comentarioListener.setText("")
             postService.addComment(THIS_POST_ID, THIS_USER_ID, comentario, object : PostRepository.callbackAddComment {
                     override fun onSuccess(post: Post) {
-                        Log.d("tag-comment", "Post actualizado")
+                        Log.d("tag-comment", "Comentario subido")
                     }
 
                     override fun onError(mensajeError: String?) {
-                        Log.d("tag-prueba", "Error: $mensajeError")
+                        Log.d("tag-comment", "Error: $mensajeError")
                     }
                 }
             )

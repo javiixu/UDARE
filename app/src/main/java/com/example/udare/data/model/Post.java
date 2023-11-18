@@ -1,6 +1,7 @@
 package com.example.udare.data.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Post {
     private String userID;
@@ -8,6 +9,8 @@ public class Post {
     private String caption;
     private String image;
     private Date date;
+    private String _id;
+    private List<CommentData> comments;
 
     public String getUserID() {
         return userID;
@@ -47,6 +50,9 @@ public class Post {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+    public String get_id() {
+        return _id;
     }
 
 }

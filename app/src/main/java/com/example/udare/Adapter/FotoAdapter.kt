@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.udare.R
+import com.example.udare.data.model.Post
 import com.example.udare.presentation.ComentariosActivity
 import com.example.udare.presentation.HacerFotoActivity
 
 
-class FotoAdapter (private val fotos: List<String>, private val context: Context) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
+class FotoAdapter (private val posts: List<Post>, private val context: Context) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
 
     class FotoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.foto_viewer)
@@ -30,6 +31,11 @@ class FotoAdapter (private val fotos: List<String>, private val context: Context
     }
 
     override fun onBindViewHolder(holder: FotoHolder, position: Int) {
+        val fotos = mutableListOf<String>()
+        val id = ""
+        for(post in posts){
+            fotos.add(post.image)
+        }
         val fotoResId = fotos[position]
         val standardSize = 1200 // Tamaño estándar en píxeles
 
@@ -51,7 +57,7 @@ class FotoAdapter (private val fotos: List<String>, private val context: Context
     }
 
     override fun getItemCount(): Int {
-        return fotos.size
+        return posts.size
     }
 
 }
