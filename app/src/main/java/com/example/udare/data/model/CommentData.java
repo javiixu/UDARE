@@ -1,6 +1,8 @@
 package com.example.udare.data.model;
 
-public class CommentData {
+import java.io.Serializable;
+
+public class CommentData implements Serializable {
     public String userId;
     public String comment;
 

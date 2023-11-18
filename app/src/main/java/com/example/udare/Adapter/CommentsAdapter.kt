@@ -37,15 +37,6 @@ class CommentsAdapter(private val textos: List<String>, private val context: Con
         // Configurar el texto en el TextView
         holder.textView.text = texto
 
-        // Agregar OnClickListener al TextView
-        holder.textView.setOnClickListener {
-            // Crear un Intent para iniciar la nueva actividad (DetalleTextoActivity)
-            val intent = Intent(context, Inicio::class.java)
-            // Puedes pasar datos adicionales a la nueva actividad si es necesario
-            // intent.putExtra("clave", valor)
-            // Iniciar la nueva actividad
-            context.startActivity(intent)
-        }
     }
 
 

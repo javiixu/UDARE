@@ -14,7 +14,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.udare.R
 import com.example.udare.data.model.Post
 import com.example.udare.presentation.ComentariosActivity
-import com.example.udare.presentation.HacerFotoActivity
 
 
 class FotoAdapter (private val posts: List<Post>, private val context: Context) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
@@ -50,7 +49,10 @@ class FotoAdapter (private val posts: List<Post>, private val context: Context) 
 
         holder.textViewClick.setOnClickListener {
             // Crear un Intent para iniciar la nueva actividad (HacerFotoActivity)
+            val comments = posts[position].comments
             val intent = Intent(context, ComentariosActivity::class.java)
+            intent.putExtra("postId", posts[position]._id)
+            intent.putExtra("comments", ArrayList<Any>(comments))
             context.startActivity(intent)
         }
 

@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_vertical">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/avatar"
@@ -16,13 +17,27 @@
         app:civ_border_color="#FFFFFF"
         android:layout_gravity="center_vertical" />
 
-    <TextView
-        android:id="@+id/comentario"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Hola"
         android:layout_marginStart="8dp"
-        android:layout_gravity="center_vertical" />
-</LinearLayout>
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre de Usuario"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/comentario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hola"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+</LinearLayout>
