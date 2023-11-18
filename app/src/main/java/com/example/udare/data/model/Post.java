@@ -1,13 +1,25 @@
 package com.example.udare.data.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-public class Post {
+public class Post  implements Serializable {
     private String userID;
     private String challengeID;
     private String caption;
     private String image;
     private Date date;
+    private String _id;
+    private List<CommentData> comments;
+
+    public List<CommentData> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentData> comments) {
+        this.comments = comments;
+    }
 
     public String getUserID() {
         return userID;
@@ -47,6 +59,9 @@ public class Post {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+    public String get_id() {
+        return _id;
     }
 
 }

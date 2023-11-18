@@ -1,5 +1,6 @@
 package com.example.udare.data.remote;
 
+import com.example.udare.data.model.CommentData;
 import com.example.udare.data.model.Post;
 import com.example.udare.data.model.Challenge;
 import com.example.udare.data.model.User;
@@ -38,6 +39,7 @@ public interface ApiService {
             @Part MultipartBody.Part post
     );
 
+
     @PUT("/users/{id}")
     Call<User> updateUserById(
             @Path("id") String userId,
@@ -53,4 +55,15 @@ public interface ApiService {
     );
 
 
+
+    @POST("/posts/{postId}/addComment")
+    Call<Post> addComment(
+            @Path("postId") String postId,
+            @Body CommentData commentData
+    );
+
+
 }
+
+
+

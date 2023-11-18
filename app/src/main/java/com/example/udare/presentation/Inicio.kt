@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -55,7 +56,7 @@ class Inicio : AppCompatActivity() {
 
 
 
-        //subirFotoPrueba()
+
 
 
 
@@ -80,7 +81,6 @@ class Inicio : AppCompatActivity() {
 
 
 
-
                 }
             }
 
@@ -94,15 +94,15 @@ class Inicio : AppCompatActivity() {
         postService.getAllPosts(object : PostRepository.callbackGetAllPosts {
             override fun onSuccess(posts: MutableList<Post>) {
 
-                val photoRecyclerView: RecyclerView = findViewById(R.id.viewer)
+                val photoRecyclerView: RecyclerView = findViewById(R.id.RecyclerFotos)
 
-                val fotoList = mutableListOf<String>()
+               /* val fotoList = mutableListOf<String>()
 
                 for(post in posts){
                     fotoList.add(post.image)
-                }
+                }*/
 
-                val photoAdapter = FotoAdapter(fotoList)
+                val photoAdapter = FotoAdapter(posts, this@Inicio)
                 photoRecyclerView.adapter = photoAdapter
                 photoRecyclerView.layoutManager = LinearLayoutManager(this@Inicio)
 
@@ -156,37 +156,8 @@ class Inicio : AppCompatActivity() {
     }
 
 
-    fun subirFotoPrueba() {
-        try {
-            val imageName = "fotopaisaje"
-            val resourceId = resources.getIdentifier(imageName, "drawable", packageName)
-            val drawable = resources.getDrawable(resourceId, null)
-            val bitmap = (drawable as BitmapDrawable).bitmap
-
-            val file = File(this.applicationContext.filesDir, "fotopaisaje.jpg")
-            val fileOutputStream = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
-            fileOutputStream.flush()
-            fileOutputStream.close()
-
-            val post = Post()
-            post.caption = "paseando por la naturaleza!!"
-            post.userID = "652436d13df7259a08be9f6f"
-            post.challengeID = "652eb4074c5c257aa8831c88"
 
 
-            postService.uploadPost(file,post,object : PostRepository.callbackUploadPost {
-                override fun onSuccess(post: Post) {
-                    Log.d("tag-prueba", "Post subido correctamente")
-                }
 
-                override fun onError(mensajeError: String?) {
-                    Log.d("tag-prueba", "Error: $mensajeError")
-                }
-            })
-        } catch (e: Exception) {
-            Log.e("tag-foto", "Error al subir la foto: ${e.message}")
-        }
-    }
 
 }

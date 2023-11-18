@@ -1,5 +1,6 @@
 package com.example.udare.data.repositories.Implementations;
 
+import com.example.udare.data.model.CommentData;
 import com.example.udare.data.model.Post;
 import com.example.udare.data.remote.ApiClient;
 import com.example.udare.data.remote.ApiService;
@@ -57,8 +58,6 @@ public class PostRepository implements IPostRepository {
 
 
 
-
-
     @Override
     public void getAllPosts(final PostRepository.callbackGetAllPosts callback) {
         Call<List<Post>> call = apiService.getAllPosts();
@@ -82,6 +81,35 @@ public class PostRepository implements IPostRepository {
                 callback.onError("Error en la llamada: " + t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void addComment(String postId, String userId, String comment, final callbackAddComment callback) {
+        CommentData commentData = new CommentData(userId, comment);
+        Call<Post> call = apiService.addComment(postId, commentData);
+
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (response.isSuccessful()) {
+                    Post uploadedPost = response.body();
+                    callback.onSuccess(uploadedPost);
+                } else {
+                    callback.onError("Error en la respuesta de subir comentario: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                // Manejar el error
+                callback.onError("Error en la llamada: " + t.getMessage());
+            }
+        });
+    }
+
+    public interface callbackAddComment{
+        void onSuccess(Post post);
+        void onError(String mensajeError);
     }
 
     public interface callbackGetAllPosts {
