@@ -27,14 +27,14 @@ class SplashScreen : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             val user = mAuth.currentUser
-            if (user == null) {
+            //if (user == null) {
                 val mainIntent = Intent(this, LoginActivity::class.java)
                 startActivity(mainIntent)
-            } else {
+            /*} else {
                 val mainIntent = Intent(this, RegistrationActivity::class.java)
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(mainIntent)
-            }
+            }*/
             finish()
         }, 2000)
 

@@ -78,6 +78,30 @@ public class UserRepository implements IUserRepository {
         });
     }
 
+    public void getUserByUid(String uid, final callbackGetUserByUid callback) {
+        Call<User> call = apiService.getUserByUid(uid);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    User user = response.body();
+                    if (user != null) {
+                        callback.onSuccess(user);
+                    } else {
+                        callback.onError("Usuario nulo");
+                    }
+                } else {
+                    callback.onError("Error en la respuesta: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                callback.onError("Error en la llamada: " + t.getMessage());
+            }
+        });
+    }
+
     public void createUser(final callbackPostUser callback, User user) {
         Call<User> call = apiService.createUser(user);
         call.enqueue(new Callback<User>() {
@@ -239,6 +263,11 @@ public class UserRepository implements IUserRepository {
 
 
     public interface callbackGetUserById {
+        void onSuccess(User user);
+        void onError(String mensajeError);
+    }
+
+    public interface callbackGetUserByUid {
         void onSuccess(User user);
         void onError(String mensajeError);
     }

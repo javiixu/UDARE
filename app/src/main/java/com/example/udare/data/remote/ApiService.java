@@ -46,6 +46,9 @@ public interface ApiService {
     @GET("/users/{id}")
     Call<User> getUserById(@Path("id") String userId);
 
+    @GET("/users/getUserByUid/{uid}")
+    Call<User> getUserByUid(@Path("uid") String uid);
+
     @GET("/posts")
     Call<List<Post>> getAllPosts();
 

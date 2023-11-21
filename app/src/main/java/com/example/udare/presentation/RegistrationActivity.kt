@@ -77,10 +77,8 @@ class RegistrationActivity : AppCompatActivity() {
                 return@setOnClickListener
             } else {
                 registerUser(emaill, passwordd, namee)
-                uid = mAuth.currentUser?.uid.toString()
-                Log.d("tag-prueba", "UID: $uid")
 //                Print that the User is going to send to backend
-                sendUserToBack(emaill, passwordd, namee, uid)
+                //sendUserToBack(emaill, passwordd, namee, uid)
             }
         }
     }
@@ -94,6 +92,7 @@ class RegistrationActivity : AppCompatActivity() {
                     val user: FirebaseUser? = mAuth.currentUser
                     val email : String = user?.email.toString()
                     val uid : String = user?.uid.toString()
+                    sendUserToBack(email, password, name, uid)
                     val hashMap : HashMap<String, String> = HashMap()
                     hashMap.put("email", email)
                     hashMap.put("uid", uid)
@@ -109,6 +108,7 @@ class RegistrationActivity : AppCompatActivity() {
 
                     val mainIntent = Intent(this, Inicio::class.java)
                     mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    mainIntent.putExtra("userLogged", uid)
                     startActivity(mainIntent)
                     finish()
                 } else {
@@ -127,7 +127,7 @@ class RegistrationActivity : AppCompatActivity() {
 
         var profile : Profile = Profile("","","", emptyArray<String>(), emptyArray<String>(),0,0,0,0,0)
 
-        user = User(name, password, email, posts, profile, false, uid)
+        user = User(name, password, uid, email, posts, profile, false)
         Log.d("tag-prueba", "User to send: $user")
 
 

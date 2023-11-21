@@ -3,31 +3,24 @@ package com.example.udare.presentation
 
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.udare.Adapter.FotoAdapter
 import com.example.udare.R
+import com.example.udare.data.model.CommentData
 import com.example.udare.data.model.Post
 import com.example.udare.data.model.User
 import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.data.repositories.Implementations.UserRepository
-import com.example.udare.presentation.Notificacion
-import com.example.udare.presentation.PerfilActivity
-import com.example.udare.presentation.SeleccionarRetoActivity
 import com.example.udare.services.interfaces.IChallengeService
 import com.example.udare.services.interfaces.IPostService
 import com.example.udare.services.interfaces.IUserService
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.File
-import java.io.FileOutputStream
 import java.util.Calendar
 import javax.inject.Inject
 import kotlin.concurrent.thread
@@ -55,8 +48,23 @@ class Inicio : AppCompatActivity() {
         val popupButton = findViewById<Button>(R.id.challenges)
 
 
+        var userId: String = ""
+        val uid = intent.getStringExtra("userLogged")
 
+        userService.getUserByUid(uid, object : UserRepository.callbackGetUserByUid {
+            override fun onSuccess(user: User) {
+                userId = user.id
+                btnTestPerfil.setOnClickListener(){
+                    val intent = Intent(this@Inicio, PerfilActivity::class.java)
+                    intent.putExtra("userLogged", userId)
+                    this@Inicio.startActivity(intent)
+                }
+            }
 
+            override fun onError(mensajeError: String?) {
+                Log.d("tag-comments", "Error in getUserByUid: $mensajeError")
+            }
+        })
 
 
 
@@ -102,7 +110,7 @@ class Inicio : AppCompatActivity() {
                     fotoList.add(post.image)
                 }*/
 
-                val photoAdapter = FotoAdapter(posts, this@Inicio)
+                val photoAdapter = FotoAdapter(posts, userId, this@Inicio)
                 photoRecyclerView.adapter = photoAdapter
                 photoRecyclerView.layoutManager = LinearLayoutManager(this@Inicio)
 
@@ -122,12 +130,12 @@ class Inicio : AppCompatActivity() {
 
 
 
-        btnTestPerfil.setOnClickListener(){
-            Intent(this, PerfilActivity::class.java).also{
-                startActivity(it)
-            }
+       /* btnTestPerfil.setOnClickListener(){
+            val intent = Intent(this, PerfilActivity::class.java)
+            intent.putExtra("userLogged", userId)
+            this.startActivity(intent)
         }
-
+*/
         thread {
             checkAndShowNotification()
         }

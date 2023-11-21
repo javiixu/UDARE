@@ -9,9 +9,9 @@ import java.io.File;
 public interface IUserService {
     void getAllUsers(UserRepository.callbackGetAllUsers callback);
 
-
-
     void createUser(UserRepository.callbackPostUser callback, User user);
+
+    void getUserByUid(String userId, UserRepository.callbackGetUserByUid callback);
 
     void updateProfilePic(UserRepository.callbackPostUser callback, User user, File file);
 

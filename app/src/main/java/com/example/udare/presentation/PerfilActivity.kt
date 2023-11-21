@@ -45,6 +45,9 @@ class PerfilActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
 
+        val userId = intent.getStringExtra("userLogged")
+        Log.d("tag-cagadas", userId + "")
+
         //Buttons & Views
         var tvSocialPoints = findViewById<TextView>(R.id.tvSocialPoints)
         var tvSportPoints = findViewById<TextView>(R.id.tvSportPoints)
@@ -64,7 +67,7 @@ class PerfilActivity : AppCompatActivity() {
         // if user updates profile pic send it to database
 
         //get the data of the user, who is logged in and display his points, profile pic, username and bio
-        userService.getUserById(THIS_USER_ID, object : UserRepository.callbackGetUserById {
+        userService.getUserById(userId, object : UserRepository.callbackGetUserById {
             override fun onSuccess(user: User) {
                 thisUser = user
                 tvCookingPoints.text = thisUser.profile.pointsCooking.toString()
@@ -120,7 +123,7 @@ class PerfilActivity : AppCompatActivity() {
                     val bitmap:Bitmap = getCapturedImage(imageUri)
                     ivProfilePicture.setImageBitmap(bitmap)
 
-                    uploadProfilePicture(bitmap)
+                    uploadProfilePicture(bitmap, userId)
 
                 } else {
                     Log.d("PhotoPicker", "No media selected")
@@ -163,7 +166,7 @@ class PerfilActivity : AppCompatActivity() {
         return bitmap
     }
 
-    fun uploadProfilePicture(bitmap: Bitmap) {
+    fun uploadProfilePicture(bitmap: Bitmap, userId: String?) {
 
 
         try {
@@ -173,7 +176,7 @@ class PerfilActivity : AppCompatActivity() {
             var file = createFileFromBitmap(bitmap, imageName)
 
 
-            userService.updateUserImage(file, thisUser, THIS_USER_ID, object : UserRepository.callbackUpdateUserImage{
+            userService.updateUserImage(file, thisUser, userId, object : UserRepository.callbackUpdateUserImage{
                 override fun onSuccess(user: User) {
                     Log.d("tag-prueba", "Imagen de usuario subido correctamente")
                 }

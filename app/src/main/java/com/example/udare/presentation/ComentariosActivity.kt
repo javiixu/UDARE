@@ -48,6 +48,7 @@ class ComentariosActivity : AppCompatActivity() {
 
         val postId = intent.getStringExtra("postId")
         val comments = intent.getSerializableExtra("comments") as List<CommentData>
+        val userId = intent.getStringExtra("userLogged")
 
 
         val Lista: MutableList<CommentData> = mutableListOf()
@@ -96,9 +97,9 @@ class ComentariosActivity : AppCompatActivity() {
             val comentario = comentarioListener.text.toString()
             comentarioListener.setText("")
             hideKeyboard(comentarioListener)
-            postService.addComment(postId, THIS_USER_ID, comentario, object : PostRepository.callbackAddComment {
+            postService.addComment(postId, userId, comentario, object : PostRepository.callbackAddComment {
                     override fun onSuccess(post: Post) {
-                        userService.getUserById(THIS_USER_ID, object : UserRepository.callbackGetUserById {
+                        userService.getUserById(userId, object : UserRepository.callbackGetUserById {
                             override fun onSuccess(user: User) {
                                 val profilePic = user.profile.profilePic
                                 val username = user.username

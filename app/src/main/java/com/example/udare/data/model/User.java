@@ -13,8 +13,8 @@ public class User {
 
     private String uid;
 
-    public User(String username, String password, String email, String[] posts, Profile profile,
-                Boolean dailyChallengeCompleted, String uid) {
+    public User(String username, String password, String uid, String email, String[] posts, Profile profile,
+                Boolean dailyChallengeCompleted) {
         this.username = username;
         this.password = password;
         this.uid = uid;
@@ -24,6 +24,7 @@ public class User {
         this.dailyChallengeCompleted = dailyChallengeCompleted;
 
     }
+
 
     public String getUsername() {
         return username;

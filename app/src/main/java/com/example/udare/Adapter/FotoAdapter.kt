@@ -13,10 +13,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.udare.R
 import com.example.udare.data.model.Post
+import com.example.udare.data.model.User
 import com.example.udare.presentation.ComentariosActivity
 
 
-class FotoAdapter (private val posts: List<Post>, private val context: Context) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
+class FotoAdapter(private val posts: List<Post>,private val uid: String?, private val context: Context) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
 
     class FotoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.foto_viewer)
@@ -53,6 +54,7 @@ class FotoAdapter (private val posts: List<Post>, private val context: Context) 
             val intent = Intent(context, ComentariosActivity::class.java)
             intent.putExtra("postId", posts[position]._id)
             intent.putExtra("comments", ArrayList<Any>(comments))
+            intent.putExtra("userLogged", uid)
             context.startActivity(intent)
         }
 
