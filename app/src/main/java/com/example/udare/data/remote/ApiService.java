@@ -1,5 +1,6 @@
 package com.example.udare.data.remote;
 
+import com.example.udare.data.model.CommentData;
 import com.example.udare.data.model.Post;
 import com.example.udare.data.model.Challenge;
 import com.example.udare.data.model.User;
@@ -12,16 +13,15 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public interface ApiService {
 
     @GET("/users")
     Call<List<User>> getAllUsers();
 
-//    Get User by id
-    @GET("/users/{id}")
-    Call<User> getUserById(int id);
 
 //    Create User
     @Multipart
@@ -43,6 +43,9 @@ public interface ApiService {
             @Part MultipartBody.Part user
     );
 
+    @GET("/users/{id}")
+    Call<User> getUserById(@Path("id") String userId);
+
     @GET("/posts")
     Call<List<Post>> getAllPosts();
 
@@ -57,4 +60,36 @@ public interface ApiService {
     );
 
 
+    @PUT("/users/{id}")
+    Call<User> updateUserById(
+            @Path("id") String userId,
+            @Body User updateUserData
+    );
+
+    @Multipart
+    @PUT("users/updateImage/{id}")
+    Call<User> updateUserByIdImage(
+            @Part MultipartBody.Part image,
+            @Part MultipartBody.Part user,
+            @Path("id") String userId
+    );
+
+
+
+    @POST("/posts/{postId}/addComment")
+    Call<Post> addComment(
+            @Path("postId") String postId,
+            @Body CommentData commentData
+    );
+
+    @GET("/users/{id}/getFollowersOfUser")
+    Call<List<User>> getFollowers(@Path("id") String userId);
+
+    @GET("/users/{id}/getFollowingOfUser")
+    Call<List<User>> getFollowing(@Path("id") String userId);
+
+
 }
+
+
+

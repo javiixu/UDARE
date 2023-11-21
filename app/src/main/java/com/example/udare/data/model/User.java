@@ -57,11 +57,11 @@ public class User {
         this.posts = posts;
     }
 
-    public Profile getPerfil() {
+    public Profile getProfile() {
         return profile;
     }
 
-    public void setPerfil(Profile profile) {
+    public void setProfile(Profile profile) {
         this.profile = profile;
     }
 

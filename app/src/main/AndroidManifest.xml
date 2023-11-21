@@ -38,6 +38,21 @@
             android:exported="true" />
         <activity
             android:name=".presentation.LoginActivity"
+            android:name=".presentation.ComentariosActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.FollowersActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.PerfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.HacerFotoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.SeleccionarRetoActivity"
             android:exported="true" />
         <activity
             android:name=".presentation.RegistrationActivity"

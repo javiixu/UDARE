@@ -7,22 +7,25 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.udare.Adapter.FotoAdapter
+import com.example.udare.R
 import com.example.udare.data.model.Post
 import com.example.udare.data.model.User
-import com.example.udare.R
 import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.data.repositories.Implementations.UserRepository
-import com.example.udare.services.implementations.UserService
+import com.example.udare.presentation.Notificacion
+import com.example.udare.presentation.PerfilActivity
+import com.example.udare.presentation.SeleccionarRetoActivity
 import com.example.udare.services.interfaces.IChallengeService
 import com.example.udare.services.interfaces.IPostService
 import com.example.udare.services.interfaces.IUserService
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 import java.io.File
 import java.io.FileOutputStream
 import java.util.Calendar
@@ -47,7 +50,14 @@ class Inicio : AppCompatActivity() {
         setContentView(R.layout.activity_inicio)
 
 
-        //subirFotoPrueba()
+        //Buttons & Views
+        val btnTestPerfil = findViewById<Button>(R.id.btnTestPerfil)
+        val popupButton = findViewById<Button>(R.id.challenges)
+
+
+
+
+
 
 
         //Obtiene todos los usuarios del backend
@@ -55,6 +65,22 @@ class Inicio : AppCompatActivity() {
             override fun onSuccess(users: List<User>) {
                 for (usuario in users) {
                     Log.d("tag-prueba", "Nombre de usuario: ${usuario.username}")
+
+
+                    //the user id  of the app owner is set to David S. id for testing
+                    if(usuario.getId() == THIS_USER_ID ){
+
+                        // if the user has completed challenge do not give the option to take
+                        // a foto, otherwise give him the option
+
+                        //if user has completed the daily challenge disable the popup button
+                        if(usuario.dailyChallengeCompleted){
+                            popupButton.visibility = View.GONE
+                        }
+                    }
+
+
+
                 }
             }
 
@@ -68,15 +94,15 @@ class Inicio : AppCompatActivity() {
         postService.getAllPosts(object : PostRepository.callbackGetAllPosts {
             override fun onSuccess(posts: MutableList<Post>) {
 
-                val photoRecyclerView: RecyclerView = findViewById(R.id.viewer)
+                val photoRecyclerView: RecyclerView = findViewById(R.id.RecyclerFotos)
 
-                val fotoList = mutableListOf<String>()
+               /* val fotoList = mutableListOf<String>()
 
                 for(post in posts){
                     fotoList.add(post.image)
-                }
+                }*/
 
-                val photoAdapter = FotoAdapter(fotoList)
+                val photoAdapter = FotoAdapter(posts, this@Inicio)
                 photoRecyclerView.adapter = photoAdapter
                 photoRecyclerView.layoutManager = LinearLayoutManager(this@Inicio)
 
@@ -87,12 +113,19 @@ class Inicio : AppCompatActivity() {
             }
         })
 
-        val popupButton = findViewById<Button>(R.id.challenges)
+
         popupButton.setOnClickListener(){
             Intent(this, SeleccionarRetoActivity::class.java).also{
                 startActivity(it)
             }
+        }
 
+
+
+        btnTestPerfil.setOnClickListener(){
+            Intent(this, PerfilActivity::class.java).also{
+                startActivity(it)
+            }
         }
 
         thread {
@@ -123,39 +156,8 @@ class Inicio : AppCompatActivity() {
     }
 
 
-    fun subirFotoPrueba() {
-        try {
-            val imageName = "foto2"
-            val resourceId = resources.getIdentifier(imageName, "drawable", packageName)
-            val drawable = resources.getDrawable(resourceId, null)
-            val bitmap = (drawable as BitmapDrawable).bitmap
-
-            val file = File(this.applicationContext.filesDir, "foto2.jpg")
-            val fileOutputStream = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
-            fileOutputStream.flush()
-            fileOutputStream.close()
-
-            val post = Post()
-            post.caption = "paseando por la naturaleza!!"
-            post.userID = "652436d13df7259a08be9f6f"
-            post.challengeID = "652eb4074c5c257aa8831c88"
 
 
-            postService.uploadPost(file,post,object : PostRepository.callbackUploadPost {
-                override fun onSuccess(post: Post) {
-                    Log.d("tag-prueba", "Post subido correctamente")
-                }
 
-                override fun onError(mensajeError: String?) {
-                    Log.d("tag-prueba", "Error: $mensajeError")
-                }
-            })
-
-
-        } catch (e: Exception) {
-            Log.e("tag-foto", "Error al subir la foto: ${e.message}")
-        }
-    }
 
 }

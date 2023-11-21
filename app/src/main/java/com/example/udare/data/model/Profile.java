@@ -7,12 +7,24 @@ public class Profile {
     private String[] followers;
     private String[] following;
 
-    public Profile(String nombre, String bio, String profilePic, String[] followers, String[] following) {
+    private int pointsSport;
+    private int pointsSocial;
+    private int pointsCulture;
+    private int pointsGrowth;
+    private int pointsCooking;
+
+    public Profile(String nombre, String bio, String profilePic, String[] followers, String[] following,
+                   int pointsSport, int pointsSocial, int pointsCulture, int pointsGrowth, int pointsCooking) {
         this.nombre = nombre;
         this.bio = bio;
         this.profilePic = profilePic;
         this.followers = followers;
         this.following = following;
+        this.pointsSport = pointsSport;
+        this.pointsSocial = pointsSocial;
+        this.pointsCulture = pointsCulture;
+        this.pointsGrowth = pointsGrowth;
+        this.pointsCooking = pointsCooking;
     }
 
     public String getNombre() {
@@ -55,5 +67,53 @@ public class Profile {
         this.following = following;
     }
 
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
+    }
+
+    public int getPointsSport() {
+        return pointsSport;
+    }
+
+    public void setPointsSport(int pointsSport) {
+        this.pointsSport = pointsSport;
+    }
+
+    public int getPointsSocial() {
+        return pointsSocial;
+    }
+
+    public void setPointsSocial(int pointsSocial) {
+        this.pointsSocial = pointsSocial;
+    }
+
+    public int getPointsCulture() {
+        return pointsCulture;
+    }
+
+    public void setPointsCulture(int pointsCulture) {
+        this.pointsCulture = pointsCulture;
+    }
+
+    public int getPointsGrowth() {
+        return pointsGrowth;
+    }
+
+    public void setPointsGrowth(int pointsGrowth) {
+        this.pointsGrowth = pointsGrowth;
+    }
+
+    public int getPointsCooking() {
+        return pointsCooking;
+    }
+
+    public void setPointsCooking(int pointsCooking) {
+        this.pointsCooking = pointsCooking;
+    }
 }
 
