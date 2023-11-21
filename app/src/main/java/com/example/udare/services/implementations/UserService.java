@@ -41,21 +41,6 @@ public class UserService implements IUserService {
 
 
     @Override
-    public void getUserById(UserRepository.callbackGetUserById callback, int id) {
-        userRepository.getUserById(new UserRepository.callbackGetUserById() {
-          @Override
-            public void onSuccess(User user) {
-                callback.onSuccess(user);
-            }
-
-            @Override
-            public void onError(String mensajeError) {
-                callback.onError(mensajeError);
-            }
-    }
-
-
-    @Override
     public void updateUser(String userId, User updatedUser , UserRepository.callbackUpdateUser callback) {
         userRepository.updateUser(userId, updatedUser, new UserRepository.callbackUpdateUser() {
 
@@ -68,7 +53,7 @@ public class UserService implements IUserService {
             public void onError(String mensajeError) {
                 callback.onError(mensajeError);
             }
-        }, id);
+        });
     }
 
     @Override
@@ -83,12 +68,12 @@ public class UserService implements IUserService {
             public void onError(String mensajeError) {
                 callback.onError(mensajeError);
             }
-          });
+          }, user);
     }
 
     @Override
     public void getUserById(String userId, UserRepository.callbackGetUserById callback) {
-        userRepository.getUserById(userId,new UserRepository.callbackGetUserById() {
+        userRepository.getUserById(userId, new UserRepository.callbackGetUserById() {
 
             @Override
             public void onSuccess(User user) {
@@ -99,12 +84,13 @@ public class UserService implements IUserService {
             public void onError(String mensajeError) {
                 callback.onError(mensajeError);
             }
+        });
+    }
 
     @Override
     public void updateProfilePic(UserRepository.callbackPostUser callback, User user, File file) {
         userRepository.updateProfilePic(new UserRepository.callbackPostUser() {
-        });
-    }
+
             @Override
             public void onSuccess(User user) {
                 callback.onSuccess(user);
@@ -114,7 +100,7 @@ public class UserService implements IUserService {
             public void onError(String mensajeError) {
                 callback.onError(mensajeError);
             }
-});
+            }, user, file);
     }
     @Override
     public void updateUserImage(File file, User user,String userId, UserRepository.callbackUpdateUserImage callback) {
@@ -128,7 +114,7 @@ public class UserService implements IUserService {
             public void onError(String mensajeError) {
                 callback.onError(mensajeError);
             }
-        }, user, file);
+        });
     }
 
 

@@ -17,7 +17,6 @@ public interface IUserRepository {
 
     void updateProfilePic(final UserRepository.callbackPostUser callback, User user, File image);
 
-    void getAllUsers(final UserRepository.callbackGetAllUsers callback);
 
     void updateUser(String userId, User updatedUser, final UserRepository.callbackUpdateUser callback);
 

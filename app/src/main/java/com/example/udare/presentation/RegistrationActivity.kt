@@ -125,7 +125,7 @@ class RegistrationActivity : AppCompatActivity() {
 //        Empty Array of posts
         var posts = emptyArray<String>()
 
-        var profile : Profile = Profile("","","", emptyArray<String>(), emptyArray<String>())
+        var profile : Profile = Profile("","","", emptyArray<String>(), emptyArray<String>(),0,0,0,0,0)
 
         user = User(name, password, email, posts, profile, false, uid)
         Log.d("tag-prueba", "User to send: $user")

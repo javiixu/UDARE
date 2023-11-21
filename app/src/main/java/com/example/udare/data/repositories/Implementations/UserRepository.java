@@ -46,7 +46,6 @@ public class UserRepository implements IUserRepository {
                     callback.onError("Error en la respuesta: " + response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
                 callback.onError("Error en la llamada: " + t.getMessage());
@@ -149,6 +148,13 @@ public class UserRepository implements IUserRepository {
                   callback.onError("Error en la respuesta: " + response.message());
                 }
             }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                // Manejar el error
+                callback.onError("Error en la llamada: " + t.getMessage());
+            }
+        });
+    }
 
     @Override
     public void updateUserImage(File file, User user, String userId, final UserRepository.callbackUpdateUserImage callback) {
@@ -192,6 +198,12 @@ public class UserRepository implements IUserRepository {
                     callback.onError("Error en la respuesta: " + response.message());
                 }
             }
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                callback.onError("Error en la llamada: " + t.getMessage());
+            }
+        });
+    }
 
           
     @Override
@@ -238,10 +250,6 @@ public class UserRepository implements IUserRepository {
 
 
     public interface callbackPostUser {
-        void onSuccess(User user);
-        void onError(String mensajeError);
-    }
-    public interface callbackGetUserById {
         void onSuccess(User user);
         void onError(String mensajeError);
     }

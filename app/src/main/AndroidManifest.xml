@@ -31,13 +31,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.EditProfilePage"
-            android:exported="false" />
-        <activity
             android:name=".presentation.DashboardActivity"
             android:exported="true" />
         <activity
             android:name=".presentation.LoginActivity"
+            />
+        <activity
             android:name=".presentation.ComentariosActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="false" />
@@ -58,23 +57,17 @@
             android:name=".presentation.RegistrationActivity"
             android:exported="true" />
         <activity
-            android:name=".presentation.SplashScreen"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".presentation.HacerFotoActivity"
-            android:exported="true" />
-        <activity
-            android:name=".presentation.SeleccionarRetoActivity"
-            android:exported="true" />
-        <activity
             android:name=".presentation.Inicio"
             android:exported="true" />
-    </application>
+        <activity
+            android:name=".presentation.SplashScreen"
+            android:exported="true" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        </application>
 
 </manifest>
