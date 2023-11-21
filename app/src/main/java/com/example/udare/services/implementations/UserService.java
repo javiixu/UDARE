@@ -87,6 +87,35 @@ public class UserService implements IUserService {
             }
         });
     }
+
+    @Override
+    public void getFollowers(String userId,UserRepository.callbackGetFollowers callback) {
+        userRepository.getFollowers(userId,new UserRepository.callbackGetFollowers() {
+            @Override
+            public void onSuccess(List<User> users) {
+                callback.onSuccess(users);
+            }
+
+            @Override
+            public void onError(String mensajeError) {
+                callback.onError(mensajeError);
+            }
+        });
+    }
+    @Override
+    public void getFollowing(String userId, UserRepository.callbackGetFollowing callback) {
+        userRepository.getFollowing(userId,new UserRepository.callbackGetFollowing() {
+            @Override
+            public void onSuccess(List<User> users) {
+                callback.onSuccess(users);
+            }
+
+            @Override
+            public void onError(String mensajeError) {
+                callback.onError(mensajeError);
+            }
+        });
+    }
 }
 
 

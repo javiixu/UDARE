@@ -130,6 +130,55 @@ public class UserRepository implements IUserRepository {
         });
     }
 
+    public void getFollowers(String userId, final callbackGetFollowers callback) {
+        Call<List<User>> call = apiService.getFollowers(userId);
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if (response.isSuccessful()) {
+                    List<User> users = response.body();
+                    if (users != null) {
+                        callback.onSuccess(users);
+                    } else {
+                        callback.onError("Lista de usuarios nula");
+                    }
+                } else {
+                    callback.onError("Error en la respuesta: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                callback.onError("Error en la llamada: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void getFollowing(String userId,final callbackGetFollowing callback) {
+        Call<List<User>> call = apiService.getFollowing(userId);
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if (response.isSuccessful()) {
+                    List<User> users = response.body();
+                    if (users != null) {
+                        callback.onSuccess(users);
+                    } else {
+                        callback.onError("Lista de usuarios nula");
+                    }
+                } else {
+                    callback.onError("Error en la respuesta: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                callback.onError("Error en la llamada: " + t.getMessage());
+            }
+        });
+    }
+
 
 
 
@@ -156,6 +205,16 @@ public class UserRepository implements IUserRepository {
 
     public interface callbackUpdateUserImage {
         void onSuccess(User user);
+        void onError(String mensajeError);
+    }
+
+    public interface callbackGetFollowers {
+        void onSuccess(List<User> users);
+        void onError(String mensajeError);
+    }
+
+    public interface callbackGetFollowing {
+        void onSuccess(List<User> users);
         void onError(String mensajeError);
     }
 }

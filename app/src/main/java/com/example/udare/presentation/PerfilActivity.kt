@@ -1,5 +1,6 @@
 package com.example.udare.presentation
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.graphics.drawable.BitmapDrawable
@@ -56,6 +57,8 @@ class PerfilActivity : AppCompatActivity() {
         var ivProfilePicture = findViewById<ImageView>(R.id.profilePicture)
         var tvUserName = findViewById<TextView>(R.id.tvUserName)
         var tvUserBio = findViewById<TextView>(R.id.tvUserBio)
+        var buttonFollowers = findViewById<Button>(R.id.buttonFollowers)
+        var buttonFollowing = findViewById<Button>(R.id.buttonFollowing)
 
         //TODO
         // if user updates profile pic send it to database
@@ -83,8 +86,9 @@ class PerfilActivity : AppCompatActivity() {
                 tvUserBio.text = thisUser.profile.bio.toString()
                 tvUserName.text = thisUser.username.toString()
 
-
-
+                //set followers and following
+                buttonFollowers.text = thisUser.profile.followers.size.toString()
+                buttonFollowing.text = thisUser.profile.following.size.toString()
             }
 
             override fun onError(mensajeError: String?) {
@@ -127,6 +131,13 @@ class PerfilActivity : AppCompatActivity() {
         btnChangeProfilePicture.setOnClickListener() {
             // Launch the photo picker and let the user choose only images.
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
+
+
+        buttonFollowers.setOnClickListener(){
+            Intent(this, FollowersActivity::class.java).also{
+                startActivity(it)
+            }
         }
 
 
