@@ -13,5 +13,8 @@ public interface IUserService {
 
     void getUserById(String userId, UserRepository.callbackGetUserById callback);
 
-    public void updateUserImage(File file, User user,String userId, UserRepository.callbackUpdateUserImage callback);
+    void updateUserImage(File file, User user,String userId, UserRepository.callbackUpdateUserImage callback);
+    void getFollowers(String userId, UserRepository.callbackGetFollowers callback);
+
+    void getFollowing(String userId, UserRepository.callbackGetFollowing callback);
 }

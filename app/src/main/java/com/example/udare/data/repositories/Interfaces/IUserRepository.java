@@ -13,5 +13,9 @@ public interface IUserRepository {
 
     void getUserById(String userId, final UserRepository.callbackGetUserById callback);
 
-    public void updateUserImage(File file, User user, String userId, final UserRepository.callbackUpdateUserImage callback);
+    void updateUserImage(File file, User user, String userId, final UserRepository.callbackUpdateUserImage callback);
+
+    void getFollowing(String userId,final UserRepository.callbackGetFollowing callback);
+
+    void getFollowers(String userId,final UserRepository.callbackGetFollowers callback);
 }

@@ -27,7 +27,7 @@ class CommentsAdapter(private val Lista: List<CommentData>, private val context:
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextoHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_comentario, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_follower, parent, false)
         return TextoHolder(view)
     }
 

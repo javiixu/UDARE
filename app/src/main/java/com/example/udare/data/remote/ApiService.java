@@ -62,6 +62,12 @@ public interface ApiService {
             @Body CommentData commentData
     );
 
+    @GET("/users/{id}/getFollowersOfUser")
+    Call<List<User>> getFollowers(@Path("id") String userId);
+
+    @GET("/users/{id}/getFollowingOfUser")
+    Call<List<User>> getFollowing(@Path("id") String userId);
+
 
 }
 
