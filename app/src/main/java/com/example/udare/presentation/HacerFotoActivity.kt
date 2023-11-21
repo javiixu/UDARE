@@ -25,7 +25,6 @@ import androidx.camera.view.LifecycleCameraController
 import androidx.core.content.ContextCompat
 import com.example.udare.R
 import com.example.udare.data.model.CommentData
-
 import com.example.udare.data.model.User
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IUserService
@@ -37,6 +36,7 @@ import com.example.udare.data.model.Post
 import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.services.interfaces.IPostService
 import java.io.File
+
 
 @AndroidEntryPoint
 class HacerFotoActivity : AppCompatActivity() {
