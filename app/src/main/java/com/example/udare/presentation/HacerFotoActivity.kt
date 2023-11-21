@@ -24,20 +24,18 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.view.LifecycleCameraController
 import androidx.core.content.ContextCompat
 import com.example.udare.R
+import com.example.udare.data.model.CommentData
 import com.example.udare.data.model.User
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IUserService
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 import com.example.udare.data.model.Post
 import com.example.udare.data.repositories.Implementations.PostRepository
-import com.example.udare.services.implementations.PostService
 import com.example.udare.services.interfaces.IPostService
 import java.io.File
-
 
 
 @AndroidEntryPoint
@@ -151,10 +149,11 @@ class HacerFotoActivity : AppCompatActivity() {
 
 
             //set the view to the „success“ layout
-            setContentView(R.layout.activity_hacer_foto_challenge_completed)
+            //setContentView(R.layout.activity_hacer_foto_challenge_completed)
 
 
             //returns to main and clears the activity stack after a small delay
+/*
             Handler(Looper.getMainLooper()).postDelayed({
                 //TODO test this further, was copied from Stack Overflow
                 val intent = Intent(this, Inicio::class.java)
@@ -162,7 +161,7 @@ class HacerFotoActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }, 7000)
-
+*/
 
             //TODO make sure the image is uploaded correctly
 
@@ -223,6 +222,14 @@ class HacerFotoActivity : AppCompatActivity() {
 
 
                     subirFoto(file)
+                    setContentView(R.layout.activity_hacer_foto_challenge_completed)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        //TODO test this further, was copied from Stack Overflow
+                        val intent = Intent(this@HacerFotoActivity, Inicio::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                        finish()
+                    }, 7000)
                 }
             }
         )
@@ -231,19 +238,22 @@ class HacerFotoActivity : AppCompatActivity() {
     fun subirFoto(file : File) {
         try {
 
+            val comments: MutableList<CommentData> = mutableListOf()
+
             val post = Post()
             post.caption = "paseando por la naturaleza!!"
             post.userID = "652436d13df7259a08be9f6f"
             post.challengeID = "652eb4074c5c257aa8831c88"
+            post.comments = comments
 
 
             postService.uploadPost(file,post,object : PostRepository.callbackUploadPost {
                 override fun onSuccess(post: Post) {
-                    Log.d("tag-prueba", "Post subido correctamente")
+                    Log.d("tag-foto", "Post subido correctamente")
                 }
 
                 override fun onError(mensajeError: String?) {
-                    Log.d("tag-prueba", "Error: $mensajeError")
+                    Log.d("tag-foto", "Error: $mensajeError")
                 }
             })
         } catch (e: Exception) {
