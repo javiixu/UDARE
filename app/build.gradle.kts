@@ -4,6 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -44,6 +45,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -64,6 +66,11 @@ dependencies {
 
     //Dagger - Hilt
     implementation("com.google.dagger:hilt-android:2.44")
+    implementation("com.google.firebase:firebase-auth:22.2.0")
+    implementation("androidx.annotation:annotation:1.6.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation("com.google.firebase:firebase-database-ktx:20.3.0")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
 
     //Retrofit
@@ -109,8 +116,16 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.concurrent:concurrent-futures-ktx:1.1.0")
 
+    //Profile Fragment
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("com.google.android.material:material:1.4.0")
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+
 
     //for round profile pics
     implementation("de.hdodenhof:circleimageview:3.1.0")
+
 
 }

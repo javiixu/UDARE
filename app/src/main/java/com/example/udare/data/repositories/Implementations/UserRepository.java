@@ -1,5 +1,6 @@
 package com.example.udare.data.repositories.Implementations;
 
+import android.util.Log;
 import com.example.udare.data.model.Post;
 import com.example.udare.data.model.User;
 import com.example.udare.data.remote.ApiClient;
@@ -78,7 +79,31 @@ public class UserRepository implements IUserRepository {
         });
     }
 
-    @Override
+    public void createUser(final callbackPostUser callback, User user) {
+        Call<User> call = apiService.createUser(user);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()){
+                    User user = response.body();
+                    Log.d("UserRepository", "onResponse: " + user);
+                    if(user != null){
+                        callback.onSuccess(user);
+                    }else{
+                        callback.onError("Usuario nulo");
+                    }
+                }else{
+                  callback.onError("Error en la respuesta: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                callback.onError("Error en la llamada: " + t.getMessage());
+            }
+        });
+    }
+
     public void updateUser(String userId, User updatedUser, callbackUpdateUser callback) {
         Call<User> call = apiService.updateUserById(userId, updatedUser);
         call.enqueue(new Callback<User>() {
@@ -103,6 +128,27 @@ public class UserRepository implements IUserRepository {
         });
     }
 
+//    Update User Profile Pic
+    public void updateProfilePic(final callbackPostUser callback, User user, File image) {
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), image);
+        MultipartBody.Part bodyImage = MultipartBody.Part.createFormData("image", image.getName(), requestFile);
+        MultipartBody.Part bodyUser = MultipartBody.Part.createFormData("user", null, RequestBody.create(MediaType.parse("application/json"), new Gson().toJson(user)));
+
+        Call<User> call = apiService.updateProfilePic(bodyImage, bodyUser);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()){
+                    User user = response.body();
+                    if(user != null){
+                        callback.onSuccess(user);
+                    }else{
+                        callback.onError("Usuario nulo");
+                    }
+                }else{
+                  callback.onError("Error en la respuesta: " + response.message());
+                }
+            }
 
     @Override
     public void updateUserImage(File file, User user, String userId, final UserRepository.callbackUpdateUserImage callback) {
@@ -147,14 +193,8 @@ public class UserRepository implements IUserRepository {
                 }
             }
 
-            @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
-                callback.onError("Error en la llamada: " + t.getMessage());
-            }
-        });
-    }
-
-
+          
+    @Override
     public void getFollowing(String userId,final callbackGetFollowing callback) {
         Call<List<User>> call = apiService.getFollowing(userId);
         call.enqueue(new Callback<List<User>>() {
@@ -180,15 +220,14 @@ public class UserRepository implements IUserRepository {
     }
 
 
-
-
-
-
-
-
-
     public interface callbackGetAllUsers {
         void onSuccess(List<User> users);
+        void onError(String mensajeError);
+    }
+
+
+    public interface callbackGetUserById {
+        void onSuccess(User user);
         void onError(String mensajeError);
     }
 
@@ -197,7 +236,18 @@ public class UserRepository implements IUserRepository {
         void onError(String mensajeError);
     }
 
+
+    public interface callbackPostUser {
+        void onSuccess(User user);
+        void onError(String mensajeError);
+    }
     public interface callbackGetUserById {
+        void onSuccess(User user);
+        void onError(String mensajeError);
+    }
+
+
+    public interface callbackUpdateUserProfilePicture {
         void onSuccess(User user);
         void onError(String mensajeError);
     }
@@ -217,4 +267,5 @@ public class UserRepository implements IUserRepository {
         void onSuccess(List<User> users);
         void onError(String mensajeError);
     }
+
 }

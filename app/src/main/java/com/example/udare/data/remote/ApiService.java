@@ -8,7 +8,6 @@ import com.example.udare.data.model.User;
 import java.util.List;
 
 import okhttp3.MultipartBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -22,6 +21,27 @@ public interface ApiService {
 
     @GET("/users")
     Call<List<User>> getAllUsers();
+
+
+//    Create User
+    @Multipart
+    @POST("/users/add")
+    Call<User> createUser(
+            @Part MultipartBody.Part image,
+            @Part MultipartBody.Part user
+    );
+
+//    Create User without image
+    @POST("/users/add")
+    Call<User> createUser(@Body User user);
+
+//    Update Profile Pic User
+    @Multipart
+    @POST("/users/updateProfilePic")
+    Call<User> updateProfilePic(
+            @Part MultipartBody.Part image,
+            @Part MultipartBody.Part user
+    );
 
     @GET("/users/{id}")
     Call<User> getUserById(@Path("id") String userId);

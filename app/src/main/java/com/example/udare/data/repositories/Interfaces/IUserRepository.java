@@ -3,10 +3,20 @@ package com.example.udare.data.repositories.Interfaces;
 import com.example.udare.data.model.User;
 import com.example.udare.data.repositories.Implementations.PostRepository;
 import com.example.udare.data.repositories.Implementations.UserRepository;
+import com.example.udare.data.model.User;
 
 import java.io.File;
 
+
 public interface IUserRepository {
+    void getAllUsers(final UserRepository.callbackGetAllUsers callback);
+
+    void createUser(final UserRepository.callbackPostUser callback, User user);
+
+//    void createUser(final UserRepository.callbackPostUser callback, String user, String image);
+
+    void updateProfilePic(final UserRepository.callbackPostUser callback, User user, File image);
+
     void getAllUsers(final UserRepository.callbackGetAllUsers callback);
 
     void updateUser(String userId, User updatedUser, final UserRepository.callbackUpdateUser callback);

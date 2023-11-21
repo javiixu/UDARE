@@ -11,15 +11,17 @@ public class User {
 
     private String _id;
 
+    private String uid;
+
     public User(String username, String password, String email, String[] posts, Profile profile,
-                Boolean dailyChallengeCompleted, String _id) {
+                Boolean dailyChallengeCompleted, String uid) {
         this.username = username;
         this.password = password;
+        this.uid = uid;
         this.email = email;
         this.posts = posts;
         this.profile = profile;
         this.dailyChallengeCompleted = dailyChallengeCompleted;
-        this._id = _id;
 
     }
 
@@ -78,4 +80,14 @@ public class User {
     public void setId(String id) {
         this._id = id;
     }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+
 }
