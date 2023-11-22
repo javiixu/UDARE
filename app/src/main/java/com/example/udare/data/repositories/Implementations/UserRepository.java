@@ -104,6 +104,33 @@ public class UserRepository implements IUserRepository {
     }
 
 
+    @Override
+    public void updateUserImage(File file, User user, String userId, final UserRepository.callbackUpdateUserImage callback) {
+
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file);
+        MultipartBody.Part bodyImage = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+        MultipartBody.Part bodyUser = MultipartBody.Part.createFormData("user", null, RequestBody.create(MediaType.parse("application/json"), new Gson().toJson(user)));
+
+        Call<User> call = apiService.updateUserByIdImage(bodyImage,bodyUser, userId);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    User updatedUser = response.body();
+                    callback.onSuccess(updatedUser);
+                } else {
+                    callback.onError("Error en la respuesta de subir imagen de usuario: " + response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                // Manejar el error
+                callback.onError("Error en la llamada: " + t.getMessage());
+            }
+        });
+    }
+
+
 
 
 
@@ -122,6 +149,12 @@ public class UserRepository implements IUserRepository {
     }
 
     public interface callbackGetUserById {
+        void onSuccess(User user);
+        void onError(String mensajeError);
+    }
+
+
+    public interface callbackUpdateUserImage {
         void onSuccess(User user);
         void onError(String mensajeError);
     }

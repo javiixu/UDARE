@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
@@ -22,11 +23,14 @@ import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IUserService
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
+
 
 
 @AndroidEntryPoint
@@ -112,6 +116,8 @@ class PerfilActivity : AppCompatActivity() {
                     val bitmap:Bitmap = getCapturedImage(imageUri)
                     ivProfilePicture.setImageBitmap(bitmap)
 
+                    uploadProfilePicture(bitmap)
+
                 } else {
                     Log.d("PhotoPicker", "No media selected")
                 }
@@ -147,34 +153,63 @@ class PerfilActivity : AppCompatActivity() {
     }
 
     fun uploadProfilePicture(bitmap: Bitmap) {
-        try {
-            val imageName = java.text.SimpleDateFormat("dd_MM_yyyy_HH_mm_ss", Locale("es", "ES"))
-                .format(Date(System.currentTimeMillis())) + "_perfil"
-            val file = File(this.applicationContext.filesDir, imageName)
-            val fileOutputStream = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
-            fileOutputStream.flush()
-            fileOutputStream.close()
 
-            //this can't work we need some way to create the aws link here
-            //thisUser.profile.profilePic = file
-            /*
-            userService.updateUser(THIS_USER_ID, thisUser, object : UserRepository.callbackUpdateUser{
-                override fun onSuccess(user: User?) {
-                    TODO("Not yet implemented")
+
+        try {
+            val imageName = java.text.SimpleDateFormat("dd_MM_yyyy_HH_mm_ss", Locale("es", "ES")).format(Date(System.currentTimeMillis())) + "_perfil"
+            //val file = File(this.applicationContext.filesDir, imageName)
+
+            var file = createFileFromBitmap(bitmap, imageName)
+
+
+            userService.updateUserImage(file, thisUser, THIS_USER_ID, object : UserRepository.callbackUpdateUserImage{
+                override fun onSuccess(user: User) {
+                    Log.d("tag-prueba", "Imagen de usuario subido correctamente")
                 }
 
                 override fun onError(mensajeError: String?) {
-                    TODO("Not yet implemented")
+                    Log.d("tag-prueba", "Error: $mensajeError")
                 }
-
             })
 
-             */
+
+
         } catch (e: Exception) {
             Log.e("tag-foto", "Error al subir la foto: ${e.message}")
         }
     }
 
+
+    fun createFileFromBitmap(bitmap: Bitmap, filename: String ) : File {
+
+        // Get the external storage directory
+        val storageDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
+
+        // Specify the file path (you can customize this based on your requirements)
+        val filePath = "${storageDirectory.absolutePath}/${filename}.png"
+
+        // Create a File object with the specified path
+        val file = File(filePath)
+
+        try {
+            // Create a FileOutputStream for the File
+            val outStream = FileOutputStream(file)
+
+            // Compress the Bitmap to the OutputStream with PNG format and the specified quality
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream)
+
+            // Close the OutputStream
+            outStream.close()
+
+            // Optionally, you can use the 'file' object to get more information about the created file
+            // For example, you can retrieve the absolute path: file.absolutePath
+
+        } catch (e: IOException) {
+            // Handle IOException (e.g., file creation failure)
+            e.printStackTrace()
+        }
+
+        return file
+    }
 }
 
