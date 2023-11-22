@@ -146,7 +146,7 @@ class HacerFotoActivity : AppCompatActivity() {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
 
-                val patrocinado =  intent.getBooleanExtra("PATROCINADO")
+                val patrocinado =  intent.getBooleanExtra("PATROCINADO", false)
                 if (patrocinado) {
                 lateinit var notificationManager: NotificacionPatrocinado
                 notificationManager = NotificacionPatrocinado(this)
