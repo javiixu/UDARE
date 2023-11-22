@@ -13,11 +13,18 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.example.udare.R
+import com.example.udare.data.model.User
+import com.example.udare.data.model.UserSingleton
+import com.example.udare.data.repositories.Implementations.UserRepository
+import com.example.udare.services.interfaces.IUserService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var email: EditText
@@ -29,6 +36,8 @@ class LoginActivity : AppCompatActivity() {
     private var currentUser: FirebaseUser? = null
     private lateinit var loadingBar: ProgressBar
     private lateinit var mAuth: FirebaseAuth
+    @Inject
+    lateinit var userService: IUserService
 
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
@@ -158,13 +167,24 @@ class LoginActivity : AppCompatActivity() {
                         val reference: DatabaseReference = database.getReference("Users")
                         reference.child(uid ?: "").setValue(hashMap)
                     }
-                    Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, Inicio::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    intent.putExtra("userLogged", user?.uid)
-                    Log.d("tag-user", user?.uid + "")
-                    startActivity(intent)
-                    finish()
+
+                    userService.getUserByUid(user?.uid, object : UserRepository.callbackGetUserByUid {
+                        override fun onSuccess(user: User) {
+                            UserSingleton.obtenerInstancia().iniciarSesion(user)
+                            Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@LoginActivity, Inicio::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                            intent.putExtra("userLogged", user?.uid)
+                            Log.d("tag-user", user?.uid + "")
+                            startActivity(intent)
+                            finish()
+                        }
+
+                        override fun onError(mensajeError: String?) {
+                            Log.d("tag-comments", "Error in getUserByUid: $mensajeError")
+                        }
+                    })
+
                 } else {
                     loadingBar.visibility = ProgressBar.GONE
                     Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()

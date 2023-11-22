@@ -14,6 +14,7 @@ import com.example.udare.R
 import com.example.udare.data.model.CommentData
 import com.example.udare.data.model.Post
 import com.example.udare.data.model.User
+import com.example.udare.data.model.UserSingleton
 import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IPostService
@@ -31,7 +32,7 @@ class FollowersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_followers)
 
-        val userId = intent.getStringExtra("userLogged")
+        val userId = UserSingleton.obtenerInstancia().obtenerUsuario().id
 
 
         userService.getFollowers(userId, object : UserRepository.callbackGetFollowers {

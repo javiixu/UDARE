@@ -19,7 +19,7 @@ import com.example.udare.data.model.User
 import com.example.udare.presentation.ComentariosActivity
 
 
-class FotoAdapter(private val Lista: List<PostData>, private val uid: String?, private val context: Context) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
+class FotoAdapter(private val Lista: List<PostData>, private val context: Context) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
 
     class FotoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.foto_viewer)
@@ -59,7 +59,6 @@ class FotoAdapter(private val Lista: List<PostData>, private val uid: String?, p
             val intent = Intent(context, ComentariosActivity::class.java)
             intent.putExtra("postId", Lista[position].post._id)
             intent.putExtra("comments", ArrayList<Any>(comments))
-            intent.putExtra("userLogged", uid)
             context.startActivity(intent)
         }
 

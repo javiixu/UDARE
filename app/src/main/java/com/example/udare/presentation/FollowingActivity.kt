@@ -8,6 +8,7 @@ import com.example.udare.Adapter.FollowersAdapter
 import com.example.udare.Adapter.FollowingAdapter
 import com.example.udare.R
 import com.example.udare.data.model.User
+import com.example.udare.data.model.UserSingleton
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IUserService
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +23,7 @@ class FollowingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_following)
 
-        val userId = intent.getStringExtra("userLogged")
+        val userId = UserSingleton.obtenerInstancia().obtenerUsuario().id
 
         userService.getFollowing(userId, object : UserRepository.callbackGetFollowing {
             override fun onSuccess(users: List<User>) {

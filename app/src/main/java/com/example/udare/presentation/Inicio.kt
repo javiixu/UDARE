@@ -20,6 +20,7 @@ import com.example.udare.data.model.CommentData
 import com.example.udare.data.model.Post
 import com.example.udare.data.model.PostData
 import com.example.udare.data.model.User
+import com.example.udare.data.model.UserSingleton
 import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IChallengeService
@@ -55,34 +56,8 @@ class Inicio : AppCompatActivity() {
         val btnTestPerfil = findViewById<Button>(R.id.btnTestPerfil)
         val popupButton = findViewById<Button>(R.id.challenges)
 
-
-        var userId: String = ""
-        val uid = intent.getStringExtra("userLogged")
-        Log.d("tag-getById", "Valor uid: $uid")
-
-        userService.getUserByUid(uid, object : UserRepository.callbackGetUserByUid {
-            override fun onSuccess(user: User) {
-                Log.d("tag-getById", "Succes getting user by id")
-
-                userId = user.id
-                btnTestPerfil.setOnClickListener(){
-                    val intent = Intent(this@Inicio, PerfilActivity::class.java)
-                    intent.putExtra("userLogged", userId)
-                    this@Inicio.startActivity(intent)
-                }
-                popupButton.setOnClickListener(){
-                    val intent = Intent(this@Inicio, SeleccionarRetoActivity::class.java)
-                    intent.putExtra("userLogged", userId)
-                    this@Inicio.startActivity(intent)
-                }
-            }
-
-            override fun onError(mensajeError: String?) {
-                Log.d("tag-comments", "Error in getUserByUid: $mensajeError")
-            }
-        })
-
-
+        val usuario = UserSingleton.obtenerInstancia().obtenerUsuario()
+        Log.d("tag-singleton", "" + usuario)
 
         //Obtiene todos los usuarios del backend
         userService.getAllUsers(object : UserRepository.callbackGetAllUsers {
@@ -142,7 +117,7 @@ class Inicio : AppCompatActivity() {
                     // Actualiza tu RecyclerView o cualquier otra vista aquí con la nueva lista
                     photoRecyclerView.layoutManager = LinearLayoutManager(this@Inicio)
 
-                    val photoAdapter = FotoAdapter(Lista, userId, this@Inicio)
+                    val photoAdapter = FotoAdapter(Lista, this@Inicio)
                     photoRecyclerView.adapter = photoAdapter
                 })
 /*
@@ -160,20 +135,19 @@ class Inicio : AppCompatActivity() {
 
 
 
-       /* popupButton.setOnClickListener(){
+        popupButton.setOnClickListener(){
             Intent(this, SeleccionarRetoActivity::class.java).also{
                 startActivity(it)
             }
         }
 
-*/
 
-       /* btnTestPerfil.setOnClickListener(){
+
+       btnTestPerfil.setOnClickListener(){
             val intent = Intent(this, PerfilActivity::class.java)
-            intent.putExtra("userLogged", userId)
             this.startActivity(intent)
         }
-*/
+
         thread {
             checkAndShowNotification()
         }
