@@ -138,9 +138,15 @@ class PerfilActivity : AppCompatActivity() {
 
 
         buttonFollowers.setOnClickListener(){
-            Intent(this, FollowersActivity::class.java).also{
-                startActivity(it)
-            }
+            val intent = Intent(this@PerfilActivity, FollowersActivity::class.java)
+            intent.putExtra("userLogged", userId)
+            this@PerfilActivity.startActivity(intent)
+        }
+
+        buttonFollowing.setOnClickListener(){
+            val intent = Intent(this@PerfilActivity, FollowingActivity::class.java)
+            intent.putExtra("userLogged", userId)
+            this@PerfilActivity.startActivity(intent)
         }
 
 

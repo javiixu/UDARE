@@ -58,9 +58,12 @@ class Inicio : AppCompatActivity() {
 
         var userId: String = ""
         val uid = intent.getStringExtra("userLogged")
+        Log.d("tag-getById", "Valor uid: $uid")
 
         userService.getUserByUid(uid, object : UserRepository.callbackGetUserByUid {
             override fun onSuccess(user: User) {
+                Log.d("tag-getById", "Succes getting user by id")
+
                 userId = user.id
                 btnTestPerfil.setOnClickListener(){
                     val intent = Intent(this@Inicio, PerfilActivity::class.java)
