@@ -12,16 +12,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.udare.R
+import com.example.udare.data.model.CommentData
 import com.example.udare.data.model.Post
+import com.example.udare.data.model.PostData
 import com.example.udare.data.model.User
 import com.example.udare.presentation.ComentariosActivity
 
 
-class FotoAdapter(private val posts: List<Post>,private val uid: String?, private val context: Context) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
+class FotoAdapter(private val Lista: List<PostData>, private val uid: String?, private val context: Context) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
 
     class FotoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.foto_viewer)
         val textViewClick: TextView = itemView.findViewById(R.id.comentarios)
+        val usernameView: TextView = itemView.findViewById(R.id.username)
+        val avatarView: ImageView = itemView.findViewById(R.id.avatar)
     }
 
 
@@ -31,12 +35,7 @@ class FotoAdapter(private val posts: List<Post>,private val uid: String?, privat
     }
 
     override fun onBindViewHolder(holder: FotoHolder, position: Int) {
-        val fotos = mutableListOf<String>()
-        val id = ""
-        for(post in posts){
-            fotos.add(post.image)
-        }
-        val fotoResId = fotos[position]
+
         val standardSize = 1200 // Tamaño estándar en píxeles
 
         val options = RequestOptions()
@@ -44,15 +43,21 @@ class FotoAdapter(private val posts: List<Post>,private val uid: String?, privat
             .centerCrop()
 
         Glide.with(holder.imageView)
-            .load(fotoResId)
+            .load(Lista[position].post.image)
             .apply(options)
             .into(holder.imageView)
 
+        holder.usernameView.text = Lista[position].username
+        Glide.with(holder.avatarView)
+            .load(Lista[position].profilePic) // Asegúrate de que CommentData tenga un campo profilePic
+            .apply(RequestOptions.circleCropTransform())
+            .into(holder.avatarView)
+
         holder.textViewClick.setOnClickListener {
             // Crear un Intent para iniciar la nueva actividad (HacerFotoActivity)
-            val comments = posts[position].comments
+            val comments = Lista[position].post.comments
             val intent = Intent(context, ComentariosActivity::class.java)
-            intent.putExtra("postId", posts[position]._id)
+            intent.putExtra("postId", Lista[position].post._id)
             intent.putExtra("comments", ArrayList<Any>(comments))
             intent.putExtra("userLogged", uid)
             context.startActivity(intent)
@@ -61,7 +66,7 @@ class FotoAdapter(private val posts: List<Post>,private val uid: String?, privat
     }
 
     override fun getItemCount(): Int {
-        return posts.size
+        return Lista.size
     }
 
 }

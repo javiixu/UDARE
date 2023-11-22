@@ -55,6 +55,8 @@ class HacerFotoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hacer_foto)
 
+        val userId = intent.getStringExtra("userLogged")
+
         //find all the buttons and text views
         var btnTakePhoto = findViewById<Button>(R.id.btnTakePhoto)
         var tvChoosenChallenge = findViewById<TextView>(R.id.tvChoosenChallenge)
@@ -89,7 +91,7 @@ class HacerFotoActivity : AppCompatActivity() {
 
         //handle
         btnTakePhoto.setOnClickListener(){
-            takePhoto()
+            takePhoto(userId)
 
 
             //get the data of the user, who is logged in and modify his points
@@ -172,7 +174,7 @@ class HacerFotoActivity : AppCompatActivity() {
     }
 
 
-    private fun takePhoto() {
+    private fun takePhoto(userId: String?) {
         // Create time stamped name and MediaStore entry.
         val name = java.text.SimpleDateFormat("dd_MM_yyyy_HH_mm_ss", Locale("es", "ES"))
             .format(Date(System.currentTimeMillis()))
@@ -221,7 +223,7 @@ class HacerFotoActivity : AppCompatActivity() {
                     }
 
 
-                    subirFoto(file)
+                    subirFoto(file, userId)
                     setContentView(R.layout.activity_hacer_foto_challenge_completed)
                     Handler(Looper.getMainLooper()).postDelayed({
                         //TODO test this further, was copied from Stack Overflow
@@ -235,14 +237,14 @@ class HacerFotoActivity : AppCompatActivity() {
         )
     }
 
-    fun subirFoto(file : File) {
+    fun subirFoto(file : File, userId: String?) {
         try {
 
             val comments: MutableList<CommentData> = mutableListOf()
 
             val post = Post()
             post.caption = "paseando por la naturaleza!!"
-            post.userID = "652436d13df7259a08be9f6f"
+            post.userID = userId
             post.challengeID = "652eb4074c5c257aa8831c88"
             post.comments = comments
 
