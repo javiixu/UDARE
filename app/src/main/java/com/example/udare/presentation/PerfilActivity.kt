@@ -170,6 +170,7 @@ class PerfilActivity : AppCompatActivity() {
 
             userService.updateUserImage(file, thisUser, userId, object : UserRepository.callbackUpdateUserImage{
                 override fun onSuccess(user: User) {
+                    UserSingleton.obtenerInstancia().actualizarFoto(user.profile.profilePic)
                     Log.d("tag-prueba", "Imagen de usuario subido correctamente")
                 }
 

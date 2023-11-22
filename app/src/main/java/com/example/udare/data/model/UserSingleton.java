@@ -29,4 +29,9 @@ public class UserSingleton {
     public User obtenerUsuario() {
         return this.usuario;
     }
+
+    public void actualizarFoto(String url)
+    {
+        this.usuario.getProfile().setProfilePic(url);
+    }
 }
