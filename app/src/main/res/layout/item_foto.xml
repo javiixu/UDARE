@@ -23,12 +23,83 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/avatar"
         android:layout_marginTop="8dp" />
+<!--    Recycler view-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/circularImagesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/foto_viewer"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:visibility="visible" />
+<!--Small button on the left-->
+    <Button
+        android:id="@+id/capture_button"
+        android:layout_below="@id/circularImagesRecyclerView"
+        android:layout_centerHorizontal="false"
+        android:src="@drawable/capture_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:onClick="onCaptureSubmitButton"/>
+
 
     <TextView
         android:id="@+id/comentarios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/foto_viewer"
+        android:layout_below="@id/capture_button"
         android:layout_marginTop="8dp"
         android:text="Añadir un comentario..." />
+
+
+    <!--    <LinearLayout-->
+<!--        android:id="@+id/emoji_buttons"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/foto_viewer"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:padding="8dp">-->
+
+<!--        &lt;!&ndash; Add reaction buttons (ImageButtons) here &ndash;&gt;-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/emoji1Button"-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:src="@drawable/emoji1"-->
+<!--            android:onClick="onEmojiButtonClick"/>-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/emoji2Button"-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:src="@drawable/emoji2"-->
+<!--            android:onClick="onEmojiButtonClick"/>-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/emoji3Button"-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:src="@drawable/emoji3"-->
+<!--            android:onClick="onEmojiButtonClick"/>-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/emoji4Button"-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:src="@drawable/emoji4"-->
+<!--            android:onClick="onEmojiButtonClick"/>-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/emoji5Button"-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:src="@drawable/emoji5"-->
+<!--            android:onClick="onEmojiButtonClick"/>-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/emoji6Button"-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:src="@drawable/emoji6"-->
+<!--            android:onClick="onEmojiButtonClick"/>-->
+
+<!--        &lt;!&ndash; Add more ImageButton for other emojis &ndash;&gt;-->
+
+<!--    </LinearLayout>-->
+
 </RelativeLayout>

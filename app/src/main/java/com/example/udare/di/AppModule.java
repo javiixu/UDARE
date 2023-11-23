@@ -3,15 +3,19 @@ package com.example.udare.di;
 import com.example.udare.data.remote.ApiService;
 import com.example.udare.data.repositories.Implementations.ChallengeRepository;
 import com.example.udare.data.repositories.Implementations.PostRepository;
+import com.example.udare.data.repositories.Implementations.ReactionRepository;
 import com.example.udare.data.repositories.Implementations.UserRepository;
 import com.example.udare.data.repositories.Interfaces.IChallengeRepository;
 import com.example.udare.data.repositories.Interfaces.IPostRepository;
+import com.example.udare.data.repositories.Interfaces.IReactionRepository;
 import com.example.udare.data.repositories.Interfaces.IUserRepository;
 import com.example.udare.services.implementations.ChallengeService;
 import com.example.udare.services.implementations.PostService;
+import com.example.udare.services.implementations.ReactionService;
 import com.example.udare.services.implementations.UserService;
 import com.example.udare.services.interfaces.IChallengeService;
 import com.example.udare.services.interfaces.IPostService;
+import com.example.udare.services.interfaces.IReactionService;
 import com.example.udare.services.interfaces.IUserService;
 
 import dagger.Module;
@@ -53,6 +57,12 @@ public final class AppModule {
 
     @Provides
     @Singleton
+    public IReactionRepository provideReactionRepository(ApiService api) {
+        return new ReactionRepository(api);
+    }
+
+    @Provides
+    @Singleton
     public IUserRepository provideUserRepository(ApiService api) {
         return new UserRepository(api);
     }
@@ -74,5 +84,12 @@ public final class AppModule {
     public IPostService providePostService(IPostRepository postRepository) {
         return new PostService(postRepository);
     }
+
+    @Provides
+    @Singleton
+    public IReactionService provideReactionService(IReactionRepository reactionRepository) {
+        return new ReactionService(reactionRepository);
+    }
+
 
 }
