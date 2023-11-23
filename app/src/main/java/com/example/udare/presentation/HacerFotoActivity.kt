@@ -56,6 +56,9 @@ class HacerFotoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hacer_foto)
 
+        val userId = UserSingleton.obtenerInstancia().obtenerUsuario().id
+
+
 
         //find all the buttons and text views
         var btnTakePhoto = findViewById<Button>(R.id.btnTakePhoto)
@@ -95,13 +98,12 @@ class HacerFotoActivity : AppCompatActivity() {
 
 
             //get the data of the user, who is logged in and modify his points
-            userService.getUserById(THIS_USER_ID, object : UserRepository.callbackGetUserById {
+            userService.getUserById(userId, object : UserRepository.callbackGetUserById {
                 override fun onSuccess(user: User) {
                     thisUser = user
 
                     //update that the user has completed the daily challenge
-                    //TODO ACTIVATE THIS AGAIN
-                    //thisUser.dailyChallengeCompleted = true
+                    thisUser.dailyChallengeCompleted = true;
 
 
                     //update the users points in the according challenge
@@ -135,9 +137,17 @@ class HacerFotoActivity : AppCompatActivity() {
                     Log.d("tag-HacerFotoActivity","UPDATE USER PROBLEM, user is 0")
                 }
                 //update user in DB
-                userService.updateUser(THIS_USER_ID, thisUser, object : UserRepository.callbackUpdateUser{
+                userService.updateUser(userId, thisUser, object : UserRepository.callbackUpdateUser{
                     override fun onSuccess(user: User) {
                         Log.d("tag-HacerFotoActivity","User updated correctly")
+                        UserSingleton.obtenerInstancia().actualizarPuntos(
+                            user.profile.pointsSport,
+                            user.profile.pointsCooking,
+                            user.profile.pointsCulture,
+                            user.profile.pointsGrowth,
+                            user.profile.pointsSocial
+                        )
+                        UserSingleton.obtenerInstancia().actualizarChallengeCompleted(true)
                     }
 
                     override fun onError(mensajeError: String) {

@@ -171,6 +171,7 @@ class LoginActivity : AppCompatActivity() {
                     userService.getUserByUid(user?.uid, object : UserRepository.callbackGetUserByUid {
                         override fun onSuccess(user: User) {
                             UserSingleton.obtenerInstancia().iniciarSesion(user)
+                            UserSingleton.obtenerInstancia().actualizarChallengeCompleted(false)
                             Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@LoginActivity, Inicio::class.java)
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

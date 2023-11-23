@@ -34,4 +34,20 @@ public class UserSingleton {
     {
         this.usuario.getProfile().setProfilePic(url);
     }
+
+    public void actualizarPuntos(int pointsSport, int pointsCooking, int pointsCulture, int pointsGrowth, int pointsSocial)
+    {
+        this.usuario.getProfile().setPointsSport(pointsSport);
+        this.usuario.getProfile().setPointsCooking(pointsCooking);
+        this.usuario.getProfile().setPointsCulture(pointsCulture);
+        this.usuario.getProfile().setPointsGrowth(pointsGrowth);
+        this.usuario.getProfile().setPointsSocial(pointsSocial);
+    }
+
+    public void actualizarChallengeCompleted(boolean completed)
+    {
+        this.usuario.setDailyChallengeCompleted(completed);
+    }
+
+
 }

@@ -57,37 +57,13 @@ class Inicio : AppCompatActivity() {
         val popupButton = findViewById<Button>(R.id.challenges)
 
         val usuario = UserSingleton.obtenerInstancia().obtenerUsuario()
-        Log.d("tag-singleton", "" + usuario)
-
-        //Obtiene todos los usuarios del backend
-        userService.getAllUsers(object : UserRepository.callbackGetAllUsers {
-            override fun onSuccess(users: List<User>) {
-                for (usuario in users) {
-                    Log.d("tag-prueba", "Nombre de usuario: ${usuario.username}")
+        Log.d("tag-userSingletonInicio", "Usuario: ${usuario.username}")
 
 
-                    //the user id  of the app owner is set to David S. id for testing
-                    if(usuario.getId() == THIS_USER_ID ){
-
-                        // if the user has completed challenge do not give the option to take
-                        // a foto, otherwise give him the option
-
-                        //if user has completed the daily challenge disable the popup button
-                        if(usuario.dailyChallengeCompleted){
-                            popupButton.visibility = View.GONE
-                        }
-                    }
-
-
-
-                }
-            }
-
-            override fun onError(mensajeError: String?) {
-                Log.d("tag-prueba", "Error: $mensajeError")
-
-            }
-        })
+        if(usuario.dailyChallengeCompleted) {
+            popupButton.text="Reto diario completado!"
+            popupButton.setEnabled(false);
+        }
 
 
         postService.getAllPosts(object : PostRepository.callbackGetAllPosts {
