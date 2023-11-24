@@ -75,7 +75,7 @@ class PerfilActivity : AppCompatActivity() {
 
         //user does not have profile pic, the standard profile pic just stays
         //otherwise we have to set it
-        if(thisUser.profile.profilePic != "Unspecified"){
+        if(thisUser.profile.profilePic != ""){
             Log.d("tag-prueba",thisUser.profile.profilePic)
             Glide.with(this@PerfilActivity).load(thisUser.profile.profilePic).into(ivProfilePicture)
 
