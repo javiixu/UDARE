@@ -25,6 +25,7 @@ import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IChallengeService
 import com.example.udare.services.interfaces.IPostService
+import com.example.udare.services.interfaces.IReactionService
 import com.example.udare.services.interfaces.IUserService
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
@@ -42,6 +43,9 @@ class Inicio : AppCompatActivity() {
 
     @Inject
     lateinit var userService: IUserService
+
+    @Inject
+    lateinit var reactionService: IReactionService
 
     private val _fotoList = MutableLiveData<List<PostData>>()
     val fotoList: LiveData<List<PostData>> get() = _fotoList
@@ -94,6 +98,7 @@ class Inicio : AppCompatActivity() {
                     photoRecyclerView.layoutManager = LinearLayoutManager(this@Inicio)
 
                     val photoAdapter = FotoAdapter(Lista, this@Inicio)
+
                     photoRecyclerView.adapter = photoAdapter
                 })
 /*
@@ -155,9 +160,39 @@ class Inicio : AppCompatActivity() {
         _fotoList.value = newList
     }
 
-
-
-
-
+//    private var selectedEmoji = -1
+//    fun onEmojiButtonClick(view: View) {
+//        // Do something in response to button click
+//        when(view.id){
+//            R.id.emoji1Button -> {
+//                // Do something
+//                selectedEmoji = 1
+//            }
+//            R.id.emoji2Button -> {
+//                // Do something
+//                selectedEmoji = 2
+//            }
+//            R.id.emoji3Button -> {
+//                // Do something
+//                selectedEmoji = 3
+//            }
+//            R.id.emoji4Button -> {
+//                // Do something
+//                selectedEmoji = 4
+//            }
+//            R.id.emoji5Button -> {
+//                // Do something
+//                selectedEmoji = 5
+//            }
+//            else -> {
+//                // Do something
+//                selectedEmoji = -1
+//            }
+//        }
+//
+//        if (selectedEmoji != -1) {
+//            // Do something
+//        }
+//    }
 
 }

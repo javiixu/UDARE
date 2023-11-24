@@ -4,6 +4,7 @@ import com.example.udare.data.model.CommentData;
 import com.example.udare.data.model.Post;
 import com.example.udare.data.model.Challenge;
 import com.example.udare.data.model.User;
+import com.example.udare.data.model.Reaction;
 
 import java.util.List;
 
@@ -91,6 +92,35 @@ public interface ApiService {
     @GET("/users/{id}/getFollowingOfUser")
     Call<List<User>> getFollowing(@Path("id") String userId);
 
+//    Reactions
+    @GET("/reactions/{userId}/{postId}")
+    Call<List<Reaction>> getReactions(@Path("userId") String userId, @Path("postId") String postId);
+
+    @GET("/reactions/{postId}")
+    Call<List<Reaction>> getReactions(@Path("postId") String postId);
+
+    @POST("/reactions/addWithouImage")
+    Call<Reaction> addReaction(@Body Reaction reaction);
+
+    @PUT("/reactions/{reactionId}")
+    Call<Reaction> updateReaction(@Path("reactionId") String reactionId, @Body Reaction reaction);
+
+    @PUT("/reactions/{reactionId}/{userId/delete")
+    Call<Reaction> deleteReaction(@Path("reactionId") String reactionId, @Path("userId") String userId);
+
+    @Multipart
+    @POST("/reactions/add")
+    Call<Reaction> uploadReaction(
+            @Part MultipartBody.Part image,
+            @Part MultipartBody.Part reaction
+    );
+
+    @GET("/reactions/{userId}/{postId}/getReaction")
+    Call<Reaction> getReaction(@Path("userId") String userId, @Path("postId") String postId);
+
+//    Get reactions by post
+    @GET("/reactions/post/{postId}")
+    Call<List<Reaction>> getReactionsByPost(@Path("postId") String postId);
 
 }
 
