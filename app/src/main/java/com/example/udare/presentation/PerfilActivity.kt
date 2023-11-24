@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide
 import com.example.udare.R
 import com.example.udare.data.model.Post
 import com.example.udare.data.model.User
+import com.example.udare.data.model.UserSingleton
 import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IUserService
@@ -45,9 +46,6 @@ class PerfilActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
 
-        val userId = intent.getStringExtra("userLogged")
-        Log.d("tag-cagadas", userId + "")
-
         //Buttons & Views
         var tvSocialPoints = findViewById<TextView>(R.id.tvSocialPoints)
         var tvSportPoints = findViewById<TextView>(R.id.tvSportPoints)
@@ -67,39 +65,29 @@ class PerfilActivity : AppCompatActivity() {
         // if user updates profile pic send it to database
 
         //get the data of the user, who is logged in and display his points, profile pic, username and bio
-        userService.getUserById(userId, object : UserRepository.callbackGetUserById {
-            override fun onSuccess(user: User) {
-                thisUser = user
-                tvCookingPoints.text = thisUser.profile.pointsCooking.toString()
-                tvCulturePoints.text = thisUser.profile.pointsCulture.toString()
-                tvSocialPoints.text = thisUser.profile.pointsSocial.toString()
-                tvSportPoints.text = thisUser.profile.pointsSport.toString()
-                tvGrowthPoints.text = thisUser.profile.pointsGrowth.toString()
+        thisUser = UserSingleton.obtenerInstancia().obtenerUsuario()
+        tvCookingPoints.text = thisUser.profile.pointsCooking.toString()
+        tvCulturePoints.text = thisUser.profile.pointsCulture.toString()
+        tvSocialPoints.text = thisUser.profile.pointsSocial.toString()
+        tvSportPoints.text = thisUser.profile.pointsSport.toString()
+        tvGrowthPoints.text = thisUser.profile.pointsGrowth.toString()
 
 
-                //user does not have profile pic, the standard profile pic just stays
-                //otherwise we have to set it
-                if(thisUser.profile.profilePic != "Unspecified"){
-                    Log.d("tag-prueba",thisUser.profile.profilePic)
-                    Glide.with(this@PerfilActivity).load(thisUser.profile.profilePic).into(ivProfilePicture)
+        //user does not have profile pic, the standard profile pic just stays
+        //otherwise we have to set it
+        if(thisUser.profile.profilePic != ""){
+            Log.d("tag-prueba",thisUser.profile.profilePic)
+            Glide.with(this@PerfilActivity).load(thisUser.profile.profilePic).into(ivProfilePicture)
 
-                }
+        }
 
-                //set Bio and Username
-                tvUserBio.text = thisUser.profile.bio.toString()
-                tvUserName.text = thisUser.username.toString()
+        //set Bio and Username
+        tvUserBio.text = thisUser.profile.bio.toString()
+        tvUserName.text = thisUser.username.toString()
 
-                //set followers and following
-                buttonFollowers.text = thisUser.profile.followers.size.toString()
-                buttonFollowing.text = thisUser.profile.following.size.toString()
-            }
-
-            override fun onError(mensajeError: String?) {
-                Log.d("tag-PerfilActivity","Error in getUserById")
-            }
-
-        })
-
+        //set followers and following
+        buttonFollowers.text = thisUser.profile.followers.size.toString()
+        buttonFollowing.text = thisUser.profile.following.size.toString()
 
 
 
@@ -123,7 +111,7 @@ class PerfilActivity : AppCompatActivity() {
                     val bitmap:Bitmap = getCapturedImage(imageUri)
                     ivProfilePicture.setImageBitmap(bitmap)
 
-                    uploadProfilePicture(bitmap, userId)
+                    uploadProfilePicture(bitmap, thisUser.id)
 
                 } else {
                     Log.d("PhotoPicker", "No media selected")
@@ -138,9 +126,13 @@ class PerfilActivity : AppCompatActivity() {
 
 
         buttonFollowers.setOnClickListener(){
-            Intent(this, FollowersActivity::class.java).also{
-                startActivity(it)
-            }
+            val intent = Intent(this@PerfilActivity, FollowersActivity::class.java)
+            this@PerfilActivity.startActivity(intent)
+        }
+
+        buttonFollowing.setOnClickListener(){
+            val intent = Intent(this@PerfilActivity, FollowingActivity::class.java)
+            this@PerfilActivity.startActivity(intent)
         }
 
 
@@ -178,6 +170,7 @@ class PerfilActivity : AppCompatActivity() {
 
             userService.updateUserImage(file, thisUser, userId, object : UserRepository.callbackUpdateUserImage{
                 override fun onSuccess(user: User) {
+                    UserSingleton.obtenerInstancia().actualizarFoto(user.profile.profilePic)
                     Log.d("tag-prueba", "Imagen de usuario subido correctamente")
                 }
 

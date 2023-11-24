@@ -19,6 +19,7 @@ import com.example.udare.R
 import com.example.udare.data.model.CommentData
 import com.example.udare.data.model.Post
 import com.example.udare.data.model.User
+import com.example.udare.data.model.UserSingleton
 import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IPostService
@@ -48,7 +49,7 @@ class ComentariosActivity : AppCompatActivity() {
 
         val postId = intent.getStringExtra("postId")
         val comments = intent.getSerializableExtra("comments") as List<CommentData>
-        val userId = intent.getStringExtra("userLogged")
+        val usuario = UserSingleton.obtenerInstancia().obtenerUsuario()
 
 
         val Lista: MutableList<CommentData> = mutableListOf()
@@ -97,24 +98,14 @@ class ComentariosActivity : AppCompatActivity() {
             val comentario = comentarioListener.text.toString()
             comentarioListener.setText("")
             hideKeyboard(comentarioListener)
-            postService.addComment(postId, userId, comentario, object : PostRepository.callbackAddComment {
+            postService.addComment(postId, usuario.id, comentario, object : PostRepository.callbackAddComment {
                     override fun onSuccess(post: Post) {
-                        userService.getUserById(userId, object : UserRepository.callbackGetUserById {
-                            override fun onSuccess(user: User) {
-                                val profilePic = user.profile.profilePic
-                                val username = user.username
-                                val elem = CommentData(comentario, profilePic, username)
-                                Lista.add(elem)
-                                updateCommentList(Lista)
-                            }
-
-                            override fun onError(mensajeError: String?) {
-                                Log.d("tag-comments", "Error in getUserById")
-                            }
-                        })
-                        Log.d("tag-comment", "Comentario subido")
+                        val profilePic = usuario.profile.profilePic
+                        val username = usuario.username
+                        val elem = CommentData(comentario, profilePic, username)
+                        Lista.add(elem)
+                        updateCommentList(Lista)
                     }
-
                     override fun onError(mensajeError: String?) {
                         Log.d("tag-comment", "Error: $mensajeError")
                     }

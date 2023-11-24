@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import com.example.udare.presentation.HacerFotoActivity
 import com.example.udare.data.model.Challenge
 import com.example.udare.R
+import com.example.udare.data.model.UserSingleton
 import com.example.udare.data.repositories.Implementations.ChallengeRepository
 import com.example.udare.services.implementations.ChallengeService
 import com.example.udare.services.interfaces.IChallengeService
@@ -32,8 +33,6 @@ class SeleccionarRetoActivity : AppCompatActivity() {
     lateinit var challengeService : IChallengeService
     override fun onCreate(savedInstanceState: Bundle?) {
         //TODO Check in Database if the challenge has already been done
-
-        val userId = intent.getStringExtra("userLogged")
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_seleccionar_reto)
@@ -141,7 +140,6 @@ class SeleccionarRetoActivity : AppCompatActivity() {
             Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "cooking")
-                it.putExtra("userLogged", userId)
                 startActivity(it)
             }
 
@@ -152,7 +150,6 @@ class SeleccionarRetoActivity : AppCompatActivity() {
             Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "growth")
-                it.putExtra("userLogged", userId)
                 startActivity(it)
             }
         }
@@ -162,7 +159,6 @@ class SeleccionarRetoActivity : AppCompatActivity() {
             Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "social")
-                it.putExtra("userLogged", userId)
                 startActivity(it)
             }
         }
@@ -172,7 +168,6 @@ class SeleccionarRetoActivity : AppCompatActivity() {
             Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "culture")
-                it.putExtra("userLogged", userId)
                 startActivity(it)
             }
        }
@@ -182,7 +177,6 @@ class SeleccionarRetoActivity : AppCompatActivity() {
             Intent(this, HacerFotoActivity::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "sport")
-                it.putExtra("userLogged", userId)
                 startActivity(it)
             }
         }

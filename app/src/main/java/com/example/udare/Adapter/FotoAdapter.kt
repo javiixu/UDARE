@@ -30,7 +30,11 @@ import javax.inject.Inject
 //@AndroidEntryPoint
 class FotoAdapter(private val Lista: List<PostData>, private val uid: String?, private val context: Context, private val reactionService: IReactionService) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
 
+
 //    private var selectedEmoji = -1
+
+class FotoAdapter(private val Lista: List<PostData>, private val context: Context) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
+
 
     private val circularImagesAdapter = mutableListOf<CircularImagesAdapter>()
     class FotoHolder(itemView: View, Lista: List<PostData>, public val reactionService: IReactionService) : RecyclerView.ViewHolder(itemView) {
@@ -130,7 +134,6 @@ class FotoAdapter(private val Lista: List<PostData>, private val uid: String?, p
             val intent = Intent(context, ComentariosActivity::class.java)
             intent.putExtra("postId", Lista[position].post._id)
             intent.putExtra("comments", ArrayList<Any>(comments))
-            intent.putExtra("userLogged", uid)
             context.startActivity(intent)
         }
 

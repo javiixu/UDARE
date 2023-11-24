@@ -33,6 +33,7 @@ import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 import com.example.udare.data.model.Post
+import com.example.udare.data.model.UserSingleton
 import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.services.interfaces.IPostService
 import java.io.File
@@ -55,7 +56,9 @@ class HacerFotoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hacer_foto)
 
-        val userId = intent.getStringExtra("userLogged")
+        val userId = UserSingleton.obtenerInstancia().obtenerUsuario().id
+
+
 
         //find all the buttons and text views
         var btnTakePhoto = findViewById<Button>(R.id.btnTakePhoto)
@@ -91,17 +94,16 @@ class HacerFotoActivity : AppCompatActivity() {
 
         //handle
         btnTakePhoto.setOnClickListener(){
-            takePhoto(userId)
+            takePhoto()
 
 
             //get the data of the user, who is logged in and modify his points
-            userService.getUserById(THIS_USER_ID, object : UserRepository.callbackGetUserById {
+            userService.getUserById(userId, object : UserRepository.callbackGetUserById {
                 override fun onSuccess(user: User) {
                     thisUser = user
 
                     //update that the user has completed the daily challenge
-                    //TODO ACTIVATE THIS AGAIN
-                    //thisUser.dailyChallengeCompleted = true
+                    thisUser.dailyChallengeCompleted = true;
 
 
                     //update the users points in the according challenge
@@ -135,9 +137,17 @@ class HacerFotoActivity : AppCompatActivity() {
                     Log.d("tag-HacerFotoActivity","UPDATE USER PROBLEM, user is 0")
                 }
                 //update user in DB
-                userService.updateUser(THIS_USER_ID, thisUser, object : UserRepository.callbackUpdateUser{
+                userService.updateUser(userId, thisUser, object : UserRepository.callbackUpdateUser{
                     override fun onSuccess(user: User) {
                         Log.d("tag-HacerFotoActivity","User updated correctly")
+                        UserSingleton.obtenerInstancia().actualizarPuntos(
+                            user.profile.pointsSport,
+                            user.profile.pointsCooking,
+                            user.profile.pointsCulture,
+                            user.profile.pointsGrowth,
+                            user.profile.pointsSocial
+                        )
+                        UserSingleton.obtenerInstancia().actualizarChallengeCompleted(true)
                     }
 
                     override fun onError(mensajeError: String) {
@@ -174,7 +184,7 @@ class HacerFotoActivity : AppCompatActivity() {
     }
 
 
-    private fun takePhoto(userId: String?) {
+    private fun takePhoto() {
         // Create time stamped name and MediaStore entry.
         val name = java.text.SimpleDateFormat("dd_MM_yyyy_HH_mm_ss", Locale("es", "ES"))
             .format(Date(System.currentTimeMillis()))
@@ -223,7 +233,8 @@ class HacerFotoActivity : AppCompatActivity() {
                     }
 
 
-                    subirFoto(file, userId)
+
+                    subirFoto(file)
                     setContentView(R.layout.activity_hacer_foto_challenge_completed)
                     Handler(Looper.getMainLooper()).postDelayed({
                         //TODO test this further, was copied from Stack Overflow
@@ -237,14 +248,14 @@ class HacerFotoActivity : AppCompatActivity() {
         )
     }
 
-    fun subirFoto(file : File, userId: String?) {
+    fun subirFoto(file : File) {
         try {
 
             val comments: MutableList<CommentData> = mutableListOf()
 
             val post = Post()
             post.caption = "paseando por la naturaleza!!"
-            post.userID = userId
+            post.userID = UserSingleton.obtenerInstancia().obtenerUsuario().id
             post.challengeID = "652eb4074c5c257aa8831c88"
             post.comments = comments
 

@@ -20,6 +20,7 @@ import com.example.udare.data.model.CommentData
 import com.example.udare.data.model.Post
 import com.example.udare.data.model.PostData
 import com.example.udare.data.model.User
+import com.example.udare.data.model.UserSingleton
 import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IChallengeService
@@ -59,61 +60,14 @@ class Inicio : AppCompatActivity() {
         val btnTestPerfil = findViewById<Button>(R.id.btnTestPerfil)
         val popupButton = findViewById<Button>(R.id.challenges)
 
-
-        var userId: String = ""
-        val uid = intent.getStringExtra("userLogged")
-
-        userService.getUserByUid(uid, object : UserRepository.callbackGetUserByUid {
-            override fun onSuccess(user: User) {
-                userId = user.id
-                btnTestPerfil.setOnClickListener(){
-                    val intent = Intent(this@Inicio, PerfilActivity::class.java)
-                    intent.putExtra("userLogged", userId)
-                    this@Inicio.startActivity(intent)
-                }
-                popupButton.setOnClickListener(){
-                    val intent = Intent(this@Inicio, SeleccionarRetoActivity::class.java)
-                    intent.putExtra("userLogged", userId)
-                    this@Inicio.startActivity(intent)
-                }
-            }
-
-            override fun onError(mensajeError: String?) {
-                Log.d("tag-comments", "Error in getUserByUid: $mensajeError")
-            }
-        })
+        val usuario = UserSingleton.obtenerInstancia().obtenerUsuario()
+        Log.d("tag-userSingletonInicio", "Usuario: ${usuario.username}")
 
 
-
-        //Obtiene todos los usuarios del backend
-        userService.getAllUsers(object : UserRepository.callbackGetAllUsers {
-            override fun onSuccess(users: List<User>) {
-                for (usuario in users) {
-                    Log.d("tag-prueba", "Nombre de usuario: ${usuario.username}")
-
-
-                    //the user id  of the app owner is set to David S. id for testing
-                    if(usuario.getId() == THIS_USER_ID ){
-
-                        // if the user has completed challenge do not give the option to take
-                        // a foto, otherwise give him the option
-
-                        //if user has completed the daily challenge disable the popup button
-                        if(usuario.dailyChallengeCompleted){
-                            popupButton.visibility = View.GONE
-                        }
-                    }
-
-
-
-                }
-            }
-
-            override fun onError(mensajeError: String?) {
-                Log.d("tag-prueba", "Error: $mensajeError")
-
-            }
-        })
+        if(usuario.dailyChallengeCompleted) {
+            popupButton.text="Reto diario completado!"
+            popupButton.setEnabled(false);
+        }
 
 
         postService.getAllPosts(object : PostRepository.callbackGetAllPosts {
@@ -143,7 +97,8 @@ class Inicio : AppCompatActivity() {
                     // Actualiza tu RecyclerView o cualquier otra vista aquí con la nueva lista
                     photoRecyclerView.layoutManager = LinearLayoutManager(this@Inicio)
 
-                    val photoAdapter = FotoAdapter(Lista, userId, this@Inicio, reactionService)
+                    val photoAdapter = FotoAdapter(Lista, this@Inicio)
+
                     photoRecyclerView.adapter = photoAdapter
                 })
 /*
@@ -161,20 +116,19 @@ class Inicio : AppCompatActivity() {
 
 
 
-       /* popupButton.setOnClickListener(){
+        popupButton.setOnClickListener(){
             Intent(this, SeleccionarRetoActivity::class.java).also{
                 startActivity(it)
             }
         }
 
-*/
 
-       /* btnTestPerfil.setOnClickListener(){
+
+       btnTestPerfil.setOnClickListener(){
             val intent = Intent(this, PerfilActivity::class.java)
-            intent.putExtra("userLogged", userId)
             this.startActivity(intent)
         }
-*/
+
         thread {
             checkAndShowNotification()
         }

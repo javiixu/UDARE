@@ -11,7 +11,7 @@ public interface IUserService {
 
     void createUser(UserRepository.callbackPostUser callback, User user);
 
-    void getUserByUid(String userId, UserRepository.callbackGetUserByUid callback);
+    void getUserByUid(String uid, UserRepository.callbackGetUserByUid callback);
 
     void updateProfilePic(UserRepository.callbackPostUser callback, User user, File file);
 
