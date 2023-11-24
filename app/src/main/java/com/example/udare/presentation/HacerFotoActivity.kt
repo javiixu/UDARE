@@ -76,6 +76,7 @@ class HacerFotoActivity : AppCompatActivity() {
             }
         }
 
+        val patrocina = intent.getBooleanExtra("EXTRA_PATROCINADO", false)
 
         //start the Camera in this view to
         startCamera()
@@ -171,6 +172,14 @@ class HacerFotoActivity : AppCompatActivity() {
                 val intent = Intent(this, Inicio::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+
+
+                if (patrocina) {
+                lateinit var notificationManager: NotificacionPatrocinado
+                notificationManager = NotificacionPatrocinado(this)
+                notificationManager.createNotification()
+                }
+                
                 finish()
             }, 7000)
 */
