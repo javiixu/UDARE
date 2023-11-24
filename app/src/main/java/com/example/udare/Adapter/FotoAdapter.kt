@@ -28,12 +28,10 @@ import retrofit2.Response
 import javax.inject.Inject
 
 //@AndroidEntryPoint
-class FotoAdapter(private val Lista: List<PostData>, private val uid: String?, private val context: Context, private val reactionService: IReactionService) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
+class FotoAdapter(private val Lista: List<PostData>, private val context: Context, private val reactionService: IReactionService) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
 
 
 //    private var selectedEmoji = -1
-
-class FotoAdapter(private val Lista: List<PostData>, private val context: Context) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
 
 
     private val circularImagesAdapter = mutableListOf<CircularImagesAdapter>()
