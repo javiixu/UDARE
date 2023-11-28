@@ -125,7 +125,7 @@ class RegistrationActivity : AppCompatActivity() {
 //        Empty Array of posts
         var posts = emptyArray<String>()
 
-        var profile : Profile = Profile("","","", emptyArray<String>(), emptyArray<String>(),0,0,0,0,0)
+        var profile : Profile = Profile("","","https://testudare.s3.eu-west-3.amazonaws.com/faceless-businessman-user-profile-icon-business-leader-profile-picture-portrait-user-member-people-icon-in-flat-style-circle-button-with-avatar-photo-silhouette-free-png.png", emptyArray<String>(), emptyArray<String>(),0,0,0,0,0)
 
         user = User(name, password, uid, email, posts, profile, false)
         Log.d("tag-prueba", "User to send: $user")
