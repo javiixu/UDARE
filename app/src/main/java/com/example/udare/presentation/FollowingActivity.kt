@@ -23,7 +23,9 @@ class FollowingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_following)
 
-        val userId = UserSingleton.obtenerInstancia().obtenerUsuario().id
+        //val userId = UserSingleton.obtenerInstancia().obtenerUsuario().id
+        val userId = "655ce4f2c985c476a5df71e6"
+
 
         userService.getFollowing(userId, object : UserRepository.callbackGetFollowing {
             override fun onSuccess(users: List<User>) {

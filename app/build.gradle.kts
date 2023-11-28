@@ -64,6 +64,12 @@ kapt {
 
 dependencies {
 
+    //Espresso
+    implementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation("androidx.test.ext:junit:1.1.5")
+    implementation("androidx.test:rules:1.4.0")
+    implementation("androidx.test:runner:1.4.0")
+
     //Dagger - Hilt
     implementation("com.google.dagger:hilt-android:2.44")
     implementation("com.google.firebase:firebase-auth:22.2.0")

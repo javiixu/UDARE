@@ -1,5 +1,7 @@
 package com.example.udare.data.model;
 
+import java.util.Arrays;
+
 public class User {
     private String username;
     private String password;
@@ -25,6 +27,19 @@ public class User {
 
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", posts=" + Arrays.toString(posts) +
+                ", profile=" + profile +
+                ", dailyChallengeCompleted=" + dailyChallengeCompleted +
+                ", _id='" + _id + '\'' +
+                ", uid='" + uid + '\'' +
+                '}';
+    }
 
     public String getUsername() {
         return username;

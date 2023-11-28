@@ -3,10 +3,8 @@ package com.example.udare.presentation
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -16,23 +14,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.udare.R
-import com.example.udare.data.model.Post
+import com.example.udare.data.model.Profile
 import com.example.udare.data.model.User
 import com.example.udare.data.model.UserSingleton
-import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IUserService
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
-
 
 
 @AndroidEntryPoint
@@ -65,7 +61,36 @@ class PerfilActivity : AppCompatActivity() {
         // if user updates profile pic send it to database
 
         //get the data of the user, who is logged in and display his points, profile pic, username and bio
-        thisUser = UserSingleton.obtenerInstancia().obtenerUsuario()
+        val userProfile = Profile(
+            "null",
+            "Esta es una bio de prueba para ver si se muestra correctamente",
+            "https://testudare.s3.eu-west-3.amazonaws.com/170067732026722_11_2023_18_21_56_perfil.png",
+            arrayOf(
+                "654bd60441b95d880f32cb60",
+                "655ce5f1283c613adce3b30c",
+                "652437043df7259a08be9f72"
+            ),
+            arrayOf("654bd60441b95d880f32cb60"),
+            400,
+            400,
+            400,
+            300,
+            200
+        )
+
+
+        thisUser = User(
+            "usuarioa",
+            "123456",
+            "MPEiSlygkCS3Zr0CywDI8HmiQFj1",
+            "a@gmail.com", arrayOf<String>(),
+            userProfile,
+            true
+        );
+
+        thisUser.id = "655ce4f2c985c476a5df71e6"
+
+
         tvCookingPoints.text = thisUser.profile.pointsCooking.toString()
         tvCulturePoints.text = thisUser.profile.pointsCulture.toString()
         tvSocialPoints.text = thisUser.profile.pointsSocial.toString()
@@ -78,7 +103,6 @@ class PerfilActivity : AppCompatActivity() {
         if(thisUser.profile.profilePic != ""){
             Log.d("tag-prueba",thisUser.profile.profilePic)
             Glide.with(this@PerfilActivity).load(thisUser.profile.profilePic).into(ivProfilePicture)
-
         }
 
         //set Bio and Username

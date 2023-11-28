@@ -170,6 +170,8 @@ class LoginActivity : AppCompatActivity() {
 
                     userService.getUserByUid(user?.uid, object : UserRepository.callbackGetUserByUid {
                         override fun onSuccess(user: User) {
+                    Log.d("tag-login", ""+user.toString())
+                            Log.d("tag-login", ""+user.profile.toString())
                             UserSingleton.obtenerInstancia().iniciarSesion(user)
                             UserSingleton.obtenerInstancia().actualizarChallengeCompleted(false)
                             Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()

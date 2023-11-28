@@ -1,5 +1,7 @@
 package com.example.udare.data.model;
 
+import java.util.Arrays;
+
 public class Profile {
     private String nombre;
     private String bio;
@@ -25,6 +27,22 @@ public class Profile {
         this.pointsCulture = pointsCulture;
         this.pointsGrowth = pointsGrowth;
         this.pointsCooking = pointsCooking;
+    }
+
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "nombre='" + nombre + '\'' +
+                ", bio='" + bio + '\'' +
+                ", profilePic='" + profilePic + '\'' +
+                ", followers=" + Arrays.toString(followers) +
+                ", following=" + Arrays.toString(following) +
+                ", pointsSport=" + pointsSport +
+                ", pointsSocial=" + pointsSocial +
+                ", pointsCulture=" + pointsCulture +
+                ", pointsGrowth=" + pointsGrowth +
+                ", pointsCooking=" + pointsCooking +
+                '}';
     }
 
     public String getNombre() {
