@@ -19,6 +19,7 @@ import com.example.udare.R
 import com.example.udare.data.model.CommentData
 import com.example.udare.data.model.Post
 import com.example.udare.data.model.PostData
+import com.example.udare.data.model.Profile
 import com.example.udare.data.model.User
 import com.example.udare.data.model.UserSingleton
 import com.example.udare.data.repositories.Implementations.PostRepository
@@ -60,14 +61,39 @@ class Inicio : AppCompatActivity() {
         val btnTestPerfil = findViewById<Button>(R.id.btnTestPerfil)
         val popupButton = findViewById<Button>(R.id.challenges)
 
-        val usuario = UserSingleton.obtenerInstancia().obtenerUsuario()
-        Log.d("tag-userSingletonInicio", "Usuario: ${usuario.username}")
+        val userProfile = Profile(
+            "null",
+            "Esta es una bio de prueba para ver si se muestra correctamente",
+            "https://testudare.s3.eu-west-3.amazonaws.com/170067732026722_11_2023_18_21_56_perfil.png",
+            arrayOf(
+                "654bd60441b95d880f32cb60",
+                "655ce5f1283c613adce3b30c",
+                "652437043df7259a08be9f72"
+            ),
+            arrayOf("654bd60441b95d880f32cb60"),
+            400,
+            400,
+            400,
+            300,
+            200
+        )
+
+
+        val usuario = User(
+            "usuarioa",
+            "123456",
+            "MPEiSlygkCS3Zr0CywDI8HmiQFj1",
+            "a@gmail.com", arrayOf<String>(),
+            userProfile,
+            true
+        );
 
 
         if(usuario.dailyChallengeCompleted) {
             popupButton.text="Reto diario completado!"
             popupButton.setEnabled(false);
         }
+
 
 
         postService.getAllPosts(object : PostRepository.callbackGetAllPosts {
@@ -112,6 +138,7 @@ class Inicio : AppCompatActivity() {
 
             }
         })
+
 
 
 
@@ -194,5 +221,26 @@ class Inicio : AppCompatActivity() {
 //            // Do something
 //        }
 //    }
+
+    fun getAllPosts(){
+        postService.getAllPosts(object : PostRepository.callbackGetAllPosts {
+            override fun onSuccess(posts: MutableList<Post>) {}
+
+
+            override fun onError(mensajeError: String?) {
+
+            }
+        })
+
+    }
+
+    fun getUserById(userId: String){
+        userService.getUserById(userId, object : UserRepository.callbackGetUserById {
+            override fun onSuccess(user: User) {
+            }
+            override fun onError(mensajeError: String?) {
+            }
+        })
+    }
 
 }
