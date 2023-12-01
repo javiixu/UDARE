@@ -127,5 +127,8 @@ dependencies {
     //for round profile pics
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
+    //for icons
+    implementation("com.google.android.material:material:1.7.0")
+
 
 }
