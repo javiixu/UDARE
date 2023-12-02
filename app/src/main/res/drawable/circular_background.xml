@@ -1,0 +1,5 @@
+<!-- res/drawable/circular_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#171717" /> <!-- Color de fondo del ImageView -->
+    <corners android:radius="25dp" /> <!-- Ajusta el radio según la cantidad de redondeo que desees -->
+</shape>
