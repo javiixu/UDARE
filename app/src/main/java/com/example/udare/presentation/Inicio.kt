@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -55,20 +56,22 @@ class Inicio : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
 
+        supportActionBar?.hide()
+
 
         //Buttons & Views
-        val btnTestPerfil = findViewById<Button>(R.id.btnTestPerfil)
-        val popupButton = findViewById<Button>(R.id.challenges)
+        val btnTestPerfil = findViewById<ImageView>(R.id.perfil)
+        val popupButton = findViewById<ImageView>(R.id.challenges)
 
+        /*
         val usuario = UserSingleton.obtenerInstancia().obtenerUsuario()
         Log.d("tag-userSingletonInicio", "Usuario: ${usuario.username}")
 
 
         if(usuario.dailyChallengeCompleted) {
-            popupButton.text="Reto diario completado!"
             popupButton.setEnabled(false);
         }
-
+        */
 
         postService.getAllPosts(object : PostRepository.callbackGetAllPosts {
             override fun onSuccess(posts: MutableList<Post>) {
