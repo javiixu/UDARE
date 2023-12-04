@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.SeleccionarRetoActivity">
+
+    <!-- Componente de arriba -->
+
+    <!-- Componente central -->
+    <LinearLayout
+        android:id="@+id/topLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#000000"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Flecha a la izquierda -->
+        <ImageView
+            android:id="@+id/flecharound"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/flecharound"/>
+
+        <!-- Flash centrado tanto horizontal como verticalmente -->
+        <ImageView
+            android:id="@+id/iconoflash"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="#000000"
+            android:src="@drawable/icono_flash" />
+
+        <!-- Cámara a la derecha -->
+        <ImageView
+            android:id="@+id/iconoCamara"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="15dp"
+            android:background="#000000"
+            android:src="@drawable/cambiar_camara" />
+
+    </LinearLayout>
+
+
+
+
+    <View
+        android:id="@+id/cameraView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.65"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topLayout">
+        <!-- Aquí se mostrará la vista de la cámara -->
+    </View>
+
+    <!-- Componente de abajo -->
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:background="#000000"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cameraView">
+
+        <!-- Aquí puedes agregar tus botones para tomar la foto, cambiar la cámara, etc. -->
+
+        <ImageView
+            android:id="@+id/ellipseView"
+            android:layout_width="82dp"
+            android:layout_height="85dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+
+            android:src="@drawable/ellipse_166"
+            app:layout_constraintBottom_toBottomOf="@id/bottomLayout"
+            app:layout_constraintEnd_toEndOf="@id/bottomLayout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/bottomLayout"
+            app:layout_constraintTop_toTopOf="@id/bottomLayout"
+            app:layout_constraintVertical_bias="0.5" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
