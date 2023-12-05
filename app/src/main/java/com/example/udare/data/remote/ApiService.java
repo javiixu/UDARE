@@ -122,6 +122,9 @@ public interface ApiService {
     @GET("/reactions/post/{postId}")
     Call<List<Reaction>> getReactionsByPost(@Path("postId") String postId);
 
+    @GET("/challenges/{id}")
+    Call<Challenge> getChallengeById(@Path("id") String challengeId);
+
 }
 
 

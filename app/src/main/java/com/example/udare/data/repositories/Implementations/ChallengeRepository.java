@@ -47,8 +47,37 @@ public class ChallengeRepository implements IChallengeRepository {
         });
     }
 
+    public void getChallengeById(String challengeId, final callbackGetChallengeById callback) {
+        Call<Challenge> call = apiService.getChallengeById(challengeId);
+        call.enqueue(new Callback<Challenge>() {
+            @Override
+            public void onResponse(Call<Challenge> call, Response<Challenge> response) {
+                if (response.isSuccessful()) {
+                    Challenge challenge = response.body();
+                    if (challenge != null) {
+                        callback.onSuccess(challenge);
+                    } else {
+                        callback.onError("Lista de retos nula");
+                    }
+                } else {
+                    callback.onError("Error en la respuesta: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Challenge> call, Throwable t) {
+                callback.onError("Error en la llamada: " + t.getMessage());
+            }
+        });
+    }
+
     public interface ChallengeCallback {
         void onSuccess(List<Challenge> challenges);
+        void onError(String mensajeError);
+    }
+
+    public interface callbackGetChallengeById {
+        void onSuccess(Challenge challenge);
         void onError(String mensajeError);
     }
 }

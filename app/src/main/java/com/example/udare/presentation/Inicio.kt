@@ -1,7 +1,6 @@
 package com.example.udare.presentation
 
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -17,11 +16,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.udare.Adapter.CommentsAdapter
 import com.example.udare.Adapter.FotoAdapter
 import com.example.udare.R
+import com.example.udare.data.model.Challenge
 import com.example.udare.data.model.CommentData
 import com.example.udare.data.model.Post
 import com.example.udare.data.model.PostData
 import com.example.udare.data.model.User
 import com.example.udare.data.model.UserSingleton
+import com.example.udare.data.repositories.Implementations.ChallengeRepository
 import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IChallengeService
@@ -40,13 +41,14 @@ class Inicio : AppCompatActivity() {
     lateinit var postService: IPostService
 
     @Inject
-    lateinit var challengeService : IChallengeService
+    lateinit var challengeService: IChallengeService
 
     @Inject
     lateinit var userService: IUserService
 
     @Inject
     lateinit var reactionService: IReactionService
+
 
     private val _fotoList = MutableLiveData<List<PostData>>()
     val fotoList: LiveData<List<PostData>> get() = _fotoList
@@ -81,17 +83,28 @@ class Inicio : AppCompatActivity() {
 
                 posts.forEach { post ->
                     val userId = post.userID
+                    val challengeId = post.challengeID
 
                     userService.getUserById(userId, object : UserRepository.callbackGetUserById {
                         override fun onSuccess(user: User) {
-                            val profilePic = user.profile.profilePic
-                            val username = user.username
-                            val elem = PostData(post, profilePic, username)
-                            Lista.add(elem)
-                            updatePostList(Lista)
+
+                           challengeService.getChallengeById(challengeId, object : ChallengeRepository.callbackGetChallengeById {
+                                override fun onSuccess(challenge: Challenge) {
+                                    val profilePic = user.profile.profilePic
+                                    val username = user.username
+                                    val elem = PostData(post, profilePic, username, challenge)
+                                    Lista.add(elem)
+                                    updatePostList(Lista)
+                                }
+
+                                override fun onError(mensajeError: String?) {
+                                    Log.d("tag-comments", "Error in getUserById")
+                                }
+                            })
                         }
+
                         override fun onError(mensajeError: String?) {
-                            Log.d("tag-comments","Error in getUserById")
+                            Log.d("tag-comments", "Error in getUserById")
                         }
                     })
 
@@ -100,15 +113,15 @@ class Inicio : AppCompatActivity() {
                     // Actualiza tu RecyclerView o cualquier otra vista aquí con la nueva lista
                     photoRecyclerView.layoutManager = LinearLayoutManager(this@Inicio)
 
-                    val photoAdapter = FotoAdapter(Lista,this@Inicio, reactionService)
+                    val photoAdapter = FotoAdapter(Lista, this@Inicio, reactionService)
 
                     photoRecyclerView.adapter = photoAdapter
                 })
-/*
-                val photoAdapter = FotoAdapter(posts, userId, this@Inicio)
-                photoRecyclerView.adapter = photoAdapter
-                photoRecyclerView.layoutManager = LinearLayoutManager(this@Inicio)
-*/
+                /*
+                                val photoAdapter = FotoAdapter(posts, userId, this@Inicio)
+                                photoRecyclerView.adapter = photoAdapter
+                                photoRecyclerView.layoutManager = LinearLayoutManager(this@Inicio)
+                */
             }
 
             override fun onError(mensajeError: String?) {
@@ -119,15 +132,15 @@ class Inicio : AppCompatActivity() {
 
 
 
-        popupButton.setOnClickListener(){
-            Intent(this, SeleccionarRetoActivity::class.java).also{
+        popupButton.setOnClickListener() {
+            Intent(this, SeleccionarRetoActivity::class.java).also {
                 startActivity(it)
             }
         }
 
 
 
-       btnTestPerfil.setOnClickListener(){
+        btnTestPerfil.setOnClickListener() {
             val intent = Intent(this, PerfilActivity::class.java)
             this.startActivity(intent)
         }

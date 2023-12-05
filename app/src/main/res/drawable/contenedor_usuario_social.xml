@@ -5,6 +5,7 @@
     android:height="50dp"
     android:viewportWidth="160"
     android:viewportHeight="50"
+    android:id="@+id/contenedor_user"
     >
     <group>
         <clip-path
