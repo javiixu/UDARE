@@ -61,7 +61,13 @@
             android:exported="true" />
         <activity
             android:name=".presentation.Inicio"
-            android:exported="true" >
+            android:exported="true" />
+        <activity
+            android:name=".presentation.BuscadorUsuario"
+            android:exported="true"/>
+        <activity
+            android:name=".presentation.SplashScreen"
+            android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 

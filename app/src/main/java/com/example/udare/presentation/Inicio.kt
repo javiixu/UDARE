@@ -13,6 +13,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.udare.Adapter.CommentsAdapter
 import com.example.udare.Adapter.FotoAdapter
 import com.example.udare.R
@@ -58,12 +60,17 @@ class Inicio : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
 
-        supportActionBar?.hide()
-
-
         //Buttons & Views
-        val btnTestPerfil = findViewById<ImageView>(R.id.perfil)
+        val fotoPerfil = findViewById<ImageView>(R.id.perfil)
         val popupButton = findViewById<ImageView>(R.id.challenges)
+        val buscadorAmigos = findViewById<ImageView>(R.id.añadir_amigos)
+
+        Glide.with(fotoPerfil)
+            .load(UserSingleton.obtenerInstancia().obtenerUsuario().profile.profilePic) // Asegúrate de que CommentData tenga un campo profilePic
+            .apply(RequestOptions.circleCropTransform())
+            .into(fotoPerfil)
+
+        supportActionBar?.hide()
 
         /*
         val usuario = UserSingleton.obtenerInstancia().obtenerUsuario()
@@ -138,9 +145,15 @@ class Inicio : AppCompatActivity() {
             }
         }
 
+        buscadorAmigos.setOnClickListener() {
+            Intent(this, BuscadorUsuario::class.java).also {
+                startActivity(it)
+            }
+        }
 
 
-        btnTestPerfil.setOnClickListener() {
+
+        fotoPerfil.setOnClickListener() {
             val intent = Intent(this, PerfilActivity::class.java)
             this.startActivity(intent)
         }

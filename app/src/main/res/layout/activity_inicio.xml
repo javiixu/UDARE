@@ -9,7 +9,7 @@
 
     <!-- Toolbar -->
     <include
-        layout="@layout/tool_bar_perfil"
+        layout="@layout/tool_bar_inicio"
         android:id="@+id/toolbar"/>
 
     <!-- RecyclerView -->

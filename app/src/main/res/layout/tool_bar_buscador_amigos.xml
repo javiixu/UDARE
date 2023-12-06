@@ -14,10 +14,11 @@
         android:gravity="center">
 
         <ImageView
+            android:id="@+id/back_buscador_amigos"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="0dp"
-            android:src="@drawable/icono_amigos" />
+            android:src="@drawable/flecharound" />
 
         <TextView
             android:layout_width="0dp"
@@ -29,7 +30,7 @@
             android:textColor="#E7EE86" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/perfil"
+            android:id="@+id/foto_perfil_buscador"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="20dp"
