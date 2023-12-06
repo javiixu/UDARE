@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.graphics.Color
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -22,6 +25,8 @@ import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IUserService
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import android.widget.Filterable
+import android.widget.Filter
 @AndroidEntryPoint
 class BuscadorUsuario : AppCompatActivity() {
 
@@ -39,24 +44,39 @@ class BuscadorUsuario : AppCompatActivity() {
         val siguiendoButton = findViewById<Button>(R.id.boton_siguiendo)
         val recyclerSugerencias = findViewById<RecyclerView>(R.id.RecyclerBuscador)
         val fotoPerfil = findViewById<ImageView>(R.id.foto_perfil_buscador)
+        val textoBuscador = findViewById<EditText>(R.id.buscar_usuario)
         val usuario = UserSingleton.obtenerInstancia().obtenerUsuario()
+        val Lista = mutableListOf<User>()
 
         Glide.with(fotoPerfil)
             .load(UserSingleton.obtenerInstancia().obtenerUsuario().profile.profilePic) // Asegúrate de que CommentData tenga un campo profilePic
             .apply(RequestOptions.circleCropTransform())
             .into(fotoPerfil)
 
+        var sugerenciasAdapter = BuscadorSugerenciasAdapter(Lista, this@BuscadorUsuario)
+        recyclerSugerencias.adapter = sugerenciasAdapter
+
 
         userService.getNotFollowingUsers(usuario.id, object : UserRepository.callbackGetNotFollowingUsers {
             override fun onSuccess(ListaSugerencias: List<User>) {
-                val sugerenciasAdapter = BuscadorSugerenciasAdapter(ListaSugerencias, this@BuscadorUsuario)
+                sugerenciasAdapter = BuscadorSugerenciasAdapter(ListaSugerencias, this@BuscadorUsuario)
                 recyclerSugerencias.adapter = sugerenciasAdapter
             }
 
             override fun onError(mensajeError: String?) {
-
             }
         })
+
+        /*textoBuscador.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                // Filtrar la lista de sugerencias según el texto en el EditText
+                ListaSugerencias.filter{it.username.contains(s)}
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })*/
 
         backButton.setOnClickListener() {
             Intent(this, Inicio::class.java).also {
@@ -69,7 +89,7 @@ class BuscadorUsuario : AppCompatActivity() {
 
             userService.getNotFollowingUsers(usuario.id, object: UserRepository.callbackGetNotFollowingUsers {
                 override fun onSuccess(ListaSugerencias: List<User>) {
-                    val sugerenciasAdapter = BuscadorSugerenciasAdapter(ListaSugerencias, this@BuscadorUsuario)
+                    sugerenciasAdapter = BuscadorSugerenciasAdapter(ListaSugerencias, this@BuscadorUsuario)
                     recyclerSugerencias.adapter = sugerenciasAdapter
                 }
 
@@ -126,3 +146,4 @@ class BuscadorUsuario : AppCompatActivity() {
         buttonUnpressed2.setTextColor(Color.parseColor("#F9F4F1"))
     }
 }
+
