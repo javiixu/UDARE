@@ -125,6 +125,9 @@ public interface ApiService {
     @GET("/challenges/{id}")
     Call<Challenge> getChallengeById(@Path("id") String challengeId);
 
+    @GET("/users/{id}/getNotFollowingUsers")
+    Call<List<User>> getNotFollowingUsers(@Path("id") String userId);
+
 }
 
 

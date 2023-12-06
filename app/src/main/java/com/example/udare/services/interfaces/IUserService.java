@@ -23,5 +23,6 @@ public interface IUserService {
     void getFollowers(String userId, UserRepository.callbackGetFollowers callback);
 
     void getFollowing(String userId, UserRepository.callbackGetFollowing callback);
+    public void getNotFollowingUsers(String userId, UserRepository.callbackGetNotFollowingUsers callback);
 
 }

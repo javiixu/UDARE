@@ -29,4 +29,5 @@ public interface IUserRepository {
     void getFollowing(String userId,final UserRepository.callbackGetFollowing callback);
 
     void getFollowers(String userId,final UserRepository.callbackGetFollowers callback);
+    void getNotFollowingUsers(String userId,final UserRepository.callbackGetNotFollowingUsers callback);
 }

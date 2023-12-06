@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="90dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="30dp"
+    android:background="#171717">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="350dp"
+        android:layout_height="90dp"
+        android:background="@drawable/objeto_buscador">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/foto_user_seguidor"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/foto1" />
+
+        <TextView
+            android:id="@+id/username_seguidor"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="35dp"
+            android:text="Username"
+            android:textColor="#F9F4F1" />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:gravity="end">
+
+            <ImageView
+                android:id="@+id/boton_eliminar_amigo"
+                android:layout_width="20dp"
+                android:layout_height="4dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="42dp"
+                android:src="@drawable/boton_delete" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

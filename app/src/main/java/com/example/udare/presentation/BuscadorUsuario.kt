@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.udare.Adapter.BuscadorSeguidorAdapter
 import com.example.udare.Adapter.BuscadorSugerenciasAdapter
 import com.example.udare.Adapter.FollowersAdapter
 import com.example.udare.Adapter.FotoAdapter
@@ -38,7 +39,6 @@ class BuscadorUsuario : AppCompatActivity() {
         val siguiendoButton = findViewById<Button>(R.id.boton_siguiendo)
         val recyclerSugerencias = findViewById<RecyclerView>(R.id.RecyclerBuscador)
         val fotoPerfil = findViewById<ImageView>(R.id.foto_perfil_buscador)
-        val Lista: MutableList<User> = mutableListOf()
         val usuario = UserSingleton.obtenerInstancia().obtenerUsuario()
 
         Glide.with(fotoPerfil)
@@ -46,13 +46,10 @@ class BuscadorUsuario : AppCompatActivity() {
             .apply(RequestOptions.circleCropTransform())
             .into(fotoPerfil)
 
-        recyclerSugerencias.layoutManager = LinearLayoutManager(this)
-        var sugerenciasAdapter = BuscadorSugerenciasAdapter(Lista, this)
-        recyclerSugerencias.adapter = sugerenciasAdapter
 
-        userService.getAllUsers(object : UserRepository.callbackGetAllUsers {
+        userService.getNotFollowingUsers(usuario.id, object : UserRepository.callbackGetNotFollowingUsers {
             override fun onSuccess(ListaSugerencias: List<User>) {
-                sugerenciasAdapter = BuscadorSugerenciasAdapter(ListaSugerencias, this@BuscadorUsuario)
+                val sugerenciasAdapter = BuscadorSugerenciasAdapter(ListaSugerencias, this@BuscadorUsuario)
                 recyclerSugerencias.adapter = sugerenciasAdapter
             }
 
@@ -70,9 +67,9 @@ class BuscadorUsuario : AppCompatActivity() {
         sugerenciasButton.setOnClickListener() {
             setButtons(sugerenciasButton, seguidoresButton, siguiendoButton)
 
-            userService.getAllUsers(object : UserRepository.callbackGetAllUsers {
+            userService.getNotFollowingUsers(usuario.id, object: UserRepository.callbackGetNotFollowingUsers {
                 override fun onSuccess(ListaSugerencias: List<User>) {
-                    sugerenciasAdapter = BuscadorSugerenciasAdapter(ListaSugerencias, this@BuscadorUsuario)
+                    val sugerenciasAdapter = BuscadorSugerenciasAdapter(ListaSugerencias, this@BuscadorUsuario)
                     recyclerSugerencias.adapter = sugerenciasAdapter
                 }
 
@@ -81,8 +78,6 @@ class BuscadorUsuario : AppCompatActivity() {
                 }
             })
 
-            sugerenciasAdapter = BuscadorSugerenciasAdapter(Lista, this)
-            recyclerSugerencias.adapter = sugerenciasAdapter
         }
 
         seguidoresButton.setOnClickListener() {
@@ -90,8 +85,8 @@ class BuscadorUsuario : AppCompatActivity() {
 
             userService.getFollowers(usuario.id, object : UserRepository.callbackGetFollowers {
                 override fun onSuccess(users: List<User>) {
-                    sugerenciasAdapter = BuscadorSugerenciasAdapter(users, this@BuscadorUsuario)
-                    recyclerSugerencias.adapter = sugerenciasAdapter
+                    val seguidorAdapter = BuscadorSeguidorAdapter(users, this@BuscadorUsuario)
+                    recyclerSugerencias.adapter = seguidorAdapter
                 }
 
                 override fun onError(mensajeError: String?) {
@@ -105,8 +100,8 @@ class BuscadorUsuario : AppCompatActivity() {
 
             userService.getFollowing(usuario.id, object : UserRepository.callbackGetFollowing {
                 override fun onSuccess(ListaSiguiendo: List<User>) {
-                    sugerenciasAdapter = BuscadorSugerenciasAdapter(ListaSiguiendo, this@BuscadorUsuario)
-                    recyclerSugerencias.adapter = sugerenciasAdapter
+                    val siguiendoAdapter = BuscadorSeguidorAdapter(ListaSiguiendo, this@BuscadorUsuario)
+                    recyclerSugerencias.adapter = siguiendoAdapter
                 }
 
                 override fun onError(mensajeError: String?) {

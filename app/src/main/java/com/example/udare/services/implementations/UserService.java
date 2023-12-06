@@ -159,6 +159,21 @@ public class UserService implements IUserService {
         });
     }
 
+    @Override
+    public void getNotFollowingUsers(String userId, UserRepository.callbackGetNotFollowingUsers callback) {
+        userRepository.getNotFollowingUsers(userId,new UserRepository.callbackGetNotFollowingUsers() {
+            @Override
+            public void onSuccess(List<User> users) {
+                callback.onSuccess(users);
+            }
+
+            @Override
+            public void onError(String mensajeError) {
+                callback.onError(mensajeError);
+            }
+        });
+    }
+
 }
 
 
