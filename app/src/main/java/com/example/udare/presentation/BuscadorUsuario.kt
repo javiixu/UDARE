@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,56 +28,54 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import android.widget.Filterable
 import android.widget.Filter
+
 @AndroidEntryPoint
 class BuscadorUsuario : AppCompatActivity() {
 
     @Inject
     lateinit var userService: IUserService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buscador_usuario)
 
         supportActionBar?.hide()
 
+        val textoBuscador = findViewById<EditText>(R.id.buscar_usuario)
+        val recyclerSugerencias = findViewById<RecyclerView>(R.id.RecyclerBuscador)
         val backButton = findViewById<ImageView>(R.id.back_buscador_amigos)
         val sugerenciasButton = findViewById<Button>(R.id.boton_sugerencias)
         val seguidoresButton = findViewById<Button>(R.id.boton_seguidores)
         val siguiendoButton = findViewById<Button>(R.id.boton_siguiendo)
-        val recyclerSugerencias = findViewById<RecyclerView>(R.id.RecyclerBuscador)
         val fotoPerfil = findViewById<ImageView>(R.id.foto_perfil_buscador)
-        val textoBuscador = findViewById<EditText>(R.id.buscar_usuario)
         val usuario = UserSingleton.obtenerInstancia().obtenerUsuario()
-        val Lista = mutableListOf<User>()
+        var Lista : List<User> = emptyList()
 
         Glide.with(fotoPerfil)
-            .load(UserSingleton.obtenerInstancia().obtenerUsuario().profile.profilePic) // Asegúrate de que CommentData tenga un campo profilePic
+            .load(
+                UserSingleton.obtenerInstancia().obtenerUsuario().profile.profilePic
+            ) // Asegúrate de que CommentData tenga un campo profilePic
             .apply(RequestOptions.circleCropTransform())
             .into(fotoPerfil)
 
-        var sugerenciasAdapter = BuscadorSugerenciasAdapter(Lista, this@BuscadorUsuario)
+        var sugerenciasAdapter = BuscadorSugerenciasAdapter(Lista, this@BuscadorUsuario, userService)
         recyclerSugerencias.adapter = sugerenciasAdapter
 
 
-        userService.getNotFollowingUsers(usuario.id, object : UserRepository.callbackGetNotFollowingUsers {
-            override fun onSuccess(ListaSugerencias: List<User>) {
-                sugerenciasAdapter = BuscadorSugerenciasAdapter(ListaSugerencias, this@BuscadorUsuario)
-                recyclerSugerencias.adapter = sugerenciasAdapter
-            }
+        userService.getNotFollowingUsers(
+            usuario.id,
+            object : UserRepository.callbackGetNotFollowingUsers {
+                override fun onSuccess(ListaSugerencias: List<User>) {
+                    Lista = ListaSugerencias
+                    sugerenciasAdapter =
+                        BuscadorSugerenciasAdapter(ListaSugerencias, this@BuscadorUsuario, userService)
+                    recyclerSugerencias.adapter = sugerenciasAdapter
+                }
 
-            override fun onError(mensajeError: String?) {
-            }
-        })
+                override fun onError(mensajeError: String?) {
+                }
+            })
 
-        /*textoBuscador.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                // Filtrar la lista de sugerencias según el texto en el EditText
-                ListaSugerencias.filter{it.username.contains(s)}
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })*/
 
         backButton.setOnClickListener() {
             Intent(this, Inicio::class.java).also {
@@ -87,16 +86,20 @@ class BuscadorUsuario : AppCompatActivity() {
         sugerenciasButton.setOnClickListener() {
             setButtons(sugerenciasButton, seguidoresButton, siguiendoButton)
 
-            userService.getNotFollowingUsers(usuario.id, object: UserRepository.callbackGetNotFollowingUsers {
-                override fun onSuccess(ListaSugerencias: List<User>) {
-                    sugerenciasAdapter = BuscadorSugerenciasAdapter(ListaSugerencias, this@BuscadorUsuario)
-                    recyclerSugerencias.adapter = sugerenciasAdapter
-                }
+            userService.getNotFollowingUsers(
+                usuario.id,
+                object : UserRepository.callbackGetNotFollowingUsers {
+                    override fun onSuccess(ListaSugerencias: List<User>) {
+                        Lista = ListaSugerencias
+                        sugerenciasAdapter =
+                            BuscadorSugerenciasAdapter(ListaSugerencias, this@BuscadorUsuario, userService)
+                        recyclerSugerencias.adapter = sugerenciasAdapter
+                    }
 
-                override fun onError(mensajeError: String?) {
+                    override fun onError(mensajeError: String?) {
 
-                }
-            })
+                    }
+                })
 
         }
 
@@ -104,8 +107,10 @@ class BuscadorUsuario : AppCompatActivity() {
             setButtons(seguidoresButton, sugerenciasButton, siguiendoButton)
 
             userService.getFollowers(usuario.id, object : UserRepository.callbackGetFollowers {
-                override fun onSuccess(users: List<User>) {
-                    val seguidorAdapter = BuscadorSeguidorAdapter(users, this@BuscadorUsuario)
+                override fun onSuccess(ListaSeguidores: List<User>) {
+                    Lista = ListaSeguidores
+                    val seguidorAdapter =
+                        BuscadorSeguidorAdapter(ListaSeguidores, this@BuscadorUsuario)
                     recyclerSugerencias.adapter = seguidorAdapter
                 }
 
@@ -120,7 +125,9 @@ class BuscadorUsuario : AppCompatActivity() {
 
             userService.getFollowing(usuario.id, object : UserRepository.callbackGetFollowing {
                 override fun onSuccess(ListaSiguiendo: List<User>) {
-                    val siguiendoAdapter = BuscadorSeguidorAdapter(ListaSiguiendo, this@BuscadorUsuario)
+                    Lista = ListaSiguiendo
+                    val siguiendoAdapter =
+                        BuscadorSeguidorAdapter(ListaSiguiendo, this@BuscadorUsuario)
                     recyclerSugerencias.adapter = siguiendoAdapter
                 }
 
@@ -131,11 +138,29 @@ class BuscadorUsuario : AppCompatActivity() {
         }
 
 
+        textoBuscador.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                // Filtrar la lista de sugerencias según el texto en el EditText
+                val ListaFiltrada = Lista.filter { it.username.contains(s) }
+                if (!ListaFiltrada.isEmpty()) {
+                    Log.d("tag-eo", ListaFiltrada[0].username)
+                    val sugerenciasAdapter =
+                        BuscadorSugerenciasAdapter(ListaFiltrada, this@BuscadorUsuario, userService)
+                    recyclerSugerencias.adapter = sugerenciasAdapter
+                } else{
+                    recyclerSugerencias.adapter = null
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
 
     }
 
-    fun setButtons(buttonPressed: Button, buttonUnpressed1: Button, buttonUnpressed2: Button){
+    fun setButtons(buttonPressed: Button, buttonUnpressed1: Button, buttonUnpressed2: Button) {
         buttonPressed.setBackgroundResource(R.drawable.botones_buscador_pressed)
         buttonPressed.setTextColor(Color.parseColor("#171717"))
 
@@ -145,5 +170,6 @@ class BuscadorUsuario : AppCompatActivity() {
         buttonUnpressed2.setBackgroundResource(R.drawable.botones_buscador)
         buttonUnpressed2.setTextColor(Color.parseColor("#F9F4F1"))
     }
+
 }
 

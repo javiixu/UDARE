@@ -1,6 +1,8 @@
 package com.example.udare.data.repositories.Implementations;
 
 import android.util.Log;
+
+import com.example.udare.data.model.CommentData;
 import com.example.udare.data.model.Post;
 import com.example.udare.data.model.User;
 import com.example.udare.data.remote.ApiClient;
@@ -9,7 +11,9 @@ import com.example.udare.data.repositories.Interfaces.IUserRepository;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -280,6 +284,37 @@ public class UserRepository implements IUserRepository {
         });
     }
 
+    @Override
+    public void followUser(String userId, String userToFollow, callbackFollowUser callback) {
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("_id", userToFollow);
+        Call<String> call = apiService.followUser(userId, requestBody);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    String user = response.body();
+                    if (user != null) {
+                        callback.onSuccess(user);
+                    } else {
+                        callback.onError("Lista de usuarios nula");
+                    }
+                } else {
+                    callback.onError("Error en la respuesta: " + response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                callback.onError("Error en la llamada: " + t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void unfollowUser(String userId, String userToUnfollowId, callbackUnfollowUser callback) {
+
+    }
+
 
     public interface callbackGetAllUsers {
         void onSuccess(List<User> users);
@@ -333,5 +368,16 @@ public class UserRepository implements IUserRepository {
         void onSuccess(List<User> users);
         void onError(String mensajeError);
     }
+
+    public interface callbackFollowUser {
+        void onSuccess(String mensaje);
+        void onError(String mensajeError);
+    }
+
+    public interface callbackUnfollowUser {
+        void onSuccess(String mensaje);
+        void onError(String mensajeError);
+    }
+
 
 }

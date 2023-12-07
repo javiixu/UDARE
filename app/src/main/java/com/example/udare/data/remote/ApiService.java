@@ -7,6 +7,7 @@ import com.example.udare.data.model.User;
 import com.example.udare.data.model.Reaction;
 
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -127,6 +128,18 @@ public interface ApiService {
 
     @GET("/users/{id}/getNotFollowingUsers")
     Call<List<User>> getNotFollowingUsers(@Path("id") String userId);
+
+    @POST("/users/{id}/followUser")
+    Call<String> followUser(
+            @Path("id") String userId,
+            @Body Map<String, String> requestBody
+    );
+
+    @GET("/users/{id}/unfollowUser")
+    Call<User> unfollowUser(
+            @Path("id") String userId,
+            @Body String userToUnfollowId
+    );
 
 }
 
