@@ -20,10 +20,9 @@ import com.example.udare.presentation.BuscadorUsuario
 import com.example.udare.services.interfaces.IUserService
 
 
-class BuscadorSiguiendoAdapter(private val Lista: List<User>, private val context: Context, private val userService: IUserService) :
-    RecyclerView.Adapter<BuscadorSiguiendoAdapter.TextoHolder>(){
+class BuscadorSeguidorAdapter(private val Lista: List<User>, private val context: Context) :
+    RecyclerView.Adapter<BuscadorSeguidorAdapter.TextoHolder>(){
 
-    private val estadoImagenes: MutableMap<Int, Boolean> = mutableMapOf()
 
     class TextoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val usernameView: TextView = itemView.findViewById(R.id.username_seguidor)
@@ -49,37 +48,13 @@ class BuscadorSiguiendoAdapter(private val Lista: List<User>, private val contex
 
         Log.d("tag-comments", username + profilePic)
 
+        holder.botonEliminarAmigo.setImageResource(0)
         holder.usernameView.text = username
         Glide.with(holder.profilePicView)
             .load(profilePic) // Asegúrate de que CommentData tenga un campo profilePic
             .apply(RequestOptions.circleCropTransform())
             .into(holder.profilePicView)
 
-        estadoImagenes[position] = false
-
-        holder.botonEliminarAmigo.setOnClickListener(){
-
-            if (estadoImagenes[position] == true) {
-
-                holder.botonEliminarAmigo.setImageResource(R.drawable.boton_delete)
-                estadoImagenes[position] = false
-
-                userService.followUser(usuario.id, elem.id, object : UserRepository.callbackFollowUser {
-                    override fun onSuccess(message: String) {}
-                    override fun onError(mensajeError: String?) {}
-                })
-
-            } else {
-
-                holder.botonEliminarAmigo.setImageResource(R.drawable.boton_add)
-                estadoImagenes[position] = true
-
-                userService.unfollowUser(usuario.id, elem.id, object : UserRepository.callbackUnfollowUser {
-                    override fun onSuccess(message: String) {}
-                    override fun onError(mensajeError: String?) {}
-                })
-            }
-        }
     }
 
 

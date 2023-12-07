@@ -13,6 +13,7 @@ import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.udare.Adapter.BuscadorSeguidorAdapter
 import com.example.udare.Adapter.BuscadorSiguiendoAdapter
 import com.example.udare.Adapter.BuscadorSugerenciasAdapter
 import com.example.udare.R
@@ -104,7 +105,7 @@ class BuscadorUsuario : AppCompatActivity() {
                 override fun onSuccess(ListaSeguidores: List<User>) {
                     Lista = ListaSeguidores
                     val seguidorAdapter =
-                        BuscadorSiguiendoAdapter(ListaSeguidores, this@BuscadorUsuario, userService)
+                        BuscadorSeguidorAdapter(ListaSeguidores, this@BuscadorUsuario)
                     recyclerSugerencias.adapter = seguidorAdapter
                 }
 
@@ -137,7 +138,7 @@ class BuscadorUsuario : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 // Filtrar la lista de sugerencias según el texto en el EditText
-                val ListaFiltrada = Lista.filter { it.username.contains(s) }
+                val ListaFiltrada = Lista.filter { it.username.startsWith(s) }
                 if (!ListaFiltrada.isEmpty()) {
                     Log.d("tag-eo", ListaFiltrada[0].username)
                     val sugerenciasAdapter =

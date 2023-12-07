@@ -2,6 +2,7 @@ package com.example.udare.Adapter
 
 
 import android.content.Context
+import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.example.udare.data.model.UserSingleton
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IUserService
 import com.google.android.material.snackbar.Snackbar
+import de.hdodenhof.circleimageview.CircleImageView
 
 class BuscadorSugerenciasAdapter(private val Lista: List<User>,
                                  private val context: Context,
@@ -24,7 +26,7 @@ class BuscadorSugerenciasAdapter(private val Lista: List<User>,
 ) :
     RecyclerView.Adapter<BuscadorSugerenciasAdapter.TextoHolder>(){
 
-    private val mcontext: Context = context;
+    private val estadoImagenes: MutableMap<Int, Boolean> = mutableMapOf()
 
     class TextoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val usernameView: TextView = itemView.findViewById(R.id.username_sugerencia)
@@ -56,14 +58,31 @@ class BuscadorSugerenciasAdapter(private val Lista: List<User>,
             .apply(RequestOptions.circleCropTransform())
             .into(holder.profilePicView)
 
+        estadoImagenes[position] = true
+
         holder.botonAñadirAmigo.setOnClickListener(){
-            userService.followUser(usuario.id, elem.id, object : UserRepository.callbackFollowUser {
-                override fun onSuccess(message: String) {// Dentro de tu actividad o fragmento
-                    // Dentro de tu actividad o fragmento
-                    Log.d("tag-oe", message + "")
-                }
-                override fun onError(mensajeError: String?) {Log.d("tag-oe", mensajeError + "")}
-            })
+
+
+            if (estadoImagenes[position] == true) {
+
+                holder.botonAñadirAmigo.setImageResource(R.drawable.boton_delete)
+                estadoImagenes[position] = false
+
+                userService.followUser(usuario.id, elem.id, object : UserRepository.callbackFollowUser {
+                    override fun onSuccess(message: String) {}
+                    override fun onError(mensajeError: String?) {}
+                })
+
+            } else {
+
+                holder.botonAñadirAmigo.setImageResource(R.drawable.boton_add)
+                estadoImagenes[position] = true
+
+                userService.unfollowUser(usuario.id, elem.id, object : UserRepository.callbackUnfollowUser {
+                    override fun onSuccess(message: String) {}
+                    override fun onError(mensajeError: String?) {}
+                })
+            }
         }
 
     }
