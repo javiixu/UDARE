@@ -13,17 +13,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.udare.R
-import com.example.udare.data.model.CommentData
 import com.example.udare.data.model.User
-import com.example.udare.presentation.Inicio
+import com.example.udare.data.model.UserSingleton
+import com.example.udare.data.repositories.Implementations.UserRepository
+import com.example.udare.presentation.BuscadorUsuario
+import com.example.udare.services.interfaces.IUserService
 
 
-class BuscadorSeguidorAdapter(private val Lista: List<User>, private val context: Context) :
-    RecyclerView.Adapter<BuscadorSeguidorAdapter.TextoHolder>(){
+class BuscadorSiguiendoAdapter(private val Lista: List<User>, private val context: Context, private val userService: IUserService) :
+    RecyclerView.Adapter<BuscadorSiguiendoAdapter.TextoHolder>(){
 
     class TextoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val usernameView: TextView = itemView.findViewById(R.id.username_seguidor)
         val profilePicView: ImageView = itemView.findViewById(R.id.foto_user_seguidor)
+        val botonEliminarAmigo: ImageView = itemView.findViewById(R.id.boton_eliminar_amigo)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextoHolder {
@@ -37,6 +40,7 @@ class BuscadorSeguidorAdapter(private val Lista: List<User>, private val context
 
     override fun onBindViewHolder(holder: TextoHolder, position: Int) {
 
+        val usuario = UserSingleton.obtenerInstancia().obtenerUsuario()
         val elem = Lista[position]
         val profilePic = elem.profile.profilePic
         val username = elem.username
@@ -48,6 +52,16 @@ class BuscadorSeguidorAdapter(private val Lista: List<User>, private val context
             .load(profilePic) // Asegúrate de que CommentData tenga un campo profilePic
             .apply(RequestOptions.circleCropTransform())
             .into(holder.profilePicView)
+
+        holder.botonEliminarAmigo.setOnClickListener(){
+            userService.unfollowUser(usuario.id, elem.id, object : UserRepository.callbackUnfollowUser {
+                override fun onSuccess(message: String) {// Dentro de tu actividad o fragmento
+                    // Dentro de tu actividad o fragmento
+                    Log.d("tag-oe", message + "")
+                }
+                override fun onError(mensajeError: String?) {Log.d("tag-oe", mensajeError + "")}
+            })
+        }
     }
 
 

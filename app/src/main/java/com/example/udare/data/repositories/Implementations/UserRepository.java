@@ -9,6 +9,7 @@ import com.example.udare.data.remote.ApiClient;
 import com.example.udare.data.remote.ApiService;
 import com.example.udare.data.repositories.Interfaces.IUserRepository;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.io.File;
 import java.util.HashMap;
@@ -288,31 +289,57 @@ public class UserRepository implements IUserRepository {
     public void followUser(String userId, String userToFollow, callbackFollowUser callback) {
         Map<String, String> requestBody = new HashMap<>();
         requestBody.put("_id", userToFollow);
-        Call<String> call = apiService.followUser(userId, requestBody);
-        call.enqueue(new Callback<String>() {
+        Call<JsonObject> call = apiService.followUser(userId, requestBody); // Cambiar a JsonObject
+        call.enqueue(new Callback<JsonObject>() { // Cambiar a JsonObject
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.isSuccessful()) {
-                    String user = response.body();
-                    if (user != null) {
-                        callback.onSuccess(user);
+                    JsonObject userObject = response.body();
+                    if (userObject != null && userObject.has("_id")) {
+                        String userId = userObject.get("_id").getAsString();
+                        callback.onSuccess(userId);
                     } else {
-                        callback.onError("Lista de usuarios nula");
+                        callback.onError("El objeto de usuario es nulo o no tiene un campo '_id'");
                     }
                 } else {
                     callback.onError("Error en la respuesta: " + response.message());
                 }
             }
+
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
                 callback.onError("Error en la llamada: " + t.getMessage());
             }
         });
     }
 
+
     @Override
     public void unfollowUser(String userId, String userToUnfollowId, callbackUnfollowUser callback) {
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("_id", userToUnfollowId);
+        Call<JsonObject> call = apiService.unfollowUser(userId, requestBody); // Cambiar a JsonObject
+        call.enqueue(new Callback<JsonObject>() { // Cambiar a JsonObject
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful()) {
+                    JsonObject userObject = response.body();
+                    if (userObject != null && userObject.has("_id")) {
+                        String userId = userObject.get("_id").getAsString();
+                        callback.onSuccess(userId);
+                    } else {
+                        callback.onError("El objeto de usuario es nulo o no tiene un campo '_id'");
+                    }
+                } else {
+                    callback.onError("Error en la respuesta: " + response.message());
+                }
+            }
 
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                callback.onError("Error en la llamada: " + t.getMessage());
+            }
+        });
     }
 
 

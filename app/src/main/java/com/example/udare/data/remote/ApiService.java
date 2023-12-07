@@ -5,6 +5,7 @@ import com.example.udare.data.model.Post;
 import com.example.udare.data.model.Challenge;
 import com.example.udare.data.model.User;
 import com.example.udare.data.model.Reaction;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 import java.util.Map;
@@ -130,15 +131,15 @@ public interface ApiService {
     Call<List<User>> getNotFollowingUsers(@Path("id") String userId);
 
     @POST("/users/{id}/followUser")
-    Call<String> followUser(
+    Call<JsonObject> followUser(
             @Path("id") String userId,
             @Body Map<String, String> requestBody
     );
 
-    @GET("/users/{id}/unfollowUser")
-    Call<User> unfollowUser(
+    @POST("/users/{id}/unfollowUser")
+    Call<JsonObject> unfollowUser(
             @Path("id") String userId,
-            @Body String userToUnfollowId
+            @Body Map<String, String> requestBody
     );
 
 }

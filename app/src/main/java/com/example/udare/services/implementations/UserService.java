@@ -189,6 +189,21 @@ public class UserService implements IUserService {
         });
     }
 
+    @Override
+    public void unfollowUser(String userId, String userToUnfollowId, UserRepository.callbackUnfollowUser callback) {
+        userRepository.unfollowUser(userId, userToUnfollowId, new UserRepository.callbackUnfollowUser() {
+            @Override
+            public void onSuccess(String user) {
+                callback.onSuccess(user);
+            }
+
+            @Override
+            public void onError(String mensajeError) {
+                callback.onError(mensajeError);
+            }
+        });
+    }
+
 }
 
 

@@ -10,24 +10,18 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.udare.Adapter.BuscadorSeguidorAdapter
+import com.example.udare.Adapter.BuscadorSiguiendoAdapter
 import com.example.udare.Adapter.BuscadorSugerenciasAdapter
-import com.example.udare.Adapter.FollowersAdapter
-import com.example.udare.Adapter.FotoAdapter
 import com.example.udare.R
-import com.example.udare.data.model.PostData
 import com.example.udare.data.model.User
 import com.example.udare.data.model.UserSingleton
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IUserService
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import android.widget.Filterable
-import android.widget.Filter
 
 @AndroidEntryPoint
 class BuscadorUsuario : AppCompatActivity() {
@@ -110,7 +104,7 @@ class BuscadorUsuario : AppCompatActivity() {
                 override fun onSuccess(ListaSeguidores: List<User>) {
                     Lista = ListaSeguidores
                     val seguidorAdapter =
-                        BuscadorSeguidorAdapter(ListaSeguidores, this@BuscadorUsuario)
+                        BuscadorSiguiendoAdapter(ListaSeguidores, this@BuscadorUsuario, userService)
                     recyclerSugerencias.adapter = seguidorAdapter
                 }
 
@@ -127,7 +121,7 @@ class BuscadorUsuario : AppCompatActivity() {
                 override fun onSuccess(ListaSiguiendo: List<User>) {
                     Lista = ListaSiguiendo
                     val siguiendoAdapter =
-                        BuscadorSeguidorAdapter(ListaSiguiendo, this@BuscadorUsuario)
+                        BuscadorSiguiendoAdapter(ListaSiguiendo, this@BuscadorUsuario, userService)
                     recyclerSugerencias.adapter = siguiendoAdapter
                 }
 
@@ -157,7 +151,21 @@ class BuscadorUsuario : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
+        fun updateSugerenciaList(){
+            userService.getNotFollowingUsers(
+                usuario.id,
+                object : UserRepository.callbackGetNotFollowingUsers {
+                    override fun onSuccess(ListaSugerencias: List<User>) {
+                        Lista = ListaSugerencias
+                        sugerenciasAdapter =
+                            BuscadorSugerenciasAdapter(ListaSugerencias, this@BuscadorUsuario, userService)
+                        recyclerSugerencias.adapter = sugerenciasAdapter
+                    }
 
+                    override fun onError(mensajeError: String?) {
+                    }
+                })
+        }
     }
 
     fun setButtons(buttonPressed: Button, buttonUnpressed1: Button, buttonUnpressed2: Button) {
@@ -170,6 +178,7 @@ class BuscadorUsuario : AppCompatActivity() {
         buttonUnpressed2.setBackgroundResource(R.drawable.botones_buscador)
         buttonUnpressed2.setTextColor(Color.parseColor("#F9F4F1"))
     }
+
 
 }
 
