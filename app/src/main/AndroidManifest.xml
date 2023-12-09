@@ -25,12 +25,17 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/UDARE"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31"
-        android:requestLegacyExternalStorage="true">
+        tools:targetApi="31">
+        <activity
+            android:name=".presentation.CalendarGaleryActivity"
+            android:exported="false"
+            android:label="@string/title_activity_calendar_galery"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".presentation.ReactionActivity"
             android:exported="false" />
@@ -45,8 +50,8 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".presentation.FollowingActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".presentation.PerfilActivity"
             android:exported="false" />
@@ -64,16 +69,15 @@
             android:exported="true" />
         <activity
             android:name=".presentation.BuscadorUsuario"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".presentation.SplashScreen"
             android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

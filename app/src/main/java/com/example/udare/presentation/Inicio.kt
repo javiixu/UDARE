@@ -82,6 +82,7 @@ class Inicio : AppCompatActivity() {
         }
         */
 
+        //TODO aquí deberían aparecer solo posts de amigos. no?
         postService.getAllPosts(object : PostRepository.callbackGetAllPosts {
             override fun onSuccess(posts: MutableList<Post>) {
 
