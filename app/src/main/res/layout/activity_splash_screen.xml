@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_color"
-
+    android:clipToOutline="true"
+    android:background="#171717"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".presentation.SplashScreen">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/udare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/udare"
+        android:layout_alignParentTop="true"
+        android:textAppearance="@style/udare_splash"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="120dp"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_height="10dp"
+        android:layout_below="@id/udare"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/custom_progress_bar" />
+
+
+</RelativeLayout>
