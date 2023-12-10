@@ -28,6 +28,8 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
+        supportActionBar?.hide()
+
         mAuth = FirebaseAuth.getInstance()
         currentUser = mAuth.currentUser
         loadingProgressBar = findViewById(R.id.progressBar)

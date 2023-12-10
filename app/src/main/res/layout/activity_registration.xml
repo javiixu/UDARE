@@ -238,6 +238,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/usuario"
         android:layout_alignParentLeft="true"
+        android:drawableStart="@drawable/ic_users"
         android:hint="@string/some_id"
         android:inputType="text"
         android:textAppearance="@style/register_titles" />

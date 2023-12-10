@@ -20,6 +20,8 @@ class Registration2Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration2)
 
+        supportActionBar?.hide()
+
         btnStart = findViewById(R.id.button_empezar)
 
         mAuth = FirebaseAuth.getInstance()

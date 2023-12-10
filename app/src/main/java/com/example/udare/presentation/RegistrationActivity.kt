@@ -48,6 +48,8 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
+        supportActionBar?.hide()
+
         mAuth = FirebaseAuth.getInstance()
 
         email = findViewById(R.id.editTextEmail)

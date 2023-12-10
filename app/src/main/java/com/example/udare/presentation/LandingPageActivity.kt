@@ -23,6 +23,8 @@ class LandingPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landing_page)
 
+        supportActionBar?.hide()
+
         mAuth = FirebaseAuth.getInstance()
         currentUser = mAuth.currentUser
 
