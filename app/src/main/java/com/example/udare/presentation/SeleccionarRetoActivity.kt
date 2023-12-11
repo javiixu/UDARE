@@ -44,6 +44,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_seleccionar_reto)
 
+
         //TIMER MANAGMENT
         //current Calendar
         var current = Calendar.getInstance()
@@ -166,10 +167,11 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         //for every challenge handle what happens when this challenge gets clicked
         btnCookingChallenge.setOnClickListener(){
             choosenChallenge = btnCookingChallenge.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
+            Intent(this, HacerFotoActivityMejora::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "cooking")
                 it.putExtra("EXTRA_PATROCINADO", cocinaPatrocinado)
+                it.putExtra("EXTRA_FORMATTED_TIME", tvChallengeTimer.text.toString())
                 startActivity(it)
             }
 
@@ -177,7 +179,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
         btnGrowthChallenge.setOnClickListener(){
             choosenChallenge = btnGrowthChallenge.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
+            Intent(this, HacerFotoActivityMejora::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "growth")
                 it.putExtra("EXTRA_PATROCINADO", crecimientoPatrocinado)
@@ -187,7 +189,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
         btnSocialChallenge.setOnClickListener(){
             choosenChallenge = btnSocialChallenge.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
+            Intent(this, HacerFotoActivityMejora::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "social")
                 it.putExtra("EXTRA_PATROCINADO", socialPatrocinado)
@@ -197,7 +199,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
         btnCultureChallenge.setOnClickListener(){
             choosenChallenge = btnCultureChallenge.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
+            Intent(this, HacerFotoActivityMejora::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "culture")
                 it.putExtra("EXTRA_PATROCINADO", culturaPatrocinado)
@@ -207,7 +209,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
         btnSportChallenge.setOnClickListener(){
             choosenChallenge = btnSportChallenge.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
+            Intent(this, HacerFotoActivityMejora::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "sport")
                 it.putExtra("EXTRA_PATROCINADO", deportesPatrocinado)
@@ -238,6 +240,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 diff %= minutesInMilli
 
                 val elapsedSeconds = diff / secondsInMilli
+
 
                 tvTimer.text =
                     "$elapsedHours:$elapsedMinutes:$elapsedSeconds"
