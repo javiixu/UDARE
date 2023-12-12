@@ -134,6 +134,8 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 //cocinaPatrocinado = retosCocina.get(0).patrocinado
                 //crecimientoPatrocinado = retosCrecimientoPersonal.get(0).patrocinado
 
+
+
                 deportesPatrocinado = true //solo para las pruebas
                 if(socialPatrocinado){
                     btnSocialChallenge.setBackgroundColor(android.graphics.Color.parseColor("#FFD700"))
@@ -156,7 +158,8 @@ class SeleccionarRetoActivity : AppCompatActivity() {
             }
         })
 
-        var choosenChallenge = "choosen Challenge"
+        var choosenChallenge : String
+
 
         //challenge going back to main activity
         btnBackFromChallengeSelect.setOnClickListener(){
@@ -170,6 +173,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "cooking")
                 it.putExtra("EXTRA_PATROCINADO", cocinaPatrocinado)
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ",retosCocina.get(0))
                 startActivity(it)
             }
 
@@ -181,6 +185,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "growth")
                 it.putExtra("EXTRA_PATROCINADO", crecimientoPatrocinado)
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ",retosCrecimientoPersonal.get(0))
                 startActivity(it)
             }
         }
@@ -191,6 +196,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "social")
                 it.putExtra("EXTRA_PATROCINADO", socialPatrocinado)
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ",retosSocial.get(0))
                 startActivity(it)
             }
         }
@@ -201,6 +207,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "culture")
                 it.putExtra("EXTRA_PATROCINADO", culturaPatrocinado)
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ",retosCultura.get(0))
                 startActivity(it)
             }
        }
@@ -211,6 +218,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "sport")
                 it.putExtra("EXTRA_PATROCINADO", deportesPatrocinado)
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ",retosDeportes.get(0))
                 startActivity(it)
             }
         }

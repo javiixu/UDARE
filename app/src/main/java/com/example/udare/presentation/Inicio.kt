@@ -1,26 +1,30 @@
 package com.example.udare.presentation
 
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.udare.Adapter.CommentsAdapter
 import com.example.udare.Adapter.FotoAdapter
 import com.example.udare.R
+import com.example.udare.data.model.Challenge
 import com.example.udare.data.model.CommentData
 import com.example.udare.data.model.Post
 import com.example.udare.data.model.PostData
 import com.example.udare.data.model.User
 import com.example.udare.data.model.UserSingleton
+import com.example.udare.data.repositories.Implementations.ChallengeRepository
 import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IChallengeService
@@ -39,13 +43,14 @@ class Inicio : AppCompatActivity() {
     lateinit var postService: IPostService
 
     @Inject
-    lateinit var challengeService : IChallengeService
+    lateinit var challengeService: IChallengeService
 
     @Inject
     lateinit var userService: IUserService
 
     @Inject
     lateinit var reactionService: IReactionService
+
 
     private val _fotoList = MutableLiveData<List<PostData>>()
     val fotoList: LiveData<List<PostData>> get() = _fotoList
@@ -55,21 +60,29 @@ class Inicio : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
 
-
         //Buttons & Views
-        val btnTestPerfil = findViewById<Button>(R.id.btnTestPerfil)
-        val popupButton = findViewById<Button>(R.id.challenges)
+        val fotoPerfil = findViewById<ImageView>(R.id.perfil)
+        val popupButton = findViewById<ImageView>(R.id.challenges)
+        val buscadorAmigos = findViewById<ImageView>(R.id.añadir_amigos)
 
+        Glide.with(fotoPerfil)
+            .load(UserSingleton.obtenerInstancia().obtenerUsuario().profile.profilePic) // Asegúrate de que CommentData tenga un campo profilePic
+            .apply(RequestOptions.circleCropTransform())
+            .into(fotoPerfil)
+
+        supportActionBar?.hide()
+
+        /*
         val usuario = UserSingleton.obtenerInstancia().obtenerUsuario()
         Log.d("tag-userSingletonInicio", "Usuario: ${usuario.username}")
 
 
         if(usuario.dailyChallengeCompleted) {
-            popupButton.text="Reto diario completado!"
             popupButton.setEnabled(false);
         }
+        */
 
-
+        //TODO aquí deberían aparecer solo posts de amigos. no?
         postService.getAllPosts(object : PostRepository.callbackGetAllPosts {
             override fun onSuccess(posts: MutableList<Post>) {
 
@@ -78,17 +91,28 @@ class Inicio : AppCompatActivity() {
 
                 posts.forEach { post ->
                     val userId = post.userID
+                    val challengeId = post.challengeID
 
                     userService.getUserById(userId, object : UserRepository.callbackGetUserById {
                         override fun onSuccess(user: User) {
-                            val profilePic = user.profile.profilePic
-                            val username = user.username
-                            val elem = PostData(post, profilePic, username)
-                            Lista.add(elem)
-                            updatePostList(Lista)
+
+                           challengeService.getChallengeById(challengeId, object : ChallengeRepository.callbackGetChallengeById {
+                                override fun onSuccess(challenge: Challenge) {
+                                    val profilePic = user.profile.profilePic
+                                    val username = user.username
+                                    val elem = PostData(post, profilePic, username, challenge)
+                                    Lista.add(elem)
+                                    updatePostList(Lista)
+                                }
+
+                                override fun onError(mensajeError: String?) {
+                                    Log.d("tag-comments", "Error in getUserById")
+                                }
+                            })
                         }
+
                         override fun onError(mensajeError: String?) {
-                            Log.d("tag-comments","Error in getUserById")
+                            Log.d("tag-comments", "Error in getUserById")
                         }
                     })
 
@@ -97,15 +121,15 @@ class Inicio : AppCompatActivity() {
                     // Actualiza tu RecyclerView o cualquier otra vista aquí con la nueva lista
                     photoRecyclerView.layoutManager = LinearLayoutManager(this@Inicio)
 
-                    val photoAdapter = FotoAdapter(Lista,this@Inicio, reactionService)
+                    val photoAdapter = FotoAdapter(Lista, this@Inicio, reactionService)
 
                     photoRecyclerView.adapter = photoAdapter
                 })
-/*
-                val photoAdapter = FotoAdapter(posts, userId, this@Inicio)
-                photoRecyclerView.adapter = photoAdapter
-                photoRecyclerView.layoutManager = LinearLayoutManager(this@Inicio)
-*/
+                /*
+                                val photoAdapter = FotoAdapter(posts, userId, this@Inicio)
+                                photoRecyclerView.adapter = photoAdapter
+                                photoRecyclerView.layoutManager = LinearLayoutManager(this@Inicio)
+                */
             }
 
             override fun onError(mensajeError: String?) {
@@ -116,15 +140,21 @@ class Inicio : AppCompatActivity() {
 
 
 
-        popupButton.setOnClickListener(){
-            Intent(this, SeleccionarRetoActivity::class.java).also{
+        popupButton.setOnClickListener() {
+            Intent(this, SeleccionarRetoActivity::class.java).also {
+                startActivity(it)
+            }
+        }
+
+        buscadorAmigos.setOnClickListener() {
+            Intent(this, BuscadorUsuario::class.java).also {
                 startActivity(it)
             }
         }
 
 
 
-       btnTestPerfil.setOnClickListener(){
+        fotoPerfil.setOnClickListener() {
             val intent = Intent(this, PerfilActivity::class.java)
             this.startActivity(intent)
         }

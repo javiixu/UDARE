@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".presentation.PerfilActivity"
+    android:background="@color/profile_black"
+
+    >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageButton
+            android:id="@+id/btnGallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            app:layout_constraintBottom_toTopOf="@+id/guideline6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingRight="30dp"
+            app:srcCompat="@drawable/icono_lbum" />
+
+        <ImageButton
+            android:id="@+id/btnBackFromCalendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            app:layout_constraintBottom_toTopOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingLeft="30dp"
+            app:srcCompat="@drawable/flecharound" />
+
+
+        <ImageButton
+            android:id="@+id/btnChangeProfilePicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="?android:selectableItemBackground"
+            android:translationZ="90dp"
+            app:layout_constraintBottom_toBottomOf="@+id/profilePicture"
+            app:layout_constraintEnd_toEndOf="@+id/profilePicture"
+            app:srcCompat="@drawable/editarround" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+
+            android:id="@+id/profilePicture"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/mujer_foto_perfil"
+            app:civ_border_color="#FFFFFF"
+            app:civ_border_width="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.27" />
+
+
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lia Marqués"
+            android:textSize="30sp"
+            android:fontFamily="@font/cabinetgrotesk_regular"
+            android:textColor="#F9F4F1"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profilePicture"
+            app:layout_constraintVertical_bias="0.304" />
+
+
+
+        <TextView
+            android:id="@+id/tvContainerCookingCategory"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/profile_category_square"
+            android:paddingLeft="30dp"
+            android:paddingTop="5dp"
+            android:text="RETOS COCINA"
+            app:layout_constraintBottom_toTopOf="@+id/tvContainerSportCategory"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideline5"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+        <TextView
+            android:id="@+id/tvContainerSportCategory"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/profile_category_square"
+            android:paddingLeft="30dp"
+            android:paddingTop="5dp"
+            android:text="RETOS DEPORTE"
+            app:layout_constraintBottom_toTopOf="@+id/tvContainerCultureCategory"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvContainerCookingCategory" />
+
+        <TextView
+            android:id="@+id/tvContainerCultureCategory"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/profile_category_square"
+            android:paddingLeft="30dp"
+            android:paddingTop="5dp"
+            android:text="RETOS CULTURA"
+            app:layout_constraintBottom_toTopOf="@+id/tvContainerSocialCategory"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvContainerSportCategory" />
+
+        <TextView
+            android:id="@+id/tvContainerSocialCategory"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/profile_category_square"
+            android:paddingLeft="30dp"
+            android:paddingTop="5dp"
+            android:text="RETOS SOCIAL"
+            app:layout_constraintBottom_toTopOf="@+id/tvContainerGrowthCategory"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvContainerCultureCategory" />
+
+        <TextView
+            android:id="@+id/tvContainerGrowthCategory"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/profile_category_square"
+            android:paddingLeft="30dp"
+            android:paddingTop="5dp"
+            android:text="RETOS CRECIMIENTO PERSONAL"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvContainerSocialCategory" />
+
+        <TextView
+            android:id="@+id/tvCookingPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0000"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvContainerCookingCategory"
+            app:layout_constraintEnd_toEndOf="@+id/tvContainerCookingCategory"
+            app:layout_constraintStart_toStartOf="@+id/tvContainerCookingCategory"
+            app:layout_constraintTop_toTopOf="@+id/tvContainerCookingCategory" />
+
+        <TextView
+            android:id="@+id/tvCulturePoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0000"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvContainerCultureCategory"
+            app:layout_constraintEnd_toEndOf="@+id/tvContainerCultureCategory"
+            app:layout_constraintStart_toStartOf="@+id/tvContainerCultureCategory"
+            app:layout_constraintTop_toTopOf="@+id/tvContainerCultureCategory" />
+
+        <TextView
+            android:id="@+id/tvSportPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0000"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvContainerSportCategory"
+            app:layout_constraintEnd_toEndOf="@+id/tvContainerSportCategory"
+            app:layout_constraintStart_toStartOf="@+id/tvContainerSportCategory"
+            app:layout_constraintTop_toTopOf="@+id/tvContainerSportCategory" />
+
+        <TextView
+            android:id="@+id/tvGrowthPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0000"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvContainerGrowthCategory"
+            app:layout_constraintEnd_toEndOf="@+id/tvContainerGrowthCategory"
+            app:layout_constraintStart_toStartOf="@+id/tvContainerGrowthCategory"
+            app:layout_constraintTop_toTopOf="@+id/tvContainerGrowthCategory" />
+
+        <TextView
+            android:id="@+id/tvSocialPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0000"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvContainerSocialCategory"
+            app:layout_constraintEnd_toEndOf="@+id/tvContainerSocialCategory"
+            app:layout_constraintStart_toStartOf="@+id/tvContainerSocialCategory"
+            app:layout_constraintTop_toTopOf="@+id/tvContainerSocialCategory" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="118dp" />
+
+        <TextView
+            android:id="@+id/tvUserBio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:fontFamily="@font/aileron_regular"
+            android:textColor="#F9F4F1"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</ScrollView>

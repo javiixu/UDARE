@@ -5,8 +5,10 @@ import com.example.udare.data.model.Post;
 import com.example.udare.data.model.Challenge;
 import com.example.udare.data.model.User;
 import com.example.udare.data.model.Reaction;
+import com.google.gson.JsonObject;
 
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -121,6 +123,24 @@ public interface ApiService {
 //    Get reactions by post
     @GET("/reactions/post/{postId}")
     Call<List<Reaction>> getReactionsByPost(@Path("postId") String postId);
+
+    @GET("/challenges/{id}")
+    Call<Challenge> getChallengeById(@Path("id") String challengeId);
+
+    @GET("/users/{id}/getNotFollowingUsers")
+    Call<List<User>> getNotFollowingUsers(@Path("id") String userId);
+
+    @POST("/users/{id}/followUser")
+    Call<JsonObject> followUser(
+            @Path("id") String userId,
+            @Body Map<String, String> requestBody
+    );
+
+    @POST("/users/{id}/unfollowUser")
+    Call<JsonObject> unfollowUser(
+            @Path("id") String userId,
+            @Body Map<String, String> requestBody
+    );
 
 }
 
