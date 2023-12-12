@@ -8,6 +8,7 @@ import android.util.Log
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -36,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
     private var currentUser: FirebaseUser? = null
     private lateinit var loadingBar: ProgressBar
     private lateinit var mAuth: FirebaseAuth
-    private lateinit var btnBack: Button
+    private lateinit var btnBack: ImageButton
 
     @Inject
     lateinit var userService: IUserService
@@ -204,7 +205,13 @@ class LoginActivity : AppCompatActivity() {
                         }
 
                         override fun onError(mensajeError: String?) {
+                            Toast.makeText(this@LoginActivity, "Error in getUserByUid", Toast.LENGTH_SHORT).show()
                             Log.d("tag-comments", "Error in getUserByUid: $mensajeError")
+
+                            val intent = Intent(this@LoginActivity, LandingPageActivity::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+                            finish()
                         }
                     })
 
