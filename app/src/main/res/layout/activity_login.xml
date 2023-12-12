@@ -8,7 +8,7 @@
     android:orientation="vertical">
     >
 
-    <ImageButton
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/buttonBack"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -16,8 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="28dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/circle_register"
-        android:src="@drawable/flecha" />
+        android:src="@drawable/flecharound_black" />
 
     <TextView
         android:id="@+id/title_login"
@@ -29,6 +28,7 @@
         android:text="Hey! Hola de nuevo a"
         android:textAppearance="@style/hey_hola_de"
         android:gravity="center_vertical"
+        android:fontFamily="@font/cabinetgrotesk_regular"
         />
 
     <TextView
@@ -40,6 +40,7 @@
         android:text="@string/udare"
         android:textAppearance="@style/udare_login"
         android:gravity="center_vertical"
+        android:fontFamily="@font/neuemetananext"
         />
 
     <TextView
@@ -51,7 +52,8 @@
         android:layout_marginTop="48dp"
         android:gravity="center_vertical"
         android:text="Correo electrónico"
-        android:textAppearance="@style/subtitle_login" />
+        android:textAppearance="@style/subtitle_login"
+        android:fontFamily="@font/aileron_regular"/>
 
     <EditText
         android:id="@+id/editTextPersonName"
@@ -66,6 +68,7 @@
         android:inputType="textPersonName"
         android:padding="8dp"
         android:textAppearance="@style/fill_login"
+        android:fontFamily="@font/aileron_regular"
         />
 
     <TextView
@@ -77,7 +80,8 @@
         android:layout_marginTop="48dp"
         android:gravity="center_vertical"
         android:text="Contraseña"
-        android:textAppearance="@style/subtitle_login" />
+        android:textAppearance="@style/subtitle_login"
+        android:fontFamily="@font/aileron_regular"/>
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -92,6 +96,7 @@
         android:inputType="textPassword"
         android:padding="8dp"
         android:textAppearance="@style/fill_login"
+        android:fontFamily="@font/aileron_regular"
         />
 
     <TextView
@@ -103,7 +108,8 @@
         android:layout_marginTop="5dp"
         android:gravity="center_vertical"
         android:text="¿No tienes cuenta? Regístrate"
-        android:textAppearance="@style/ya_tienes_c" />
+        android:textAppearance="@style/ya_tienes_c"
+        android:fontFamily="@font/aileron_regular"/>
 
     <Button
         android:id="@+id/button_login"
@@ -114,7 +120,8 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/rectangle_button_register"
         android:text="@string/registrarse"
-        android:textAppearance="@style/registrarse" />
+        android:textAppearance="@style/registrarse"
+        android:fontFamily="@font/aileron_regular"/>
 
     <TextView
         android:id="@+id/te_apetece_"
@@ -125,7 +132,8 @@
         android:layout_marginTop="48dp"
         android:gravity="center_vertical"
         android:text="Haz olvidado tu contraseña?"
-        android:textAppearance="@style/forgot_password" />
+        android:textAppearance="@style/forgot_password"
+        android:fontFamily="@font/aileron_regular"/>
 
 
 

@@ -20,7 +20,7 @@
         android:background="@drawable/buscador_style"
         android:drawableStart="@drawable/lupa_buscador"
         android:drawablePadding="8dp"
-        android:fontFamily="@font/aileron"
+        android:fontFamily="@font/aileron_regular"
         android:hint="Buscar amigos"
         android:paddingLeft="20dp"
         android:textColor="#F9F4F1"
@@ -45,7 +45,7 @@
             android:text="Sugerencias"
             android:textColor="#171717"
             android:textSize="13sp"
-            android:fontFamily="@font/aileron"
+            android:fontFamily="@font/aileron_regular"
             android:textAllCaps="false"
             />
 
@@ -59,7 +59,7 @@
             android:text="Seguidores"
             android:textColor="#F9F4F1"
             android:textSize="13sp"
-            android:fontFamily="@font/aileron"
+            android:fontFamily="@font/aileron_regular"
             android:textAllCaps="false"/>
 
 
@@ -72,7 +72,7 @@
             android:text="Siguiendo"
             android:textColor="#F9F4F1"
             android:textSize="13sp"
-            android:fontFamily="@font/aileron"
+            android:fontFamily="@font/aileron_regular"
             android:textAllCaps="false"/>
 
 

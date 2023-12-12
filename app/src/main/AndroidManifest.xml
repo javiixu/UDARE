@@ -60,9 +60,6 @@
             android:name=".presentation.PerfilActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.HacerFotoActivity"
-            android:exported="true" />
-        <activity
             android:name=".presentation.HacerFotoActivityMejora"
             android:exported="true" />
         <activity

@@ -8,7 +8,7 @@ import android.util.Log
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
     private var currentUser: FirebaseUser? = null
     private lateinit var loadingBar: ProgressBar
     private lateinit var mAuth: FirebaseAuth
-    private lateinit var btnBack: ImageButton
+    private lateinit var btnBack: ImageView
 
     @Inject
     lateinit var userService: IUserService

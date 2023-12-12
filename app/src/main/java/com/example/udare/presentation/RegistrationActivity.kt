@@ -8,6 +8,7 @@ import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -42,7 +43,7 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var user : User
     private lateinit var uid : String
 
-    private lateinit var btnBack : ImageButton
+    private lateinit var btnBack : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)

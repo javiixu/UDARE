@@ -27,7 +27,8 @@
             android:gravity="center"
             android:text=".UDARE"
             android:textSize="20sp"
-            android:textColor="#E7EE86" />
+            android:textColor="#E7EE86"
+            android:fontFamily="@font/neuemetananext"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/perfil"

@@ -12,7 +12,6 @@ import androidx.camera.core.CameraSelector
 import androidx.camera.view.LifecycleCameraController
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.udare.presentation.HacerFotoActivity
 import com.example.udare.data.model.Challenge
 import com.example.udare.R
 import com.example.udare.data.model.UserSingleton

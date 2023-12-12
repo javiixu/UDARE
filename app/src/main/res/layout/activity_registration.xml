@@ -149,14 +149,13 @@
     android:clipToOutline="true"
     tools:context=".presentation.RegistrationActivity">
 
-    <ImageButton
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/buttonBack"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/circle_register"
-        android:src="@drawable/flecha" />
+        android:src="@drawable/flecharound_black" />
 
     <TextView
         android:id="@+id/welcom_to"
@@ -168,6 +167,7 @@
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/welcome_to"
         android:textAppearance="@style/welcome_to"
+        android:fontFamily="@font/cabinetgrotesk_regular"
     />
 
     <TextView
@@ -179,7 +179,8 @@
         android:layout_marginTop="3dp"
         android:gravity="top"
         android:text="@string/udare"
-        android:textAppearance="@style/udare_register" />
+        android:textAppearance="@style/udare_register"
+        android:fontFamily="@font/neuemetananext"/>
 
     <TextView
         android:id="@+id/nombre"
@@ -190,7 +191,8 @@
         android:layout_marginTop="21dp"
         android:gravity="center_vertical"
         android:text="@string/nombre"
-        android:textAppearance="@style/register_titles" />
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
 
     <EditText
         android:id="@+id/editTextName"
@@ -198,7 +200,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/nombre"
         android:layout_alignParentLeft="true"
-        android:hint="Introduce tu nombre" />
+        android:hint="Introduce tu nombre"
+        android:fontFamily="@font/aileron_regular"/>
 
     <TextView
         android:id="@+id/correo"
@@ -209,7 +212,8 @@
         android:layout_marginTop="21dp"
         android:gravity="center_vertical"
         android:text="@string/correo"
-        android:textAppearance="@style/register_titles" />
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
 
     <EditText
         android:id="@+id/editTextEmail"
@@ -219,7 +223,8 @@
         android:layout_alignParentLeft="true"
         android:hint="udare@gmail.com"
         android:inputType="textEmailAddress"
-        android:textAppearance="@style/register_titles" />
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
 
     <TextView
         android:id="@+id/usuario"
@@ -230,7 +235,8 @@
         android:layout_marginTop="21dp"
         android:gravity="center_vertical"
         android:text="@string/usuario"
-        android:textAppearance="@style/register_titles" />
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
 
     <EditText
         android:id="@+id/editTextUsername"
@@ -241,7 +247,8 @@
         android:drawableStart="@drawable/ic_users"
         android:hint="@string/some_id"
         android:inputType="text"
-        android:textAppearance="@style/register_titles" />
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
     
     <TextView
         android:id="@+id/contrase_a"
@@ -252,7 +259,8 @@
         android:layout_marginTop="21dp"
         android:gravity="center_vertical"
         android:text="@string/contrase_a"
-        android:textAppearance="@style/register_titles" />
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
     
     <EditText
         android:id="@+id/editTextPassword"
@@ -262,7 +270,8 @@
         android:layout_alignParentLeft="true"
         android:hint="*********"
         android:inputType="textPassword"
-        android:textAppearance="@style/register_titles" />
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
     
     <TextView
         android:id="@+id/repetir_con"
@@ -273,7 +282,8 @@
         android:layout_marginTop="21dp"
         android:gravity="center_vertical"
         android:text="@string/repetir_con"
-        android:textAppearance="@style/register_titles" />
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
     
     <EditText
         android:id="@+id/editTextConfirmPassword"
@@ -283,7 +293,8 @@
         android:layout_alignParentLeft="true"
         android:hint="*********"
         android:inputType="textPassword"
-        android:textAppearance="@style/register_titles" />
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
 
     <TextView
         android:id="@+id/ya_tienes_c"
@@ -294,6 +305,7 @@
         android:text="@string/ya_tienes_c"
         android:textAppearance="@style/ya_tienes_c"
         android:gravity="center_vertical"
+        android:fontFamily="@font/aileron_regular"
         />
 
     <Button
@@ -305,7 +317,8 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/rectangle_button_register"
         android:text="@string/registrarse"
-        android:textAppearance="@style/registrarse" />
+        android:textAppearance="@style/registrarse"
+        android:fontFamily="@font/aileron_regular"/>
 
 
     <!--    <EditText-->

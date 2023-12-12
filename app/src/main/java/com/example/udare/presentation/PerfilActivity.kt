@@ -44,6 +44,8 @@ class PerfilActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
 
+        supportActionBar?.hide()
+
         //Buttons & Views
         var tvSocialPoints = findViewById<TextView>(R.id.tvSocialPoints)
         var tvSportPoints = findViewById<TextView>(R.id.tvSportPoints)

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -45,6 +46,8 @@ class ComentariosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comentarios)
+
+        supportActionBar?.hide()
 
 
         val postId = intent.getStringExtra("postId")
@@ -84,7 +87,7 @@ class ComentariosActivity : AppCompatActivity() {
             recyclerView.adapter = textoAdapter
         })
 
-        val backButton = findViewById<Button>(R.id.bAtras)
+        val backButton = findViewById<ImageView>(R.id.bAtrasComentario)
         val sendButton = findViewById<Button>(R.id.bEnviarComentario)
         val comentarioListener = findViewById<EditText>(R.id.listenerComentario)
 
