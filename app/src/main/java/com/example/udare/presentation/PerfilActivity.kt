@@ -125,6 +125,12 @@ class PerfilActivity : AppCompatActivity() {
         }
 
 
+        btnUserAlbum.setOnClickListener(){
+            val intent = Intent(this@PerfilActivity, CalendarGaleryActivity::class.java)
+            this@PerfilActivity.startActivity(intent)
+        }
+
+
         buttonFollowers.setOnClickListener(){
             val intent = Intent(this@PerfilActivity, FollowersActivity::class.java)
             this@PerfilActivity.startActivity(intent)

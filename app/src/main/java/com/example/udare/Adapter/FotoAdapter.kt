@@ -20,12 +20,7 @@ import com.example.udare.data.model.Reaction
 import com.example.udare.data.repositories.Implementations.ReactionRepository
 import com.example.udare.presentation.ComentariosActivity
 import com.example.udare.presentation.ReactionActivity
-import com.example.udare.services.implementations.ReactionService
 import com.example.udare.services.interfaces.IReactionService
-import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.Call
-import retrofit2.Response
-import javax.inject.Inject
 
 //@AndroidEntryPoint
 class FotoAdapter(private val Lista: List<PostData>, private val context: Context, private val reactionService: IReactionService) : RecyclerView.Adapter<FotoAdapter.FotoHolder>() {
@@ -40,8 +35,10 @@ class FotoAdapter(private val Lista: List<PostData>, private val context: Contex
         val textViewClick: TextView = itemView.findViewById(R.id.comentarios)
         val usernameView: TextView = itemView.findViewById(R.id.username)
         val avatarView: ImageView = itemView.findViewById(R.id.avatar)
+        val iconoView: ImageView = itemView.findViewById(R.id.icono_categoria)
+        val contenedorUser : View = itemView.findViewById(R.id.contenedor_user)
 
-        val captureButton = itemView.findViewById<Button>(R.id.capture_button)
+        val captureButton = itemView.findViewById<ImageView>(R.id.capture_button)
 
         var reactionList = mutableListOf<Reaction>()
 
@@ -111,6 +108,36 @@ class FotoAdapter(private val Lista: List<PostData>, private val context: Contex
 
         val standardSize = 1200 // Tamaño estándar en píxeles
 
+        Log.d("tag-eo", Lista[position].challenge.category)
+
+        when (Lista[position].challenge.category) {
+            "deportes" -> {
+                holder.iconoView.setImageResource(R.drawable.icono_deporte)
+                holder.contenedorUser.setBackgroundResource(R.drawable.contenedor_usuario_deporte)
+            }
+            "social" -> {
+                holder.iconoView.setImageResource(R.drawable.icono_social)
+                holder.contenedorUser.setBackgroundResource(R.drawable.contenedor_usuario_social)
+            }
+            "cultura" -> {
+                holder.iconoView.setImageResource(R.drawable.icono_cultural)
+                holder.contenedorUser.setBackgroundResource(R.drawable.contenedor_usuario_cultural)
+            }
+            "cocina" -> {
+                holder.iconoView.setImageResource(R.drawable.icono_cocina)
+                holder.contenedorUser.setBackgroundResource(R.drawable.contenedor_usuario_cocina)
+            }
+            "crecimientopersonal" -> {
+                holder.iconoView.setImageResource(R.drawable.icono_crec_pers)
+                holder.contenedorUser.setBackgroundResource(R.drawable.contenedor_usuario_crec_pers)
+            }
+            else -> {
+                holder.iconoView.setImageResource(R.drawable.icono_social)
+                holder.contenedorUser.setBackgroundResource(R.drawable.contenedor_usuario_social)
+            }
+        }
+
+
         val options = RequestOptions()
             .override(standardSize, standardSize)
             .centerCrop()
@@ -120,7 +147,7 @@ class FotoAdapter(private val Lista: List<PostData>, private val context: Contex
             .apply(options)
             .into(holder.imageView)
 
-        holder.usernameView.text = Lista[position].username
+        holder.usernameView.text = "@" + Lista[position].username
         Glide.with(holder.avatarView)
             .load(Lista[position].profilePic) // Asegúrate de que CommentData tenga un campo profilePic
             .apply(RequestOptions.circleCropTransform())

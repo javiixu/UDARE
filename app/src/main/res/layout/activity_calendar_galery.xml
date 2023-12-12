@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#E7EE86"
+    android:fillViewport="true"
+    tools:context=".presentation.CalendarGaleryActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="52dp">
+
+            <ImageButton
+                android:id="@+id/btnBackFromCalendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:background="?android:selectableItemBackground"
+                android:src="@drawable/flecharound_black" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:fontFamily="@font/cabinetgrotesk_regular"
+                android:text="Mi álbum"
+                android:textColor="#171717"
+                android:textSize="45sp" />
+
+        </LinearLayout>
+
+
+        <!-- RecyclerView -->
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:id="@+id/btnGetChallengesAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rectangle_calendar_button"
+                    android:fontFamily="@font/aileron_regular"
+                    android:gravity="center"
+                    android:text="todo"
+                    android:textColor="#E7EE86"
+                    android:textSize="13sp" />
+
+
+
+                <Button
+                    android:id="@+id/btnGetChallengesLastWeek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rectangle_calendar_button"
+                    android:fontFamily="@font/aileron_regular"
+                    android:gravity="center"
+                    android:text="última semana"
+                    android:textColor="#E7EE86"
+                    android:textSize="13sp" />
+
+
+                <Button
+                    android:id="@+id/btnGetChallengesLastMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rectangle_calendar_button"
+                    android:fontFamily="@font/aileron_regular"
+                    android:gravity="center"
+                    android:text="último mes"
+                    android:textColor="#E7EE86"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/btnGetChallengesCulture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rectangle_calendar_button"
+                    android:fontFamily="@font/aileron_regular"
+                    android:gravity="center"
+                    android:text="cultura"
+                    android:textColor="#E7EE86"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/btnGetChallengesSport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rectangle_calendar_button"
+                    android:fontFamily="@font/aileron_regular"
+                    android:gravity="center"
+                    android:text="deporte"
+                    android:textColor="#E7EE86"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/btnGetChallengesSocial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rectangle_calendar_button"
+                    android:fontFamily="@font/aileron_regular"
+                    android:gravity="center"
+                    android:text="social"
+                    android:textColor="#E7EE86"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/btnGetChallengesGrowth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rectangle_calendar_button_large"
+                    android:fontFamily="@font/aileron_regular"
+                    android:gravity="center"
+                    android:text="crecimiento personal"
+                    android:textColor="#E7EE86"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/btnGetChallengesCooking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rectangle_calendar_button"
+                    android:fontFamily="@font/aileron_regular"
+                    android:gravity="center"
+                    android:text="cocina"
+                    android:textColor="#E7EE86"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+        </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:nestedScrollingEnabled="false"
+            />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

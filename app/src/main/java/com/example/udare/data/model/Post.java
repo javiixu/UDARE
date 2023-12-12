@@ -13,6 +13,16 @@ public class Post  implements Serializable {
     private String _id;
     private List<CommentData> comments;
 
+    private String orientation;
+
+    public String getOrientation() {
+        return orientation;
+    }
+
+    public void setOrientation(String orientation) {
+        this.orientation = orientation;
+    }
+
     public List<CommentData> getComments() {
         return comments;
     }

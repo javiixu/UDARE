@@ -1,15 +1,20 @@
 package com.example.udare.data.repositories.Implementations;
 
 import android.util.Log;
+
+import com.example.udare.data.model.CommentData;
 import com.example.udare.data.model.Post;
 import com.example.udare.data.model.User;
 import com.example.udare.data.remote.ApiClient;
 import com.example.udare.data.remote.ApiService;
 import com.example.udare.data.repositories.Interfaces.IUserRepository;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -255,6 +260,88 @@ public class UserRepository implements IUserRepository {
         });
     }
 
+    @Override
+    public void getNotFollowingUsers(String userId,final callbackGetNotFollowingUsers callback) {
+        Call<List<User>> call = apiService.getNotFollowingUsers(userId);
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if (response.isSuccessful()) {
+                    List<User> users = response.body();
+                    if (users != null) {
+                        callback.onSuccess(users);
+                    } else {
+                        callback.onError("Lista de usuarios nula");
+                    }
+                } else {
+                    callback.onError("Error en la respuesta: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                callback.onError("Error en la llamada: " + t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void followUser(String userId, String userToFollow, callbackFollowUser callback) {
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("_id", userToFollow);
+        Call<JsonObject> call = apiService.followUser(userId, requestBody); // Cambiar a JsonObject
+        call.enqueue(new Callback<JsonObject>() { // Cambiar a JsonObject
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful()) {
+                    JsonObject userObject = response.body();
+                    if (userObject != null && userObject.has("_id")) {
+                        String userId = userObject.get("_id").getAsString();
+                        callback.onSuccess(userId);
+                    } else {
+                        callback.onError("El objeto de usuario es nulo o no tiene un campo '_id'");
+                    }
+                } else {
+                    callback.onError("Error en la respuesta: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                callback.onError("Error en la llamada: " + t.getMessage());
+            }
+        });
+    }
+
+
+    @Override
+    public void unfollowUser(String userId, String userToUnfollowId, callbackUnfollowUser callback) {
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("_id", userToUnfollowId);
+        Call<JsonObject> call = apiService.unfollowUser(userId, requestBody); // Cambiar a JsonObject
+        call.enqueue(new Callback<JsonObject>() { // Cambiar a JsonObject
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful()) {
+                    JsonObject userObject = response.body();
+                    if (userObject != null && userObject.has("_id")) {
+                        String userId = userObject.get("_id").getAsString();
+                        callback.onSuccess(userId);
+                    } else {
+                        callback.onError("El objeto de usuario es nulo o no tiene un campo '_id'");
+                    }
+                } else {
+                    callback.onError("Error en la respuesta: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                callback.onError("Error en la llamada: " + t.getMessage());
+            }
+        });
+    }
+
 
     public interface callbackGetAllUsers {
         void onSuccess(List<User> users);
@@ -304,5 +391,20 @@ public class UserRepository implements IUserRepository {
         void onSuccess(List<User> users);
         void onError(String mensajeError);
     }
+    public interface callbackGetNotFollowingUsers {
+        void onSuccess(List<User> users);
+        void onError(String mensajeError);
+    }
+
+    public interface callbackFollowUser {
+        void onSuccess(String mensaje);
+        void onError(String mensajeError);
+    }
+
+    public interface callbackUnfollowUser {
+        void onSuccess(String mensaje);
+        void onError(String mensajeError);
+    }
+
 
 }

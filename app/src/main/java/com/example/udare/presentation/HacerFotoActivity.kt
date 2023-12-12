@@ -24,6 +24,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.view.LifecycleCameraController
 import androidx.core.content.ContextCompat
 import com.example.udare.R
+import com.example.udare.data.model.Challenge
 import com.example.udare.data.model.CommentData
 import com.example.udare.data.model.User
 import com.example.udare.data.repositories.Implementations.UserRepository
@@ -259,14 +260,22 @@ class HacerFotoActivity : AppCompatActivity() {
 
     fun subirFoto(file : File) {
         try {
+            var completedChallenge : Challenge
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                completedChallenge= intent.getSerializableExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ", Challenge::class.java)!!
+            else
+                completedChallenge = intent.getSerializableExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ") as Challenge
 
             val comments: MutableList<CommentData> = mutableListOf()
-
             val post = Post()
             post.caption = "paseando por la naturaleza!!"
             post.userID = UserSingleton.obtenerInstancia().obtenerUsuario().id
-            post.challengeID = "652eb4074c5c257aa8831c88"
+            post.challengeID = completedChallenge._id
             post.comments = comments
+
+
+
+
 
 
             postService.uploadPost(file,post,object : PostRepository.callbackUploadPost {

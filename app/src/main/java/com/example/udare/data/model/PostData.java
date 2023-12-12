@@ -5,11 +5,13 @@ public class PostData {
     public String profilePic;
     public String username;
     public Post post;
+    public Challenge challenge;
 
-    public PostData(Post post, String profilePic, String username){
+    public PostData(Post post, String profilePic, String username, Challenge challenge){
         this.post = post;
         this.profilePic = profilePic;
         this.username = username;
+        this.challenge = challenge;
     }
 
     public String getProfilePic() {
@@ -34,5 +36,13 @@ public class PostData {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public Challenge getChallenge() {
+        return challenge;
+    }
+
+    public void setChallenge(Challenge challenge) {
+        this.challenge = challenge;
     }
 }

@@ -1,13 +1,19 @@
 package com.example.udare.data.model;
 
-public class Challenge {
+import java.io.Serializable;
+
+public class Challenge implements Serializable {
     private String  title;
-    private String descrition;
+    private String description;
     private String category;
 
-    public Challenge(String title, String descrition, String category) {
+
+
+    private String _id;
+
+    public Challenge(String title, String description, String category) {
         this.title = title;
-        this.descrition = descrition;
+        this.description = description;
         this.category = category;
     }
 
@@ -20,12 +26,12 @@ public class Challenge {
         this.title = title;
     }
 
-    public String getDescrition() {
-        return descrition;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescrition(String descrition) {
-        this.descrition = descrition;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCategory() {
@@ -36,5 +42,13 @@ public class Challenge {
         this.category = category;
     }
 
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
 }

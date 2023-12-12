@@ -34,4 +34,19 @@ public class ChallengeService implements IChallengeService {
             }
         });
     }
+    @Override
+    public void getChallengeById(String challengeId, ChallengeRepository.callbackGetChallengeById callback){
+        challengeRepository.getChallengeById(challengeId, new ChallengeRepository.callbackGetChallengeById() {
+            @Override
+            public void onSuccess(Challenge challenges) {
+                callback.onSuccess(challenges);
+            }
+
+            @Override
+            public void onError(String mensajeError) {
+                callback.onError(mensajeError);
+            }
+        });
+    }
+
 }

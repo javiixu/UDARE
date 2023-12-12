@@ -4,102 +4,94 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
 
-    <ImageView
+
+
+    <View
+        android:id="@+id/contenedor_user"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/contenedor_usuario_social"
+        android:elevation="8dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/avatar"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="20dp"
         android:layout_width="40dp"
-        android:layout_height="40dp" />
+        android:layout_height="40dp"
+        android:src="@drawable/foto1"
+        android:elevation="9dp" />
 
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="32dp"
         android:layout_toEndOf="@id/avatar"
-        android:text="Nombre de usuario" />
+        android:text="username"
+        android:textColor="#4B4E63"
+        android:elevation="9dp"
+        android:textSize = "12sp"
+        android:fontFamily="@font/aileron_bold"/>
+
 
     <ImageView
         android:id="@+id/foto_viewer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/avatar"
-        android:layout_marginTop="8dp" />
-    <!--    Recycler view-->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/circularImagesRecyclerView"
-        android:layout_width="match_parent"
+        android:layout_width="450dp"
+        android:layout_height="370dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/circular_background"
+        android:clipToOutline="true"
+        android:radius="40dp" />
+
+    <ImageView
+        android:id="@+id/icono_categoria"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="330dp"
+        android:src="@drawable/icon_social" />
+
+    <LinearLayout
+        android:id="@+id/contenedor_reacciones"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/foto_viewer"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:visibility="visible" />
-    <!--Small button on the left-->
-    <Button
-        android:id="@+id/capture_button"
-        android:layout_below="@id/circularImagesRecyclerView"
-        android:layout_centerHorizontal="false"
-        android:src="@drawable/capture_button"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:onClick="onCaptureSubmitButton"/>
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/capture_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/circularImagesRecyclerView"
+            android:layout_centerHorizontal="false"
+            android:onClick="onCaptureSubmitButton"
+            android:src="@drawable/foto_reaccion"
+            android:layout_marginTop="8dp"/>
+        <!--    Recycler view-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/circularImagesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:orientation="horizontal"
+            android:visibility="visible" />
+        <!--Small button on the left-->
+    </LinearLayout>
 
 
     <TextView
         android:id="@+id/comentarios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/capture_button"
+        android:layout_below="@id/contenedor_reacciones"
         android:layout_marginTop="8dp"
-        android:text="Añadir un comentario..." />
-
-
-    <!--    <LinearLayout-->
-    <!--        android:id="@+id/emoji_buttons"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@id/foto_viewer"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        android:padding="8dp">-->
-
-    <!--        &lt;!&ndash; Add reaction buttons (ImageButtons) here &ndash;&gt;-->
-    <!--        <ImageButton-->
-    <!--            android:id="@+id/emoji1Button"-->
-    <!--            android:layout_width="48dp"-->
-    <!--            android:layout_height="48dp"-->
-    <!--            android:src="@drawable/emoji1"-->
-    <!--            android:onClick="onEmojiButtonClick"/>-->
-    <!--        <ImageButton-->
-    <!--            android:id="@+id/emoji2Button"-->
-    <!--            android:layout_width="48dp"-->
-    <!--            android:layout_height="48dp"-->
-    <!--            android:src="@drawable/emoji2"-->
-    <!--            android:onClick="onEmojiButtonClick"/>-->
-    <!--        <ImageButton-->
-    <!--            android:id="@+id/emoji3Button"-->
-    <!--            android:layout_width="48dp"-->
-    <!--            android:layout_height="48dp"-->
-    <!--            android:src="@drawable/emoji3"-->
-    <!--            android:onClick="onEmojiButtonClick"/>-->
-    <!--        <ImageButton-->
-    <!--            android:id="@+id/emoji4Button"-->
-    <!--            android:layout_width="48dp"-->
-    <!--            android:layout_height="48dp"-->
-    <!--            android:src="@drawable/emoji4"-->
-    <!--            android:onClick="onEmojiButtonClick"/>-->
-    <!--        <ImageButton-->
-    <!--            android:id="@+id/emoji5Button"-->
-    <!--            android:layout_width="48dp"-->
-    <!--            android:layout_height="48dp"-->
-    <!--            android:src="@drawable/emoji5"-->
-    <!--            android:onClick="onEmojiButtonClick"/>-->
-    <!--        <ImageButton-->
-    <!--            android:id="@+id/emoji6Button"-->
-    <!--            android:layout_width="48dp"-->
-    <!--            android:layout_height="48dp"-->
-    <!--            android:src="@drawable/emoji6"-->
-    <!--            android:onClick="onEmojiButtonClick"/>-->
-
-    <!--        &lt;!&ndash; Add more ImageButton for other emojis &ndash;&gt;-->
-
-    <!--    </LinearLayout>-->
+        android:text="Añadir un comentario..."
+        android:textColor="#F9F4F1" />
 
 </RelativeLayout>
