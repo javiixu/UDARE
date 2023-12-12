@@ -36,6 +36,8 @@ class LoginActivity : AppCompatActivity() {
     private var currentUser: FirebaseUser? = null
     private lateinit var loadingBar: ProgressBar
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var btnBack: Button
+
     @Inject
     lateinit var userService: IUserService
 
@@ -57,11 +59,16 @@ class LoginActivity : AppCompatActivity() {
         password = findViewById(R.id.editTextPassword)
         newAccount = findViewById(R.id.ya_tienes_c)
         recoverPassword = findViewById(R.id.te_apetece_)
+        btnBack = findViewById(R.id.buttonBack)
 
         loadingBar = ProgressBar(this)
 
         if (mAuth.currentUser != null) {
             currentUser = mAuth.currentUser
+        }
+
+        btnBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
 
         mLogin.setOnClickListener {
