@@ -183,6 +183,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "growth")
                 it.putExtra("EXTRA_PATROCINADO", crecimientoPatrocinado)
+                it.putExtra("EXTRA_FORMATTED_TIME", tvChallengeTimer.text.toString())
                 startActivity(it)
             }
         }
@@ -193,6 +194,8 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "social")
                 it.putExtra("EXTRA_PATROCINADO", socialPatrocinado)
+                it.putExtra("EXTRA_FORMATTED_TIME", tvChallengeTimer.text.toString())
+
                 startActivity(it)
             }
         }
@@ -203,6 +206,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "culture")
                 it.putExtra("EXTRA_PATROCINADO", culturaPatrocinado)
+                it.putExtra("EXTRA_FORMATTED_TIME", tvChallengeTimer.text.toString())
                 startActivity(it)
             }
        }
@@ -213,6 +217,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "sport")
                 it.putExtra("EXTRA_PATROCINADO", deportesPatrocinado)
+                it.putExtra("EXTRA_FORMATTED_TIME", tvChallengeTimer.text.toString())
                 startActivity(it)
             }
         }

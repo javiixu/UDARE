@@ -84,7 +84,7 @@ class HacerFotoActivityMejora : AppCompatActivity() {
 
         //handle getting back to the main activity
         btnBackFromTakingPhoto.setOnClickListener(){
-            Intent(this, Inicio::class.java).also{
+            Intent(this, SeleccionarRetoActivity::class.java).also{
                 startActivity(it)
             }
         }
