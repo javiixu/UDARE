@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
+import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
@@ -56,14 +57,14 @@ class HacerFotoActivityMejora : AppCompatActivity() {
 
         val userId = UserSingleton.obtenerInstancia().obtenerUsuario().id
 
-
+        supportActionBar?.hide()
 
         //find all the buttons and text views
         var btnTakePhoto = findViewById<ImageView>(R.id.btnTakePhoto2)
         //var tvChoosenChallenge = findViewById<TextView>(R.id.tvChoosenChallenge)
         var btnSwitchCamera = findViewById<ImageView>(R.id.btnSwitchCamera2)
         var btnBackFromTakingPhoto = findViewById<ImageView>(R.id.btnBackFromTakingPhoto2)
-
+        var btnFlash = findViewById<ImageView>(R.id.btnFlash);
 
         var tvTime = findViewById<TextView>(R.id.tvTimerChallengeCamera)
         var formattedTime = intent.getStringExtra("EXTRA_FORMATTED_TIME")
@@ -192,7 +193,7 @@ class HacerFotoActivityMejora : AppCompatActivity() {
                 notificationManager = NotificacionPatrocinado(this)
                 notificationManager.createNotification()
                 }
-                
+
                 finish()
             }, 7000)
 */
@@ -336,4 +337,6 @@ class HacerFotoActivityMejora : AppCompatActivity() {
         cameraController.cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
         previewView.controller = cameraController
     }
+
+
 }
