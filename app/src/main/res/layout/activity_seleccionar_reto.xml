@@ -11,13 +11,69 @@
         android:id="@+id/viewFinder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="visible" />
 
+    <Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="408dp"
+        android:layout_height="82dp"
+        android:background="#171717"
+        android:clipToOutline="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/back_buscador_amigos"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="0dp"
+                android:src="@drawable/flecharound" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text=".UDARE"
+                android:textColor="#E7EE86"
+                android:textSize="20sp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/foto_perfil_buscador"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/mujer_foto_perfil" />
+
+        </LinearLayout>
+
+    </Toolbar>
+
+    <Button
+        android:id="@+id/btnPatrocinado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="12dp"
+        android:text="Reto Patrocinado"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/btnBackFromChallengeSelect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGrowthChallenge" />
 
     <Button
         android:id="@+id/btnBackFromChallengeSelect"
@@ -27,20 +83,32 @@
         android:text="Go Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.407"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btnCookingChallenge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="16dp"
         android:text="Reto Cocina"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.833"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+    <ImageView
+        android:id="@+id/iconoCocina"
+        android:layout_width="36dp"
+        android:layout_height="43dp"
+        android:visibility="visible"
+        app:srcCompat="@drawable/icono_cocina"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="123dp" />
 
     <Button
         android:id="@+id/btnSportChallenge"
@@ -50,9 +118,17 @@
         android:text="Reto Deporte"
         app:layout_constraintBottom_toTopOf="@+id/btnCultureChallenge"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnCookingChallenge" />
+
+    <ImageView
+        android:id="@+id/iconoDeporte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/icono_deporte"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="217dp" />
 
     <Button
         android:id="@+id/btnCultureChallenge"
@@ -62,9 +138,17 @@
         android:text="Reto Cultura"
         app:layout_constraintBottom_toTopOf="@+id/btnSocialChallenge"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSportChallenge" />
+
+    <ImageView
+        android:id="@+id/iconoCultura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/icono_cultural"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="331dp" />
 
     <Button
         android:id="@+id/btnSocialChallenge"
@@ -78,18 +162,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnCultureChallenge" />
 
+
+    <ImageView
+        android:id="@+id/iconoSocial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/icon_social"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="445dp" />
+
     <Button
         android:id="@+id/btnGrowthChallenge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="52dp"
         android:text="Reto Crecimiento Personal"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.675"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageView
+        android:id="@+id/iconoCrecimiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/icono_crec_pers"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="539dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -105,21 +205,20 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.83" />
 
+
     <TextView
         android:id="@+id/tvChallengeTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="76dp"
         android:background="@color/black"
         android:text="24:00:00"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -134,5 +233,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.72" />
+
+    <ImageView
+        android:id="@+id/iconoPatrocinado"
+        android:layout_width="82dp"
+        android:layout_height="27dp"
+        app:srcCompat="@drawable/udare_notificacion"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="611dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

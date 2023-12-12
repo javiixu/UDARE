@@ -77,8 +77,6 @@ class HacerFotoActivity : AppCompatActivity() {
             }
         }
 
-        val patrocina = intent.getBooleanExtra("EXTRA_PATROCINADO", false)
-
         //start the Camera in this view to
         startCamera()
 
@@ -243,9 +241,13 @@ class HacerFotoActivity : AppCompatActivity() {
                     }
 
 
-
+                    val categoryChallenge =  intent.getStringExtra("EXTRA_CATEGORY_CHALLENGE")
                     subirFoto(file)
-                    setContentView(R.layout.activity_hacer_foto_challenge_completed)
+                    if(categoryChallenge == "patrocinado"){
+                        setContentView(R.layout.activity_hacer_foto_patrocinado_completed)
+                    }else if(categoryChallenge != "patrocinado"){
+                        setContentView(R.layout.activity_hacer_foto_challenge_completed)
+                    }
                     Handler(Looper.getMainLooper()).postDelayed({
                         //TODO test this further, was copied from Stack Overflow
                         val intent = Intent(this@HacerFotoActivity, Inicio::class.java)
