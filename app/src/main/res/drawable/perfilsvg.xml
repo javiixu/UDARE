@@ -436,6 +436,11 @@
       android:strokeLineCap="round"/>
   <path
       android:strokeWidth="1"
+      android:pathData="M194.5,100.5L194.5,100.5A62,62 0,0 1,256.5 162.5L256.5,162.5A62,62 0,0 1,194.5 224.5L194.5,224.5A62,62 0,0 1,132.5 162.5L132.5,162.5A62,62 0,0 1,194.5 100.5z"
+      android:fillColor="url(#pattern0)"
+      android:strokeColor="#F9F4F1"/>
+  <path
+      android:strokeWidth="1"
       android:pathData="M81.5,331.5L310.5,331.5A29,29 0,0 1,339.5 360.5L339.5,360.5A29,29 0,0 1,310.5 389.5L81.5,389.5A29,29 0,0 1,52.5 360.5L52.5,360.5A29,29 0,0 1,81.5 331.5z"
       android:fillColor="#00000000"
       android:strokeColor="#E7EE86"/>

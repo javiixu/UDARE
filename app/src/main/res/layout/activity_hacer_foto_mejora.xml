@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.SeleccionarRetoActivity">
+
+    <!-- Componente de arriba -->
+
+    <!-- Componente central -->
+    <LinearLayout
+        android:id="@+id/topLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#171717"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Flecha a la izquierda -->
+        <ImageView
+            android:id="@+id/btnBackFromTakingPhoto2"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/flecharound" />
+
+        <!-- Flash centrado tanto horizontal como verticalmente -->
+        <ImageView
+            android:id="@+id/btnFlash"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#171717"
+            android:src="@drawable/icono_flash" />
+
+        <!-- Cámara a la derecha -->
+        <ImageView
+            android:id="@+id/btnAjustes"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="15dp"
+            android:background="#171717"
+            android:src="@drawable/ajustes" />
+
+    </LinearLayout>
+
+
+
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/viewFinder2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.60"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topLayout">
+        <!-- Aquí se mostrará la vista de la cámara -->
+    </androidx.camera.view.PreviewView>
+
+    <!-- Componente de abajo -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="2dp"
+        android:background="#171717"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewFinder2">
+
+        <ImageView
+            android:id="@+id/btnSwitchCamera2"
+            android:layout_width="79dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="84dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="87dp"
+            android:background="#171717"
+            android:src="@drawable/cambiar_camara"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnTakePhoto2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btnTakePhoto2"
+            android:layout_width="110dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/ellipse_166"
+            app:layout_constraintBottom_toTopOf="@id/rectangleTiempo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <RelativeLayout
+            android:id="@+id/rectangleTiempo"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="147dp"
+            android:layout_marginEnd="146dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/rectangulo_tiempo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnTakePhoto2">
+
+            <!-- TextView dentro del rectangleTiempo -->
+            <TextView
+                android:id="@+id/tvTimerChallengeCamera"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Tu texto aquí"
+                android:textColor="#E7EE86"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

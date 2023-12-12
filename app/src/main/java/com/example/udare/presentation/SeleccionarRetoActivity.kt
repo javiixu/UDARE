@@ -134,8 +134,6 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 //cocinaPatrocinado = retosCocina.get(0).patrocinado
                 //crecimientoPatrocinado = retosCrecimientoPersonal.get(0).patrocinado
 
-
-
                 deportesPatrocinado = true //solo para las pruebas
                 if(socialPatrocinado){
                     btnSocialChallenge.setBackgroundColor(android.graphics.Color.parseColor("#FFD700"))
@@ -158,8 +156,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
             }
         })
 
-        var choosenChallenge : String
-
+        var choosenChallenge = "choosen Challenge"
 
         //challenge going back to main activity
         btnBackFromChallengeSelect.setOnClickListener(){
@@ -169,11 +166,11 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         //for every challenge handle what happens when this challenge gets clicked
         btnCookingChallenge.setOnClickListener(){
             choosenChallenge = btnCookingChallenge.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
+            Intent(this, HacerFotoActivityMejora::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "cooking")
                 it.putExtra("EXTRA_PATROCINADO", cocinaPatrocinado)
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ",retosCocina.get(0))
+                it.putExtra("EXTRA_FORMATTED_TIME", tvChallengeTimer.text.toString())
                 startActivity(it)
             }
 
@@ -181,44 +178,45 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
         btnGrowthChallenge.setOnClickListener(){
             choosenChallenge = btnGrowthChallenge.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
+            Intent(this, HacerFotoActivityMejora::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "growth")
                 it.putExtra("EXTRA_PATROCINADO", crecimientoPatrocinado)
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ",retosCrecimientoPersonal.get(0))
+                it.putExtra("EXTRA_FORMATTED_TIME", tvChallengeTimer.text.toString())
                 startActivity(it)
             }
         }
 
         btnSocialChallenge.setOnClickListener(){
             choosenChallenge = btnSocialChallenge.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
+            Intent(this, HacerFotoActivityMejora::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "social")
                 it.putExtra("EXTRA_PATROCINADO", socialPatrocinado)
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ",retosSocial.get(0))
+                it.putExtra("EXTRA_FORMATTED_TIME", tvChallengeTimer.text.toString())
+
                 startActivity(it)
             }
         }
 
         btnCultureChallenge.setOnClickListener(){
             choosenChallenge = btnCultureChallenge.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
+            Intent(this, HacerFotoActivityMejora::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "culture")
                 it.putExtra("EXTRA_PATROCINADO", culturaPatrocinado)
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ",retosCultura.get(0))
+                it.putExtra("EXTRA_FORMATTED_TIME", tvChallengeTimer.text.toString())
                 startActivity(it)
             }
        }
 
         btnSportChallenge.setOnClickListener(){
             choosenChallenge = btnSportChallenge.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
+            Intent(this, HacerFotoActivityMejora::class.java).also{
                 it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "sport")
                 it.putExtra("EXTRA_PATROCINADO", deportesPatrocinado)
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ",retosDeportes.get(0))
+                it.putExtra("EXTRA_FORMATTED_TIME", tvChallengeTimer.text.toString())
                 startActivity(it)
             }
         }
