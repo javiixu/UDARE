@@ -8,6 +8,7 @@ import android.util.Log
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -29,31 +30,37 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var email: EditText
     private lateinit var password: EditText
-    private lateinit var name: EditText
+//    private lateinit var name: EditText
     private lateinit var mLogin: Button
     private lateinit var newAccount: TextView
     private lateinit var recoverPassword: TextView
     private var currentUser: FirebaseUser? = null
     private lateinit var loadingBar: ProgressBar
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var btnBack: ImageButton
+
     @Inject
     lateinit var userService: IUserService
 
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        val actionBar = supportActionBar
-        actionBar!!.title = "Login"
-        actionBar.setDisplayShowHomeEnabled(true)
-        actionBar.setDisplayHomeAsUpEnabled(true)
+
+        supportActionBar?.hide()
+
+//        val actionBar = supportActionBar
+//        actionBar!!.title = "Login"
+//        actionBar.setDisplayShowHomeEnabled(true)
+//        actionBar.setDisplayHomeAsUpEnabled(true)
 
         mAuth = FirebaseAuth.getInstance()
-        mLogin = findViewById(R.id.login_button)
+        mLogin = findViewById(R.id.button_login)
 
-        email = findViewById(R.id.login_email)
-        password = findViewById(R.id.login_password)
-        newAccount = findViewById(R.id.needs_new_account)
-        recoverPassword = findViewById(R.id.forgetp)
+        email = findViewById(R.id.editTextPersonName)
+        password = findViewById(R.id.editTextPassword)
+        newAccount = findViewById(R.id.ya_tienes_c)
+        recoverPassword = findViewById(R.id.te_apetece_)
+        btnBack = findViewById(R.id.buttonBack)
 
         loadingBar = ProgressBar(this)
 
@@ -61,20 +68,32 @@ class LoginActivity : AppCompatActivity() {
             currentUser = mAuth.currentUser
         }
 
+        btnBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         mLogin.setOnClickListener {
-            val emaill = email.text.toString()
+            val usernamee = email.text.toString()
             val passwordd = password.text.toString()
 
-            if(!Patterns.EMAIL_ADDRESS.matcher(emaill).matches()){
-                email.error = "Email is not valid"
+            if(usernamee.isEmpty()){
+                email.error = "email is required"
                 email.requestFocus()
                 return@setOnClickListener
-            } else if(passwordd.isEmpty() || passwordd.length < 6){
-                password.error = "Password is not valid"
+            } else if(!Patterns.EMAIL_ADDRESS.matcher(usernamee).matches()){
+                email.error = "Please enter a valid email"
+                email.requestFocus()
+                return@setOnClickListener
+            } else if(passwordd.isEmpty()){
+                password.error = "Password is required"
+                password.requestFocus()
+                return@setOnClickListener
+            } else if(passwordd.length < 6){
+                password.error = "Password must be at least 6 characters long"
                 password.requestFocus()
                 return@setOnClickListener
             } else {
-                loginUser(emaill, passwordd)
+                loginUser(usernamee, passwordd)
             }
         }
 
@@ -151,9 +170,13 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     loadingBar.visibility = ProgressBar.GONE
                     val user = mAuth.currentUser
+                    val email = user?.email
+                    val uid = user?.uid
+                    Log.d("tag-user", email + " " + uid)
                     if (task.result?.additionalUserInfo?.isNewUser == true) {
                         val email = user?.email
                         val uid = user?.uid
+                        Log.d("tag-user", email + " " + uid)
                         val hashMap = HashMap<String, String>()
                         hashMap["email"] = email ?: ""
                         hashMap["uid"] = uid ?: ""
@@ -182,7 +205,13 @@ class LoginActivity : AppCompatActivity() {
                         }
 
                         override fun onError(mensajeError: String?) {
+                            Toast.makeText(this@LoginActivity, "Error in getUserByUid", Toast.LENGTH_SHORT).show()
                             Log.d("tag-comments", "Error in getUserByUid: $mensajeError")
+
+                            val intent = Intent(this@LoginActivity, LandingPageActivity::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+                            finish()
                         }
                     })
 

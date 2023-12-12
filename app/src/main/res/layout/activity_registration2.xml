@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.Registration2Activity"
+    android:background="#B9D2B4" >
+
+    <TextView
+        android:id="@+id/enhorabuena"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/enhorabuena"
+        android:textAppearance="@style/enhorabuena" />
+
+    <TextView
+        android:id="@+id/udare_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/enhorabuena"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/udare"
+        android:textAppearance="@style/udare_r" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="266dp"
+        android:layout_height="266dp"
+        android:layout_below="@+id/udare_"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/star1" />
+
+
+    <TextView
+        android:id="@+id/ya_tienes_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="¿Te apetece empezar a retar a tus amigos?"
+        android:textAppearance="@style/te_apetece_" />
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_login"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/ya_tienes_c"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:background="@drawable/btn_login"-->
+<!--        android:text="@string/iniciar_ses"-->
+<!--        android:textAppearance="@style/iniciar_ses" />-->
+
+    <Button
+        android:id="@+id/button_empezar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ya_tienes_c"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rectangle_button_register"
+        android:text="Empezar"
+        android:textAppearance="@style/registrarse" />
+
+</RelativeLayout>
