@@ -11,14 +11,14 @@
         android:id="@+id/viewFinder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#292929"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:visibility="visible" />
+        tools:visibility="visible" >
+
+    </androidx.camera.view.PreviewView>
 
     <Toolbar
         android:id="@+id/toolbar2"
@@ -61,135 +61,151 @@
     </Toolbar>
 
     <Button
-        android:id="@+id/btnPatrocinado"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="12dp"
-        android:text="Reto Patrocinado"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toTopOf="@+id/btnBackFromChallengeSelect"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnGrowthChallenge" />
-
-    <Button
-        android:id="@+id/btnBackFromChallengeSelect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Go Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.407"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
         android:id="@+id/btnCookingChallenge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/boton_seleccionar_cocina"
         android:text="Reto Cocina"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.833"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintBottom_toTopOf="@id/btnSportChallenge"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        tools:layout_editor_absoluteX="20dp" />
 
     <ImageView
         android:id="@+id/iconoCocina"
-        android:layout_width="36dp"
-        android:layout_height="43dp"
+        android:layout_width="56dp"
+        android:layout_height="57dp"
+        android:elevation="10dp"
         android:visibility="visible"
-        app:srcCompat="@drawable/icono_cocina"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="123dp" />
+        app:layout_constraintStart_toStartOf="@+id/btnCookingChallenge"
+        app:layout_constraintTop_toTopOf="@id/btnCookingChallenge"
+        app:srcCompat="@drawable/icono_cocina" />
 
     <Button
         android:id="@+id/btnSportChallenge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/boton_seleccionar_deporte"
         android:text="Reto Deporte"
-        app:layout_constraintBottom_toTopOf="@+id/btnCultureChallenge"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCookingChallenge" />
+        app:layout_constraintBottom_toTopOf="@id/btnCultureChallenge"
+        app:layout_constraintTop_toBottomOf="@+id/btnCookingChallenge"
+        tools:layout_editor_absoluteX="20dp" />
 
     <ImageView
         android:id="@+id/iconoDeporte"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/icono_deporte"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="217dp" />
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:elevation="10dp"
+        app:layout_constraintStart_toStartOf="@+id/btnSportChallenge"
+        app:layout_constraintTop_toTopOf="@+id/btnSportChallenge"
+        app:srcCompat="@drawable/icono_deporte" />
 
     <Button
         android:id="@+id/btnCultureChallenge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/boton_seleccionar_cultura"
         android:text="Reto Cultura"
         app:layout_constraintBottom_toTopOf="@+id/btnSocialChallenge"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSportChallenge" />
+        app:layout_constraintTop_toBottomOf="@id/btnSportChallenge"
+        tools:layout_editor_absoluteX="20dp" />
 
     <ImageView
         android:id="@+id/iconoCultura"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/icono_cultural"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="331dp" />
+        android:layout_width="61dp"
+        android:layout_height="57dp"
+        android:elevation="10dp"
+        app:layout_constraintStart_toStartOf="@+id/btnCultureChallenge"
+        app:layout_constraintTop_toTopOf="@+id/btnCultureChallenge"
+        app:srcCompat="@drawable/icono_cultural" />
 
     <Button
         android:id="@+id/btnSocialChallenge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/boton_seleccionar_social"
         android:text="Reto Social"
         app:layout_constraintBottom_toTopOf="@+id/btnGrowthChallenge"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCultureChallenge" />
+        app:layout_constraintTop_toBottomOf="@id/btnCultureChallenge"
+        tools:layout_editor_absoluteX="20dp" />
 
 
     <ImageView
         android:id="@+id/iconoSocial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/icon_social"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="445dp" />
+        android:layout_width="67dp"
+        android:layout_height="60dp"
+        android:elevation="10dp"
+        app:layout_constraintStart_toStartOf="@+id/btnSocialChallenge"
+        app:layout_constraintTop_toTopOf="@+id/btnSocialChallenge"
+        app:srcCompat="@drawable/icon_social" />
 
     <Button
         android:id="@+id/btnGrowthChallenge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/boton_seleccionar_crecimiento"
         android:text="Reto Crecimiento Personal"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.675"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/btnPatrocinado"
+        app:layout_constraintTop_toBottomOf="@id/btnSocialChallenge"
+        tools:layout_editor_absoluteX="20dp" />
 
     <ImageView
         android:id="@+id/iconoCrecimiento"
+        android:layout_width="65dp"
+        android:layout_height="60dp"
+        android:elevation="10dp"
+        app:layout_constraintStart_toStartOf="@+id/btnGrowthChallenge"
+        app:layout_constraintTop_toTopOf="@id/btnGrowthChallenge"
+        app:srcCompat="@drawable/icono_crec_pers" />
+
+    <Button
+        android:id="@+id/btnPatrocinado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/boton_seleccionar_patrocinado"
+        android:text="Reto Patrocinado"
+        android:textColor="#F9F4F1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnGrowthChallenge"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <ImageView
+        android:id="@+id/iconoPatrocinado"
+        android:layout_width="72dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="16dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/btnPatrocinado"
+        app:layout_constraintStart_toStartOf="@+id/btnPatrocinado"
+        app:layout_constraintTop_toTopOf="@id/btnPatrocinado"
+        app:srcCompat="@drawable/udare_notificacion" />
+
+    <ImageView
+        android:id="@+id/iconoSuperPatrocinado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/icono_crec_pers"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="539dp" />
+        android:layout_marginStart="6dp"
+        android:elevation="20dp"
+        app:layout_constraintStart_toStartOf="@id/iconoPatrocinado"
+        app:layout_constraintTop_toTopOf="@id/iconoPatrocinado"
+        app:srcCompat="@drawable/icono_alerta_patrocinado" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -203,22 +219,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.83" />
+        app:layout_constraintGuide_end="-16dp" />
 
-
-    <TextView
-        android:id="@+id/tvChallengeTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:background="@color/black"
-        android:text="24:00:00"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -232,14 +234,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.72" />
-
-    <ImageView
-        android:id="@+id/iconoPatrocinado"
-        android:layout_width="82dp"
-        android:layout_height="27dp"
-        app:srcCompat="@drawable/udare_notificacion"
-        tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="611dp" />
+        app:layout_constraintGuide_end="115dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

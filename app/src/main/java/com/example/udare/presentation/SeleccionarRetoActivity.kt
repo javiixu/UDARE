@@ -2,15 +2,11 @@ package com.example.udare.presentation
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.camera.core.CameraSelector
 import androidx.camera.view.LifecycleCameraController
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +14,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.udare.presentation.HacerFotoActivity
 import com.example.udare.data.model.Challenge
 import com.example.udare.R
 import com.example.udare.data.model.UserSingleton
@@ -45,7 +40,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_seleccionar_reto)
 
         supportActionBar?.hide()
-        //TIMER MANAGMENT
+        /*//TIMER MANAGMENT
         //current Calendar
         var current = Calendar.getInstance()
 
@@ -83,7 +78,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
         //starts the timer for the challenge
         val tvChallengeTimer = findViewById<TextView>(R.id.tvChallengeTimer)
-        doTimer(difference, tvChallengeTimer)
+        doTimer(difference, tvChallengeTimer)*/
 
 
         //CAMERA MANGAMENT
@@ -110,7 +105,6 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         var btnSportChallenge = findViewById<Button>(R.id.btnSportChallenge)
         var btnCookingChallenge = findViewById<Button>(R.id.btnCookingChallenge)
         var btnGrowthChallenge = findViewById<Button>(R.id.btnGrowthChallenge)
-        var btnBackFromChallengeSelect = findViewById<Button>(R.id.btnBackFromChallengeSelect)
         var btnPatrocinado = findViewById<Button>(R.id.btnPatrocinado)
 
         var retosDeportes  = mutableListOf<Challenge>()
@@ -119,26 +113,15 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         var retosCrecimientoPersonal = mutableListOf<Challenge>()
         var retosCocina = mutableListOf<Challenge>()
 
-        val fondo = findViewById<androidx.camera.view.PreviewView>(R.id.viewFinder)
-        fondo.setBackgroundColor(Color.DKGRAY)
-
-        val shapeSocial = GradientDrawable()
-        shapeSocial.cornerRadius = 70f
-        shapeSocial.setColor(android.graphics.Color.parseColor("#6A1B9A"))
-        btnSocialChallenge.background = shapeSocial
-        val iconoSocial = findViewById<ImageView>(R.id.iconoSocial)
+        /*val iconoSocial = findViewById<ImageView>(R.id.iconoSocial)
         val paramsSocial = iconoSocial.layoutParams as ConstraintLayout.LayoutParams
         paramsSocial.startToStart = btnSocialChallenge.id // Alinea el final del ImageView al inicio del Button
         paramsSocial.topToTop = btnSocialChallenge.id // Alinea la parte superior del ImageView a la parte superior del Button
         paramsSocial.bottomToBottom = btnSocialChallenge.id // Alinea la parte inferior del ImageView a la parte inferior del Button
         paramsSocial.marginStart = 0 // Establece el margen que desees
         iconoSocial.layoutParams = paramsSocial
-        iconoSocial.elevation = 10f
 
-        val shapeCulture = GradientDrawable()
-        shapeCulture.cornerRadius = 70f
-        shapeCulture.setColor(android.graphics.Color.parseColor("#D32F2F")) // Color del fondo
-        btnCultureChallenge.background = shapeCulture
+
         val iconoCultura = findViewById<ImageView>(R.id.iconoCultura)
         val paramsCultura = iconoCultura.layoutParams as ConstraintLayout.LayoutParams
         paramsCultura.startToStart = btnCultureChallenge.id // Alinea el final del ImageView al inicio del Button
@@ -146,12 +129,8 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         paramsCultura.bottomToBottom = btnCultureChallenge.id // Alinea la parte inferior del ImageView a la parte inferior del Button
         paramsCultura.marginStart = 0 // Establece el margen que desees
         iconoCultura.layoutParams = paramsCultura
-        iconoCultura.elevation = 10f
 
-        val shapeSport = GradientDrawable()
-        shapeSport.cornerRadius = 70f
-        shapeSport.setColor(android.graphics.Color.parseColor("#FFA000")) // Color del fondo
-        btnSportChallenge.background = shapeSport
+
         val iconoDeporte = findViewById<ImageView>(R.id.iconoDeporte)
         val paramsDeporte = iconoDeporte.layoutParams as ConstraintLayout.LayoutParams
         paramsDeporte.startToStart = btnSportChallenge.id // Alinea el final del ImageView al inicio del Button
@@ -159,12 +138,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         paramsDeporte.bottomToBottom = btnSportChallenge.id // Alinea la parte inferior del ImageView a la parte inferior del Button
         paramsDeporte.marginStart = 0 // Establece el margen que desees
         iconoDeporte.layoutParams = paramsDeporte
-        iconoDeporte.elevation = 10f
 
-        val shapeCooking = GradientDrawable()
-        shapeCooking.cornerRadius = 70f
-        shapeCooking.setColor(android.graphics.Color.parseColor("#388E3C")) // Color del fondo
-        btnCookingChallenge.background = shapeCooking
         val iconoCocina = findViewById<ImageView>(R.id.iconoCocina)
         val params = iconoCocina.layoutParams as ConstraintLayout.LayoutParams
         params.startToStart = btnCookingChallenge.id // Alinea el final del ImageView al inicio del Button
@@ -172,25 +146,15 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         params.bottomToBottom = btnCookingChallenge.id // Alinea la parte inferior del ImageView a la parte inferior del Button
         params.marginStart = 0 // Establece el margen que desees
         iconoCocina.layoutParams = params
-        iconoCocina.elevation = 10f
 
-        val shapeGrowth = GradientDrawable()
-        shapeGrowth.cornerRadius = 70f
-        shapeGrowth.setColor(android.graphics.Color.parseColor("#1976D2")) // Color del fondo
-        btnGrowthChallenge.background = shapeGrowth
         val iconoCrecimiento = findViewById<ImageView>(R.id.iconoCrecimiento)
         val paramsCrecimiento = iconoCrecimiento.layoutParams as ConstraintLayout.LayoutParams
         paramsCrecimiento.startToStart = btnGrowthChallenge.id // Alinea el final del ImageView al inicio del Button
         paramsCrecimiento.topToTop = btnGrowthChallenge.id // Alinea la parte superior del ImageView a la parte superior del Button
         paramsCrecimiento.bottomToBottom = btnGrowthChallenge.id // Alinea la parte inferior del ImageView a la parte inferior del Button
         paramsCrecimiento.marginStart = 0 // Establece el margen que desees
-        iconoCrecimiento.layoutParams = paramsCrecimiento
-        iconoCrecimiento.elevation = 10f
+        iconoCrecimiento.layoutParams = paramsCrecimiento*/
 
-        val shapePatrocinado = GradientDrawable()
-        shapePatrocinado.cornerRadius = 70f
-        shapePatrocinado.setColor(android.graphics.Color.parseColor("#000000"))
-        btnPatrocinado.background = shapePatrocinado
         val iconoPatrocinado = findViewById<ImageView>(R.id.iconoPatrocinado)
         val paramsPatrocinado = iconoPatrocinado.layoutParams as ConstraintLayout.LayoutParams
         paramsPatrocinado.startToStart = btnPatrocinado.id // Alinea el final del ImageView al inicio del Button
@@ -198,7 +162,6 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         paramsPatrocinado.bottomToBottom = btnPatrocinado.id // Alinea la parte inferior del ImageView a la parte inferior del Button
         paramsPatrocinado.marginStart = 0 // Establece el margen que desees
         iconoPatrocinado.layoutParams = paramsPatrocinado
-        iconoPatrocinado.elevation = 10f
 
         challengeService.getAllChallenges(object: ChallengeRepository.ChallengeCallback {
             override fun onSuccess(challenges: List<Challenge>) {
@@ -232,9 +195,6 @@ class SeleccionarRetoActivity : AppCompatActivity() {
 
         //challenge going back to main activity
         backButton.setOnClickListener(){
-            finish()
-        }
-        btnBackFromChallengeSelect.setOnClickListener(){
             finish()
         }
 
@@ -304,7 +264,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
     }
 
 
-    //function to manage timer
+    /*//function to manage timer
     private fun doTimer(difference : Long, tvTimer : TextView){
         var countDownTimer = object : CountDownTimer(difference, 1000) {
 
@@ -333,7 +293,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 doTimer(diff, tvTimer)
             }
         }.start()
-    }
+    }*/
 
     //start the camera preview
     private fun startCamera(){
