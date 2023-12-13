@@ -40,58 +40,12 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_seleccionar_reto)
 
         supportActionBar?.hide()
-        /*//TIMER MANAGMENT
-        //current Calendar
-        var current = Calendar.getInstance()
 
-        //Difference in Miliseconds between our current time an the end of the challenge time
-        val difference : Long
-
-        //first day of challenge
-        if(current.get(Calendar.HOUR_OF_DAY) == 6){
-            difference = 0
-        }
-        else if(current.get(Calendar.HOUR_OF_DAY) > 6){
-            // set a calendar to the following date at 6 am
-            var followingDate = current.clone() as Calendar
-
-            // Set the time to 6:00 AM, on the next day
-            followingDate.set(Calendar.HOUR_OF_DAY, 6)
-            followingDate.set(Calendar.MINUTE, 0)
-            followingDate.set(Calendar.SECOND, 0)
-            followingDate.set(Calendar.MILLISECOND, 0)
-            followingDate.add(Calendar.DAY_OF_YEAR, 1)
-
-            difference = followingDate.timeInMillis - current.timeInMillis
-        }
-        //second day of challenge
-        else{
-            // set a calendar to 6 am, do not change date, we are on the second day of the challenge
-            var followingDate = current.clone() as Calendar
-            followingDate.set(Calendar.HOUR_OF_DAY, 6)
-            followingDate.set(Calendar.MINUTE, 0)
-            followingDate.set(Calendar.SECOND, 0)
-            followingDate.set(Calendar.MILLISECOND, 0)
-
-            difference = followingDate.timeInMillis - current.timeInMillis
-        }
-
-        //starts the timer for the challenge
-        val tvChallengeTimer = findViewById<TextView>(R.id.tvChallengeTimer)
-        doTimer(difference, tvChallengeTimer)*/
-
-
-        //CAMERA MANGAMENT
-        if(allPermissionsGranted()){
-            startCamera()
-        } else{
-            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, 0)
-        }
 
         //toolbar
         val backButton = findViewById<ImageView>(R.id.back_buscador_amigos)
         val fotoPerfil = findViewById<ImageView>(R.id.foto_perfil_buscador)
-        val usuario = UserSingleton.obtenerInstancia().obtenerUsuario()
+
         Glide.with(fotoPerfil)
             .load(
                 UserSingleton.obtenerInstancia().obtenerUsuario().profile.profilePic
@@ -107,14 +61,14 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         var btnGrowthChallenge = findViewById<Button>(R.id.btnGrowthChallenge)
         var btnPatrocinado = findViewById<Button>(R.id.btnPatrocinado)
 
-        var retosDeportes  = mutableListOf<Challenge>()
+        var retosDeportes = mutableListOf<Challenge>()
         var retosSocial = mutableListOf<Challenge>()
         var retosCultura = mutableListOf<Challenge>()
         var retosCrecimientoPersonal = mutableListOf<Challenge>()
         var retosCocina = mutableListOf<Challenge>()
 
 
-        challengeService.getAllChallenges(object: ChallengeRepository.ChallengeCallback {
+        challengeService.getAllChallenges(object : ChallengeRepository.ChallengeCallback {
             override fun onSuccess(challenges: List<Challenge>) {
                 for (reto in challenges) {
                     when (reto.category) {
@@ -128,139 +82,99 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                         }
                     }
                 }
-                /*btnSocialChallenge.text = retosSocial.get(0).title + "\n" + "SOCIAL"
+                btnSocialChallenge.text = retosSocial.get(0).title + "\n" + "SOCIAL"
                 btnCultureChallenge.text = retosCultura.get(0).title + "\n" + "CULTURA"
                 btnSportChallenge.text = retosDeportes.get(0).title + "\n" + "DEPORTE"
                 btnCookingChallenge.text = retosCocina.get(0).title + "\n" + "COCINAR"
-                btnGrowthChallenge.text = retosCrecimientoPersonal.get(0).title + "\n" +"CRECIMIENTO PERSONAL"*/
+                btnGrowthChallenge.text = retosCrecimientoPersonal.get(0).title + "\n" +"CRECIMIENTO PERSONAL"
 
 
             }
+
             override fun onError(mensajeError: String?) {
                 Log.d("tag-prueba", "Error: $mensajeError")
             }
         })
 
-        var choosenChallenge : String
+        var choosenChallenge: String
 
 
         //challenge going back to main activity
-        backButton.setOnClickListener(){
+        backButton.setOnClickListener() {
             finish()
         }
 
-        //for every challenge handle what happens when this challenge gets clicked
-        btnCookingChallenge.setOnClickListener(){
-            choosenChallenge = btnCookingChallenge.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
-                it.putExtra("EXTRA_CATEGORY_CHALLENGE", "cooking")
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ",retosCocina.get(0))
+        fotoPerfil.setOnClickListener() {
+            Intent(this, PerfilActivity::class.java).also {
                 startActivity(it)
             }
+
+            //for every challenge handle what happens when this challenge gets clicked
+            btnCookingChallenge.setOnClickListener() {
+                choosenChallenge = btnCookingChallenge.text.toString().substringBefore("\n")
+                Intent(this, HacerFotoActivity::class.java).also {
+                    it.putExtra("EXTRA_CHOOSEN_CHALLENGE", choosenChallenge)
+                    it.putExtra("EXTRA_CATEGORY_CHALLENGE", "cooking")
+                    it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ", retosCocina.get(0))
+                    startActivity(it)
+                }
+
+            }
+
+            btnGrowthChallenge.setOnClickListener() {
+                choosenChallenge = btnGrowthChallenge.text.toString().substringBefore("\n")
+                Intent(this, HacerFotoActivity::class.java).also {
+                    it.putExtra("EXTRA_CHOOSEN_CHALLENGE", choosenChallenge)
+                    it.putExtra("EXTRA_CATEGORY_CHALLENGE", "growth")
+                    it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ", retosCrecimientoPersonal.get(0))
+                    startActivity(it)
+                }
+            }
+
+            btnSocialChallenge.setOnClickListener() {
+                choosenChallenge = btnSocialChallenge.text.toString().substringBefore("\n")
+                Intent(this, HacerFotoActivity::class.java).also {
+                    it.putExtra("EXTRA_CHOOSEN_CHALLENGE", choosenChallenge)
+                    it.putExtra("EXTRA_CATEGORY_CHALLENGE", "social")
+                    it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ", retosSocial.get(0))
+                    startActivity(it)
+                }
+            }
+
+            btnCultureChallenge.setOnClickListener() {
+                choosenChallenge = btnCultureChallenge.text.toString().substringBefore("\n")
+                Intent(this, HacerFotoActivity::class.java).also {
+                    it.putExtra("EXTRA_CHOOSEN_CHALLENGE", choosenChallenge)
+                    it.putExtra("EXTRA_CATEGORY_CHALLENGE", "culture")
+                    it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ", retosCultura.get(0))
+                    startActivity(it)
+                }
+            }
+
+            btnSportChallenge.setOnClickListener() {
+                choosenChallenge = btnSportChallenge.text.toString().substringBefore("\n")
+                Intent(this, HacerFotoActivity::class.java).also {
+                    it.putExtra("EXTRA_CHOOSEN_CHALLENGE", choosenChallenge)
+                    it.putExtra("EXTRA_CATEGORY_CHALLENGE", "sport")
+                    it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ", retosDeportes.get(0))
+                    startActivity(it)
+                }
+            }
+
+            btnPatrocinado.setOnClickListener() {
+                choosenChallenge = btnPatrocinado.text.toString().substringBefore("\n")
+                Intent(this, HacerFotoActivity::class.java).also {
+                    it.putExtra("EXTRA_CHOOSEN_CHALLENGE", choosenChallenge)
+                    it.putExtra("EXTRA_CATEGORY_CHALLENGE", "patrocinado")
+                    startActivity(it)
+                }
+            }
+
 
         }
-
-        btnGrowthChallenge.setOnClickListener(){
-            choosenChallenge = btnGrowthChallenge.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
-                it.putExtra("EXTRA_CATEGORY_CHALLENGE", "growth")
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ",retosCrecimientoPersonal.get(0))
-                startActivity(it)
-            }
-        }
-
-        btnSocialChallenge.setOnClickListener(){
-            choosenChallenge = btnSocialChallenge.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
-                it.putExtra("EXTRA_CATEGORY_CHALLENGE", "social")
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ",retosSocial.get(0))
-                startActivity(it)
-            }
-        }
-
-        btnCultureChallenge.setOnClickListener(){
-            choosenChallenge = btnCultureChallenge.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
-                it.putExtra("EXTRA_CATEGORY_CHALLENGE", "culture")
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ",retosCultura.get(0))
-                startActivity(it)
-            }
-       }
-
-        btnSportChallenge.setOnClickListener(){
-            choosenChallenge = btnSportChallenge.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
-                it.putExtra("EXTRA_CATEGORY_CHALLENGE", "sport")
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ",retosDeportes.get(0))
-                startActivity(it)
-            }
-        }
-
-        btnPatrocinado.setOnClickListener(){
-            choosenChallenge = btnPatrocinado.text.toString().substringBefore("\n")
-            Intent(this, HacerFotoActivity::class.java).also{
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE",choosenChallenge)
-                it.putExtra("EXTRA_CATEGORY_CHALLENGE", "patrocinado")
-                startActivity(it)
-            }
-        }
-
 
 
     }
 
-
-    /*//function to manage timer
-    private fun doTimer(difference : Long, tvTimer : TextView){
-        var countDownTimer = object : CountDownTimer(difference, 1000) {
-
-            override fun onTick(millisUntilFinished: Long) {
-                var diff = millisUntilFinished
-                val secondsInMilli: Long = 1000
-                val minutesInMilli = secondsInMilli * 60
-                val hoursInMilli = minutesInMilli * 60
-
-
-                val elapsedHours = diff / hoursInMilli
-                diff %= hoursInMilli
-
-                val elapsedMinutes = diff / minutesInMilli
-                diff %= minutesInMilli
-
-                val elapsedSeconds = diff / secondsInMilli
-
-                tvTimer.text =
-                    "$elapsedHours:$elapsedMinutes:$elapsedSeconds"
-            }
-
-            //restarts the timer at 6 o clock in the morning
-            override fun onFinish() {
-                var diff : Long = 24 * 60 * 60 * 1000
-                doTimer(diff, tvTimer)
-            }
-        }.start()
-    }*/
-
-    //start the camera preview
-    private fun startCamera(){
-        val previewView = findViewById<androidx.camera.view.PreviewView>(R.id.viewFinder)
-        cameraController = LifecycleCameraController(baseContext)
-        cameraController.bindToLifecycle(this)
-        cameraController.cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
-        //previewView.controller = cameraController
-
-
-    }
-
-
-    //check if all necessary permissions are granted
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
-    }
 }
 
