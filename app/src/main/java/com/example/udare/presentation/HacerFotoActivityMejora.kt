@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
-import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
@@ -322,7 +321,7 @@ class HacerFotoActivityMejora : AppCompatActivity() {
                     subirFoto(file)
                     val challengeCompletedLayout = layoutInflater.inflate(R.layout.activity_hacer_foto_challenge_completed, null)
                     var textView = challengeCompletedLayout.findViewById<TextView>(R.id.textView2)
-                    textView.text = "Enhorabuena "+UserSingleton.obtenerInstancia().obtenerUsuario().profile.nombre+", has completado el reto de hoy!"
+                    textView.text = "Enhorabuena "+UserSingleton.obtenerInstancia().obtenerUsuario().profile.name +", has completado el reto de hoy!"
                     setContentView(challengeCompletedLayout)
 
 

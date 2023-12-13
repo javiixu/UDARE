@@ -19,8 +19,8 @@
     <string name="registrarse">Continuar</string>
     <string name="iniciar_ses"> Iniciar Sesion</string>
     <string name="welcome_to">Welcome to</string>
-    <string name="nombre">Nombre\n</string>
-    <string name="introduce_t">"Introduce tu nombre "</string>
+    <string name="name">Nombre\n</string>
+    <string name="introduce_t">"Introduce tu name "</string>
     <string name="correo">Correo\n</string>
     <string name="udare_gmail">udare@gmail.com\n</string>
     <string name="usuario">Usuario\n</string>

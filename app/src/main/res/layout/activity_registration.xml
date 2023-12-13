@@ -183,14 +183,14 @@
         android:fontFamily="@font/neuemetananext"/>
 
     <TextView
-        android:id="@+id/nombre"
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_below="@+id/udare_register"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="21dp"
         android:gravity="center_vertical"
-        android:text="@string/nombre"
+        android:text="@string/name"
         android:textAppearance="@style/register_titles"
         android:fontFamily="@font/aileron_regular"/>
 
@@ -198,9 +198,9 @@
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/nombre"
+        android:layout_below="@+id/name"
         android:layout_alignParentLeft="true"
-        android:hint="Introduce tu nombre"
+        android:hint="Introduce tu name"
         android:fontFamily="@font/aileron_regular"/>
 
     <TextView

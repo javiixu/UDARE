@@ -10,14 +10,12 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.text.Html
 import android.util.Log
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.HtmlCompat
 import com.bumptech.glide.Glide
 import com.example.udare.R
 import com.example.udare.data.model.User
@@ -92,7 +90,7 @@ class PerfilActivity : AppCompatActivity() {
 
         //set Bio and Username
         if(thisUser.username != null){tvUserNameTag.text = thisUser.username.toString()}
-        if(thisUser.profile.nombre != null){tvUserName.text = thisUser.profile.nombre.toString()}
+        if(thisUser.profile.name != null){tvUserName.text = thisUser.profile.name.toString()}
 
 
 

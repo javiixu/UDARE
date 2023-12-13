@@ -1,7 +1,7 @@
 package com.example.udare.data.model;
 
 public class Profile {
-    private String nombre;
+    private String name;
     private String bio;
     private String profilePic;
     private String[] followers;
@@ -13,9 +13,9 @@ public class Profile {
     private int pointsGrowth;
     private int pointsCooking;
 
-    public Profile(String nombre, String bio, String profilePic, String[] followers, String[] following,
+    public Profile(String name, String bio, String profilePic, String[] followers, String[] following,
                    int pointsSport, int pointsSocial, int pointsCulture, int pointsGrowth, int pointsCooking) {
-        this.nombre = nombre;
+        this.name = name;
         this.bio = bio;
         this.profilePic = profilePic;
         this.followers = followers;
@@ -27,12 +27,12 @@ public class Profile {
         this.pointsCooking = pointsCooking;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getBio() {
