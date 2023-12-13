@@ -1,32 +1,23 @@
 package com.example.udare.presentation
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.HorizontalScrollView
 import android.widget.ImageButton
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.request.transition.Transition
 import com.example.udare.Adapter.CalendarAdapter
-import com.example.udare.Adapter.FotoAdapter
 import com.example.udare.R
 import com.example.udare.data.model.CalendarData
 import com.example.udare.data.model.Challenge
 import com.example.udare.data.model.Post
-import com.example.udare.data.model.PostData
 import com.example.udare.data.model.UserSingleton
 import com.example.udare.data.repositories.Implementations.ChallengeRepository
 import com.example.udare.data.repositories.Implementations.PostRepository
@@ -34,10 +25,10 @@ import com.example.udare.services.interfaces.IChallengeService
 import com.example.udare.services.interfaces.IPostService
 import com.example.udare.services.interfaces.IUserService
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.LocalDateTime
 import java.util.Calendar
 import java.util.Date
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class CalendarGaleryActivity : AppCompatActivity() {
@@ -58,6 +49,9 @@ class CalendarGaleryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_calendar_galery)
 
         supportActionBar?.hide()
+
+        val horizontalScrollView = findViewById<HorizontalScrollView>(R.id.scrollbar_botones)
+        horizontalScrollView.isHorizontalScrollBarEnabled = false
 
         //used for later referencing the id
         val thisUser = UserSingleton.obtenerInstancia().obtenerUsuario()

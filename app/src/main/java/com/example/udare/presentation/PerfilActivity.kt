@@ -60,8 +60,6 @@ class PerfilActivity : AppCompatActivity() {
         var tvUserName = findViewById<TextView>(R.id.tvUserName)
         var tvUserNameTag = findViewById<TextView>(R.id.tvUserNameTag)
         var tvUserPointsMessage = findViewById<TextView>(R.id.tvUserPointsMessage)
-        var buttonFollowers = findViewById<Button>(R.id.btnFollowers)
-        var buttonFollowing = findViewById<Button>(R.id.btnFollowing)
 
         //TODO
         // if user updates profile pic send it to database
@@ -97,9 +95,6 @@ class PerfilActivity : AppCompatActivity() {
         if(thisUser.profile.nombre != null){tvUserName.text = thisUser.profile.nombre.toString()}
 
 
-        //set followers and following
-        buttonFollowers.text = "Followers\n" + thisUser.profile.followers.size.toString()
-        buttonFollowing.text = "Following\n" + thisUser.profile.following.size.toString()
 
 
 
@@ -139,17 +134,6 @@ class PerfilActivity : AppCompatActivity() {
 
         btnUserAlbum.setOnClickListener(){
             val intent = Intent(this@PerfilActivity, CalendarGaleryActivity::class.java)
-            this@PerfilActivity.startActivity(intent)
-        }
-
-
-        buttonFollowers.setOnClickListener(){
-            val intent = Intent(this@PerfilActivity, FollowersActivity::class.java)
-            this@PerfilActivity.startActivity(intent)
-        }
-
-        buttonFollowing.setOnClickListener(){
-            val intent = Intent(this@PerfilActivity, FollowingActivity::class.java)
             this@PerfilActivity.startActivity(intent)
         }
 

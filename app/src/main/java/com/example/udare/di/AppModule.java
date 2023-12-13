@@ -31,7 +31,7 @@ import javax.inject.Singleton;
 @InstallIn(SingletonComponent.class)
 public final class AppModule {
 
-    private static final String BASE_URL = "http://10.0.2.2:3000/";
+    private static final String BASE_URL = "http://192.168.6.245:3000/";
 
     @Provides
     @Singleton

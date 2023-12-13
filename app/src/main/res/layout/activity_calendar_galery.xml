@@ -17,7 +17,7 @@
         >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="52dp">
@@ -46,21 +46,23 @@
         <!-- RecyclerView -->
 
         <HorizontalScrollView
-            android:layout_width="match_parent"
+            android:id="@+id/scrollbar_botones"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp">
+            android:fadeScrollbars="false">>
 
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:layout_marginLeft="30dp">
 
                 <Button
                     android:id="@+id/btnGetChallengesAll"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle_calendar_button"
                     android:fontFamily="@font/aileron_regular"
@@ -74,7 +76,7 @@
                 <Button
                     android:id="@+id/btnGetChallengesLastWeek"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle_calendar_button"
                     android:fontFamily="@font/aileron_regular"
@@ -87,7 +89,7 @@
                 <Button
                     android:id="@+id/btnGetChallengesLastMonth"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle_calendar_button"
                     android:fontFamily="@font/aileron_regular"
@@ -99,7 +101,7 @@
                 <Button
                     android:id="@+id/btnGetChallengesCulture"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle_calendar_button"
                     android:fontFamily="@font/aileron_regular"
@@ -111,7 +113,7 @@
                 <Button
                     android:id="@+id/btnGetChallengesSport"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle_calendar_button"
                     android:fontFamily="@font/aileron_regular"
@@ -123,7 +125,7 @@
                 <Button
                     android:id="@+id/btnGetChallengesSocial"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle_calendar_button"
                     android:fontFamily="@font/aileron_regular"
@@ -135,7 +137,7 @@
                 <Button
                     android:id="@+id/btnGetChallengesGrowth"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle_calendar_button_large"
                     android:fontFamily="@font/aileron_regular"
@@ -147,7 +149,7 @@
                 <Button
                     android:id="@+id/btnGetChallengesCooking"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle_calendar_button"
                     android:fontFamily="@font/aileron_regular"
