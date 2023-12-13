@@ -117,7 +117,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         btnCookingChallenge.setOnClickListener() {
             choosenChallenge = btnCookingChallenge.text.toString().substringBefore("\n")
             Intent(this, HacerFotoActivityMejora::class.java).also {
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE", choosenChallenge)
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE", retosCocina.get(0)._id)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "cooking")
                 startActivity(it)
             }
@@ -126,7 +126,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         btnGrowthChallenge.setOnClickListener() {
             choosenChallenge = btnGrowthChallenge.text.toString().substringBefore("\n")
             Intent(this, HacerFotoActivityMejora::class.java).also {
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE", choosenChallenge)
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE", retosCrecimientoPersonal.get(0)._id)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "growth")
                 startActivity(it)
             }
@@ -137,7 +137,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         btnSocialChallenge.setOnClickListener() {
             choosenChallenge = btnSocialChallenge.text.toString().substringBefore("\n")
             Intent(this, HacerFotoActivityMejora::class.java).also {
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE", choosenChallenge)
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE", retosSocial.get(0)._id)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "social")
                 startActivity(it)
             }
@@ -148,7 +148,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         btnCultureChallenge.setOnClickListener() {
             choosenChallenge = btnCultureChallenge.text.toString().substringBefore("\n")
             Intent(this, HacerFotoActivityMejora::class.java).also {
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE", choosenChallenge)
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE", retosCultura.get(0)._id)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "culture")
                 startActivity(it)
             }
@@ -158,7 +158,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         btnSportChallenge.setOnClickListener() {
             choosenChallenge = btnSportChallenge.text.toString().substringBefore("\n")
             Intent(this, HacerFotoActivityMejora::class.java).also {
-                it.putExtra("EXTRA_CHOOSEN_CHALLENGE", choosenChallenge)
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE", retosDeportes.get(0)._id)
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "sport")
                 startActivity(it)
             }

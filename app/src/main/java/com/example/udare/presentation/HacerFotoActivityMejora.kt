@@ -58,6 +58,7 @@ class HacerFotoActivityMejora : AppCompatActivity() {
 
         val userId = UserSingleton.obtenerInstancia().obtenerUsuario().id
 
+
         supportActionBar?.hide()
 
         //find all the buttons and text views
@@ -121,8 +122,8 @@ class HacerFotoActivityMejora : AppCompatActivity() {
 
 
 
-        //set the choosen challenge to the correct name
-        //tvChoosenChallenge.text = intent.getStringExtra("EXTRA_CHOOSEN_CHALLENGE")
+
+
 
         //handle getting back to the main activity
         btnBackFromTakingPhoto.setOnClickListener(){
@@ -317,7 +318,6 @@ class HacerFotoActivityMejora : AppCompatActivity() {
                     }
 
 
-
                     subirFoto(file)
                     val challengeCompletedLayout = layoutInflater.inflate(R.layout.activity_hacer_foto_challenge_completed, null)
                     var textView = challengeCompletedLayout.findViewById<TextView>(R.id.textView2)
@@ -340,19 +340,19 @@ class HacerFotoActivityMejora : AppCompatActivity() {
 
     fun subirFoto(file : File) {
         try {
-
+            val challengeId = intent.getStringExtra("EXTRA_CHOOSEN_CHALLENGE")
             val comments: MutableList<CommentData> = mutableListOf()
 
             val post = Post()
             post.caption = "paseando por la naturaleza!!"
             post.userID = UserSingleton.obtenerInstancia().obtenerUsuario().id
-            post.challengeID = "652eb4074c5c257aa8831c88"
+            post.challengeID = challengeId
             post.comments = comments
 
 
             postService.uploadPost(file,post,object : PostRepository.callbackUploadPost {
                 override fun onSuccess(post: Post) {
-                    Log.d("tag-foto", "Post subido correctamente")
+                    Log.d("tag-foto", "Post subido correctamente: "+post.toString())
                 }
 
                 override fun onError(mensajeError: String?) {
