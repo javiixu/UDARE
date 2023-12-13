@@ -21,6 +21,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.udare.R
 import com.example.udare.data.model.CommentData
@@ -36,6 +37,7 @@ import com.example.udare.data.model.UserSingleton
 import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.services.interfaces.IPostService
 import java.io.File
+import java.util.Calendar
 
 
 @AndroidEntryPoint
@@ -67,16 +69,56 @@ class HacerFotoActivityMejora : AppCompatActivity() {
         var btnFlash = findViewById<ImageView>(R.id.btnFlash);
 
         var tvTime = findViewById<TextView>(R.id.tvTimerChallengeCamera)
-        var formattedTime = intent.getStringExtra("EXTRA_FORMATTED_TIME")
 
-        val parts = formattedTime?.split(":")
-        val hours = parts?.get(0)?.toLongOrNull() ?: 0L
-        val minutes = parts?.get(1)?.toLongOrNull() ?: 0L
-        val seconds = parts?.get(2)?.toLongOrNull() ?: 0L
+        //TIMER MANAGMENT
+        //current Calendar
+        var current = Calendar.getInstance()
 
-        val differenceMillis = (hours * 60 * 60 + minutes * 60 + seconds) * 1000
+        //Difference in Miliseconds between our current time an the end of the challenge time
+        val difference : Long
 
-        doTimer(differenceMillis, tvTime)
+        //first day of challenge
+        if(current.get(Calendar.HOUR_OF_DAY) == 6){
+            difference = 0
+        }
+        else if(current.get(Calendar.HOUR_OF_DAY) > 6){
+            // set a calendar to the following date at 6 am
+            var followingDate = current.clone() as Calendar
+
+            // Set the time to 6:00 AM, on the next day
+            followingDate.set(Calendar.HOUR_OF_DAY, 6)
+            followingDate.set(Calendar.MINUTE, 0)
+            followingDate.set(Calendar.SECOND, 0)
+            followingDate.set(Calendar.MILLISECOND, 0)
+            followingDate.add(Calendar.DAY_OF_YEAR, 1)
+
+            difference = followingDate.timeInMillis - current.timeInMillis
+        }
+        //second day of challenge
+        else{
+            // set a calendar to 6 am, do not change date, we are on the second day of the challenge
+            var followingDate = current.clone() as Calendar
+            followingDate.set(Calendar.HOUR_OF_DAY, 6)
+            followingDate.set(Calendar.MINUTE, 0)
+            followingDate.set(Calendar.SECOND, 0)
+            followingDate.set(Calendar.MILLISECOND, 0)
+
+            difference = followingDate.timeInMillis - current.timeInMillis
+        }
+
+        //starts the timer for the challenge
+        doTimer(difference, tvTime)
+
+
+        //start the camera
+        if(checkCameraPermission(this)){
+            startCamera()
+        }
+        else{
+            requestCameraPermission(this)
+        }
+
+
 
 
 
@@ -206,6 +248,26 @@ class HacerFotoActivityMejora : AppCompatActivity() {
 
     }
 
+    private fun checkCameraPermission(context: HacerFotoActivityMejora): Boolean{
+        return ContextCompat.checkSelfPermission(context, android.Manifest.permission.CAMERA) == android.content.pm.PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestCameraPermission(context: HacerFotoActivityMejora){
+        ActivityCompat.requestPermissions(context, arrayOf(android.Manifest.permission.CAMERA), 100)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode == 100){
+            if(grantResults.isNotEmpty() && grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED){
+                startCamera()
+            }
+            else{
+                Toast.makeText(this, "Camera permission is required to use the camera", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
 
     private fun takePhoto() {
         // Create time stamped name and MediaStore entry.
@@ -258,7 +320,13 @@ class HacerFotoActivityMejora : AppCompatActivity() {
 
 
                     subirFoto(file)
-                    setContentView(R.layout.activity_hacer_foto_challenge_completed)
+                    val challengeCompletedLayout = layoutInflater.inflate(R.layout.activity_hacer_foto_challenge_completed, null)
+                    var textView = challengeCompletedLayout.findViewById<TextView>(R.id.textView2)
+                    textView.text = "Enhorabuena "+UserSingleton.obtenerInstancia().obtenerUsuario().profile.nombre+", has completado el reto de hoy!"
+                    setContentView(challengeCompletedLayout)
+
+
+
                     Handler(Looper.getMainLooper()).postDelayed({
                         //TODO test this further, was copied from Stack Overflow
                         val intent = Intent(this@HacerFotoActivityMejora, Inicio::class.java)
@@ -299,6 +367,7 @@ class HacerFotoActivityMejora : AppCompatActivity() {
 
     }
 
+    //function to manage timer
     private fun doTimer(difference : Long, tvTimer : TextView){
         var countDownTimer = object : CountDownTimer(difference, 1000) {
 
@@ -316,7 +385,6 @@ class HacerFotoActivityMejora : AppCompatActivity() {
                 diff %= minutesInMilli
 
                 val elapsedSeconds = diff / secondsInMilli
-
 
                 tvTimer.text =
                     "$elapsedHours:$elapsedMinutes:$elapsedSeconds"

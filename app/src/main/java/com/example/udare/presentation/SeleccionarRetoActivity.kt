@@ -82,12 +82,12 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                         }
                     }
                 }
-                btnSocialChallenge.text = retosSocial.get(0).title + "\n" + "SOCIAL"
-                btnCultureChallenge.text = retosCultura.get(0).title + "\n" + "CULTURA"
-                btnSportChallenge.text = retosDeportes.get(0).title + "\n" + "DEPORTE"
-                btnCookingChallenge.text = retosCocina.get(0).title + "\n" + "COCINAR"
+                btnSocialChallenge.text = retosSocial.get(0).title
+                btnCultureChallenge.text = retosCultura.get(0).title
+                btnSportChallenge.text = retosDeportes.get(0).title
+                btnCookingChallenge.text = retosCocina.get(0).title
                 btnGrowthChallenge.text =
-                    retosCrecimientoPersonal.get(0).title + "\n" + "CRECIMIENTO PERSONAL"
+                    retosCrecimientoPersonal.get(0).title
 
             }
 

@@ -9,18 +9,25 @@ import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.view.LifecycleCameraController
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginTop
 import com.example.udare.R
 import com.example.udare.data.model.Post
 import com.example.udare.data.model.Reaction
 import com.example.udare.data.model.User
+import com.example.udare.data.model.UserSingleton
 
 import com.example.udare.services.interfaces.IUserService
 import com.google.firebase.auth.FirebaseAuth
@@ -56,7 +63,14 @@ class ReactionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reaction)
+
+
+
+        val camaraLayout = layoutInflater.inflate(R.layout.activity_hacer_foto_mejora_reaccion, null)
+
+        setContentView(camaraLayout)
+
+        supportActionBar?.hide()
 
         postId = intent.getStringExtra("postId").toString()
         uid = intent.getStringExtra("userLogged").toString()
@@ -65,9 +79,9 @@ class ReactionActivity : AppCompatActivity() {
         currentUser = auth.currentUser!!
 
         //find all the buttons and text views
-        var btnTakePhoto = findViewById<Button>(R.id.btnTakePhoto)
-        var btnSwitchCamera = findViewById<Button>(R.id.btnSwitchCamera)
-        var btnBackFromTakingPhoto = findViewById<Button>(R.id.btnBackFromTakingPhoto)
+        var btnTakePhoto = findViewById<ImageView>(R.id.btnTakePhoto3)
+        var btnSwitchCamera = findViewById<ImageView>(R.id.btnSwitchCamera3)
+        var btnBackFromTakingPhoto = findViewById<ImageView>(R.id.btnBackFromTakingPhoto3)
 
         //handle getting back to the main activity
         btnBackFromTakingPhoto.setOnClickListener(){
@@ -124,7 +138,7 @@ class ReactionActivity : AppCompatActivity() {
     }
 
     private fun startCamera(){
-        val previewView = findViewById<androidx.camera.view.PreviewView>(R.id.viewFinder)
+        val previewView = findViewById<androidx.camera.view.PreviewView>(R.id.viewFinder3)
         cameraController = LifecycleCameraController(baseContext)
         cameraController.bindToLifecycle(this)
         cameraController.cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA

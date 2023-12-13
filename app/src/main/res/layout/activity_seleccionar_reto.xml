@@ -19,7 +19,6 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/boton_seleccionar_cocina"
-        android:text="Reto Cocina"
         app:layout_constraintBottom_toTopOf="@id/btnSportChallenge"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_seleccionar_reto"
         tools:layout_editor_absoluteX="24dp" />
@@ -42,7 +41,6 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/boton_seleccionar_deporte"
-        android:text="Reto Deporte"
         app:layout_constraintBottom_toTopOf="@id/btnCultureChallenge"
         app:layout_constraintTop_toBottomOf="@+id/btnCookingChallenge"
         tools:layout_editor_absoluteX="20dp" />
@@ -64,7 +62,6 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/boton_seleccionar_cultura"
-        android:text="Reto Cultura"
         app:layout_constraintBottom_toTopOf="@+id/btnSocialChallenge"
         app:layout_constraintTop_toBottomOf="@id/btnSportChallenge"
         tools:layout_editor_absoluteX="20dp" />
@@ -86,7 +83,6 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/boton_seleccionar_social"
-        android:text="Reto Social"
         app:layout_constraintBottom_toTopOf="@+id/btnGrowthChallenge"
         app:layout_constraintTop_toBottomOf="@id/btnCultureChallenge"
         tools:layout_editor_absoluteX="20dp" />
@@ -109,7 +105,6 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/boton_seleccionar_crecimiento"
-        android:text="Reto Crecimiento Personal"
         app:layout_constraintBottom_toTopOf="@id/btnPatrocinado"
         app:layout_constraintTop_toBottomOf="@id/btnSocialChallenge"
         tools:layout_editor_absoluteX="20dp" />
