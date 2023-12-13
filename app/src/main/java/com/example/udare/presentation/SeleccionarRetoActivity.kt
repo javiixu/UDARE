@@ -113,55 +113,6 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         var retosCrecimientoPersonal = mutableListOf<Challenge>()
         var retosCocina = mutableListOf<Challenge>()
 
-        /*val iconoSocial = findViewById<ImageView>(R.id.iconoSocial)
-        val paramsSocial = iconoSocial.layoutParams as ConstraintLayout.LayoutParams
-        paramsSocial.startToStart = btnSocialChallenge.id // Alinea el final del ImageView al inicio del Button
-        paramsSocial.topToTop = btnSocialChallenge.id // Alinea la parte superior del ImageView a la parte superior del Button
-        paramsSocial.bottomToBottom = btnSocialChallenge.id // Alinea la parte inferior del ImageView a la parte inferior del Button
-        paramsSocial.marginStart = 0 // Establece el margen que desees
-        iconoSocial.layoutParams = paramsSocial
-
-
-        val iconoCultura = findViewById<ImageView>(R.id.iconoCultura)
-        val paramsCultura = iconoCultura.layoutParams as ConstraintLayout.LayoutParams
-        paramsCultura.startToStart = btnCultureChallenge.id // Alinea el final del ImageView al inicio del Button
-        paramsCultura.topToTop = btnCultureChallenge.id // Alinea la parte superior del ImageView a la parte superior del Button
-        paramsCultura.bottomToBottom = btnCultureChallenge.id // Alinea la parte inferior del ImageView a la parte inferior del Button
-        paramsCultura.marginStart = 0 // Establece el margen que desees
-        iconoCultura.layoutParams = paramsCultura
-
-
-        val iconoDeporte = findViewById<ImageView>(R.id.iconoDeporte)
-        val paramsDeporte = iconoDeporte.layoutParams as ConstraintLayout.LayoutParams
-        paramsDeporte.startToStart = btnSportChallenge.id // Alinea el final del ImageView al inicio del Button
-        paramsDeporte.topToTop = btnSportChallenge.id // Alinea la parte superior del ImageView a la parte superior del Button
-        paramsDeporte.bottomToBottom = btnSportChallenge.id // Alinea la parte inferior del ImageView a la parte inferior del Button
-        paramsDeporte.marginStart = 0 // Establece el margen que desees
-        iconoDeporte.layoutParams = paramsDeporte
-
-        val iconoCocina = findViewById<ImageView>(R.id.iconoCocina)
-        val params = iconoCocina.layoutParams as ConstraintLayout.LayoutParams
-        params.startToStart = btnCookingChallenge.id // Alinea el final del ImageView al inicio del Button
-        params.topToTop = btnCookingChallenge.id // Alinea la parte superior del ImageView a la parte superior del Button
-        params.bottomToBottom = btnCookingChallenge.id // Alinea la parte inferior del ImageView a la parte inferior del Button
-        params.marginStart = 0 // Establece el margen que desees
-        iconoCocina.layoutParams = params
-
-        val iconoCrecimiento = findViewById<ImageView>(R.id.iconoCrecimiento)
-        val paramsCrecimiento = iconoCrecimiento.layoutParams as ConstraintLayout.LayoutParams
-        paramsCrecimiento.startToStart = btnGrowthChallenge.id // Alinea el final del ImageView al inicio del Button
-        paramsCrecimiento.topToTop = btnGrowthChallenge.id // Alinea la parte superior del ImageView a la parte superior del Button
-        paramsCrecimiento.bottomToBottom = btnGrowthChallenge.id // Alinea la parte inferior del ImageView a la parte inferior del Button
-        paramsCrecimiento.marginStart = 0 // Establece el margen que desees
-        iconoCrecimiento.layoutParams = paramsCrecimiento*/
-
-        val iconoPatrocinado = findViewById<ImageView>(R.id.iconoPatrocinado)
-        val paramsPatrocinado = iconoPatrocinado.layoutParams as ConstraintLayout.LayoutParams
-        paramsPatrocinado.startToStart = btnPatrocinado.id // Alinea el final del ImageView al inicio del Button
-        paramsPatrocinado.topToTop = btnPatrocinado.id // Alinea la parte superior del ImageView a la parte superior del Button
-        paramsPatrocinado.bottomToBottom = btnPatrocinado.id // Alinea la parte inferior del ImageView a la parte inferior del Button
-        paramsPatrocinado.marginStart = 0 // Establece el margen que desees
-        iconoPatrocinado.layoutParams = paramsPatrocinado
 
         challengeService.getAllChallenges(object: ChallengeRepository.ChallengeCallback {
             override fun onSuccess(challenges: List<Challenge>) {
