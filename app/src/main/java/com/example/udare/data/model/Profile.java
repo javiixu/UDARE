@@ -115,5 +115,9 @@ public class Profile {
     public void setPointsCooking(int pointsCooking) {
         this.pointsCooking = pointsCooking;
     }
+
+    public int getAllPoints(){
+        return (pointsCooking + pointsGrowth +  pointsSport +  pointsCulture + pointsSocial);
+    }
 }
 

@@ -3,29 +3,28 @@ package com.example.udare.presentation
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.Html
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
 import com.bumptech.glide.Glide
 import com.example.udare.R
-import com.example.udare.data.model.Post
 import com.example.udare.data.model.User
 import com.example.udare.data.model.UserSingleton
-import com.example.udare.data.repositories.Implementations.PostRepository
 import com.example.udare.data.repositories.Implementations.UserRepository
 import com.example.udare.services.interfaces.IUserService
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -34,17 +33,18 @@ import java.util.Locale
 import javax.inject.Inject
 
 
-
 @AndroidEntryPoint
 class PerfilActivity : AppCompatActivity() {
     @Inject
     lateinit var userService: IUserService
     lateinit var thisUser: User
 
-
+    @SuppressWarnings("deprecation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
+
+        supportActionBar?.hide()
 
         //Buttons & Views
         var tvSocialPoints = findViewById<TextView>(R.id.tvSocialPoints)
@@ -52,14 +52,16 @@ class PerfilActivity : AppCompatActivity() {
         var tvGrowthPoints = findViewById<TextView>(R.id.tvGrowthPoints)
         var tvCulturePoints = findViewById<TextView>(R.id.tvCulturePoints)
         var tvCookingPoints = findViewById<TextView>(R.id.tvCookingPoints)
-        val btnUserAlbum = findViewById<Button>(R.id.btnUserAlbum)
-        val btnRankingFriends = findViewById<Button>(R.id.btnRankingFriends)
-        val btnChangeProfilePicture = findViewById<Button>(R.id.btnChangeProfilePicture)
+        val btnUserAlbum = findViewById<ImageButton>(R.id.btnGallery)
+        //val btnRankingFriends = findViewById<Button>(R.id.btnRankingFriends)
+        val btnChangeProfilePicture = findViewById<ImageButton>(R.id.btnChangeProfilePicture)
+        val btnBackFromProfile = findViewById<ImageButton>(R.id.btnBackFromProfile)
         var ivProfilePicture = findViewById<ImageView>(R.id.profilePicture)
         var tvUserName = findViewById<TextView>(R.id.tvUserName)
-        var tvUserBio = findViewById<TextView>(R.id.tvUserBio)
-        var buttonFollowers = findViewById<Button>(R.id.buttonFollowers)
-        var buttonFollowing = findViewById<Button>(R.id.buttonFollowing)
+        var tvUserNameTag = findViewById<TextView>(R.id.tvUserNameTag)
+        var tvUserPointsMessage = findViewById<TextView>(R.id.tvUserPointsMessage)
+        var buttonFollowers = findViewById<Button>(R.id.btnFollowers)
+        var buttonFollowing = findViewById<Button>(R.id.btnFollowing)
 
         //TODO
         // if user updates profile pic send it to database
@@ -72,6 +74,15 @@ class PerfilActivity : AppCompatActivity() {
         tvSportPoints.text = thisUser.profile.pointsSport.toString()
         tvGrowthPoints.text = thisUser.profile.pointsGrowth.toString()
 
+        val userPointSum = thisUser.profile.allPoints
+        val userPointsMessage = "<font color=#f9f4f1>¡Ya tienes</font> <font color=#e7ee86>$userPointSum puntos</font> <font color=#f9f4f1>!</font> "
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            tvUserPointsMessage.setText(Html.fromHtml(userPointsMessage, Html.FROM_HTML_MODE_LEGACY))
+        } else {
+           tvUserPointsMessage.setText(Html.fromHtml(userPointsMessage))
+        }
+
+
 
         //user does not have profile pic, the standard profile pic just stays
         //otherwise we have to set it
@@ -82,12 +93,13 @@ class PerfilActivity : AppCompatActivity() {
         }
 
         //set Bio and Username
-        tvUserBio.text = thisUser.profile.bio.toString()
-        tvUserName.text = thisUser.username.toString()
+        if(thisUser.username != null){tvUserNameTag.text = thisUser.username.toString()}
+        if(thisUser.profile.nombre != null){tvUserName.text = thisUser.profile.nombre.toString()}
+
 
         //set followers and following
-        buttonFollowers.text = thisUser.profile.followers.size.toString()
-        buttonFollowing.text = thisUser.profile.following.size.toString()
+        buttonFollowers.text = "Followers\n" + thisUser.profile.followers.size.toString()
+        buttonFollowing.text = "Following\n" + thisUser.profile.following.size.toString()
 
 
 
@@ -141,7 +153,14 @@ class PerfilActivity : AppCompatActivity() {
             this@PerfilActivity.startActivity(intent)
         }
 
+        btnBackFromProfile.setOnClickListener(){
+            Intent(this, Inicio::class.java).also{
+                startActivity(it)
+            }
+        }
 
+        //TODO ACCESS Gallery
+        //TODO Access Ranking
 
 
 

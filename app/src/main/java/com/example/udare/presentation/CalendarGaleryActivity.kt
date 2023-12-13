@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -56,6 +57,8 @@ class CalendarGaleryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar_galery)
 
+        supportActionBar?.hide()
+
         //used for later referencing the id
         val thisUser = UserSingleton.obtenerInstancia().obtenerUsuario()
 
@@ -73,7 +76,7 @@ class CalendarGaleryActivity : AppCompatActivity() {
 
 
         btnBackFromCalendar.setOnClickListener(){
-            Intent(this, Inicio::class.java).also{
+            Intent(this, PerfilActivity::class.java).also{
                 startActivity(it)
             }
         }

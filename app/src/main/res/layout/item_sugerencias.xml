@@ -26,7 +26,8 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="35dp"
             android:text="Username"
-            android:textColor="#F9F4F1" />
+            android:textColor="#F9F4F1"
+            android:fontFamily="@font/aileron_bold"/>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"

@@ -1,126 +1,145 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<?xml version="1.0" encoding="UTF-8" ?>
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.LoginActivity">
+    android:background="#74BDE8"
+    android:orientation="vertical">
+    >
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/buttonBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/flecharound_black" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/title_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonBack"
+        android:layout_marginTop="48dp"
+        android:layout_marginLeft="28dp"
+        android:text="Hey! Hola de nuevo a"
+        android:textAppearance="@style/hey_hola_de"
+        android:gravity="center_vertical"
+        android:fontFamily="@font/cabinetgrotesk_regular"
+        />
 
-            <TextView
-                android:id="@+id/welcom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="120dp"
-                android:layout_marginTop="50dp"
-                android:text="Welcome!"
-                android:textColor="@color/colorBlack"
-                android:textSize="30sp"
-                android:textStyle="italic|bold" />
+    <TextView
+        android:id="@+id/udare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_login"
+        android:layout_marginLeft="28dp"
+        android:text="@string/udare"
+        android:textAppearance="@style/udare_login"
+        android:gravity="center_vertical"
+        android:fontFamily="@font/neuemetananext"
+        />
 
-            <TextView
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/welcom"
-                android:layout_marginStart="35dp"
-                android:layout_marginTop="120dp"
-                android:text="Email"
-                android:textColor="@color/colorBlack" />
+    <TextView
+        android:id="@+id/usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/udare"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="48dp"
+        android:gravity="center_vertical"
+        android:text="Correo electrónico"
+        android:textAppearance="@style/subtitle_login"
+        android:fontFamily="@font/aileron_regular"/>
 
-            <EditText
-                android:id="@+id/login_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/email"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/edit"
-                android:drawableStart="@drawable/ic_email"
-                android:hint="Email..."
-                android:inputType="textEmailAddress"
-                android:padding="8dp" />
+    <EditText
+        android:id="@+id/editTextPersonName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/usuario"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:drawableStart="@drawable/ic_users"
+        android:hint="udare@gmail.com"
+        android:inputType="textPersonName"
+        android:padding="8dp"
+        android:textAppearance="@style/fill_login"
+        android:fontFamily="@font/aileron_regular"
+        />
 
-            <TextView
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/login_email"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="20dp"
-                android:text="Password"
-                android:textColor="@color/colorBlack" />
+    <TextView
+        android:id="@+id/contrase_a"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextPersonName"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="48dp"
+        android:gravity="center_vertical"
+        android:text="Contraseña"
+        android:textAppearance="@style/subtitle_login"
+        android:fontFamily="@font/aileron_regular"/>
 
-            <EditText
-                android:id="@+id/login_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/password"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/edit"
-                android:hint="Password..."
-                android:inputType="textPassword"
-                android:padding="8dp" />
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contrase_a"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:drawableStart="@drawable/ic_lock"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:padding="8dp"
+        android:textAppearance="@style/fill_login"
+        android:fontFamily="@font/aileron_regular"
+        />
 
-            <TextView
-                android:id="@+id/forgetp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/login_password"
-                android:layout_marginStart="210dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="23dp"
-                android:text="Forget Password?"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+    <TextView
+        android:id="@+id/ya_tienes_c"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextPassword"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:text="¿No tienes cuenta? Regístrate"
+        android:textAppearance="@style/ya_tienes_c"
+        android:fontFamily="@font/aileron_regular"/>
 
-            <Button
-                android:id="@+id/login_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/forgetp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/buttonss"
-                android:padding="4dp"
-                android:text="Login"
-                android:textAllCaps="false"
-                android:textColor="@android:color/background_light"
-                android:textSize="24sp" />
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/ya_tienes_c"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rectangle_button_register"
+        android:text="@string/registrarse"
+        android:textAppearance="@style/registrarse"
+        android:fontFamily="@font/aileron_regular"/>
 
-            <TextView
-                android:id="@+id/needs_new_account"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/login_button"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="23dp"
-                android:text="Need new Account?Sign Up Here"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
-                android:textSize="17sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
+    <TextView
+        android:id="@+id/te_apetece_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:gravity="center_vertical"
+        android:text="Haz olvidado tu contraseña?"
+        android:textAppearance="@style/forgot_password"
+        android:fontFamily="@font/aileron_regular"/>
 
-    </ScrollView>
 
-</LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>
