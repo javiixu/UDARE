@@ -121,6 +121,8 @@ class Inicio : AppCompatActivity() {
                     // Actualiza tu RecyclerView o cualquier otra vista aquí con la nueva lista
                     photoRecyclerView.layoutManager = LinearLayoutManager(this@Inicio)
 
+                    //sorts by date
+                    Lista.sortByDescending { it.post.date }
                     val photoAdapter = FotoAdapter(Lista, this@Inicio, reactionService)
 
                     photoRecyclerView.adapter = photoAdapter
