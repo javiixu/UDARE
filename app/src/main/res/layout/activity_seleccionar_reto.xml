@@ -8,8 +8,13 @@
     android:background="#292929">
 
     <include
+        android:id="@+id/toolbar_seleccionar_reto"
         layout="@layout/tool_bar_buscador_amigos"
-        android:id="@+id/toolbar_seleccionar_reto"/>
+        app:layout_constraintBottom_toTopOf="@+id/btnCookingChallenge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnCookingChallenge"
