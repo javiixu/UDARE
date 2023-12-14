@@ -20,6 +20,7 @@
         android:textAppearance="@style/udare_splash"
         android:gravity="center_horizontal|center_vertical"
         android:layout_centerHorizontal="true"
+        android:fontFamily="@font/neuemetananext_semibold"
         />
 
     <ProgressBar
