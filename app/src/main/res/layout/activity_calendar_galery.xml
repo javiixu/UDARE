@@ -59,59 +59,64 @@
 
                 <Button
                     android:id="@+id/btnGetChallengesAll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle_calendar_button"
                     android:fontFamily="@font/aileron_regular"
                     android:gravity="center"
                     android:text="todo"
                     android:textColor="#E7EE86"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:textAllCaps="false"/>
 
 
 
                 <Button
                     android:id="@+id/btnGetChallengesLastWeek"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/rectangle_calendar_button"
+                    android:background="@drawable/rectangle_calendar_button_large"
                     android:fontFamily="@font/aileron_regular"
                     android:gravity="center"
                     android:text="última semana"
                     android:textColor="#E7EE86"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:textAllCaps="false"/>
 
 
                 <Button
                     android:id="@+id/btnGetChallengesLastMonth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle_calendar_button"
                     android:fontFamily="@font/aileron_regular"
                     android:gravity="center"
                     android:text="último mes"
                     android:textColor="#E7EE86"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:textAllCaps="false"/>
 
                 <Button
                     android:id="@+id/btnGetChallengesCulture"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle_calendar_button"
                     android:fontFamily="@font/aileron_regular"
                     android:gravity="center"
                     android:text="cultura"
                     android:textColor="#E7EE86"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:textAllCaps="false"/>
 
                 <Button
+                    android:textAllCaps="false"
                     android:id="@+id/btnGetChallengesSport"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle_calendar_button"
                     android:fontFamily="@font/aileron_regular"
@@ -121,9 +126,10 @@
                     android:textSize="13sp" />
 
                 <Button
+                    android:textAllCaps="false"
                     android:id="@+id/btnGetChallengesSocial"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle_calendar_button"
                     android:fontFamily="@font/aileron_regular"
@@ -133,9 +139,10 @@
                     android:textSize="13sp" />
 
                 <Button
+                    android:textAllCaps="false"
                     android:id="@+id/btnGetChallengesGrowth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle_calendar_button_large"
                     android:fontFamily="@font/aileron_regular"
@@ -145,9 +152,10 @@
                     android:textSize="13sp" />
 
                 <Button
+                    android:textAllCaps="false"
                     android:id="@+id/btnGetChallengesCooking"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle_calendar_button"
                     android:fontFamily="@font/aileron_regular"

@@ -56,6 +56,8 @@ class CalendarGaleryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar_galery)
 
+
+
         //used for later referencing the id
         val thisUser = UserSingleton.obtenerInstancia().obtenerUsuario()
 
@@ -86,6 +88,10 @@ class CalendarGaleryActivity : AppCompatActivity() {
 
         // recycler view we use here
         val rvCalendar = findViewById<View>(R.id.rvCalendar) as RecyclerView
+
+
+        //layout purpose
+        supportActionBar?.hide()
 
         postService.getAllPosts(object : PostRepository.callbackGetAllPosts {
             override fun onSuccess(posts: MutableList<Post>) {

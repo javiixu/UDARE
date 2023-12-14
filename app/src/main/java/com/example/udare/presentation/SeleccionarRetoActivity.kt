@@ -108,6 +108,13 @@ class SeleccionarRetoActivity : AppCompatActivity() {
         var retosCocina = mutableListOf<Challenge>()
 
 
+        var retoDeportes = Challenge("test","test","test")
+        var retoSocial = Challenge("test","test","test")
+        var retoCultura = Challenge("test","test","test")
+        var retoCrecimientoPersonal = Challenge("test","test","test")
+        var retoCocina = Challenge("test","test","test")
+
+
         challengeService.getAllChallenges(object: ChallengeRepository.ChallengeCallback {
             override fun onSuccess(challenges: List<Challenge>) {
                 for (reto in challenges) {
@@ -122,11 +129,19 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                         }
                     }
                 }
-                btnSocialChallenge.text = retosSocial.get(0).title + "\n" + "SOCIAL"
-                btnCultureChallenge.text = retosCultura.get(0).title + "\n" + "CULTURA"
-                btnSportChallenge.text = retosDeportes.get(0).title + "\n" + "DEPORTE"
-                btnCookingChallenge.text = retosCocina.get(0).title + "\n" + "COCINAR"
-                btnGrowthChallenge.text = retosCrecimientoPersonal.get(0).title + "\n" +"CRECIMIENTO PERSONAL"
+
+                //set the challenges
+                retoDeportes = retosDeportes.get(0)
+                retoSocial = retosSocial.get(0)
+                retoCultura = retosCultura.get(0)
+                retoCrecimientoPersonal = retosCrecimientoPersonal.get(0)
+                retoCocina = retosCocina.get(0)
+
+                btnSocialChallenge.text = retoSocial.title + "\n" + "SOCIAL"
+                btnCultureChallenge.text = retoCultura.title + "\n" + "CULTURA"
+                btnSportChallenge.text = retoDeportes.title + "\n" + "DEPORTE"
+                btnCookingChallenge.text = retoCocina.title + "\n" + "COCINAR"
+                btnGrowthChallenge.text = retoCrecimientoPersonal.title + "\n" +"CRECIMIENTO PERSONAL"
 
                 //socialPatrocinado = retosSocial.get(0).patrocinado
                 //culturaPatrocinado = retosCultura.get(0).patrocinado
@@ -171,6 +186,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "cooking")
                 it.putExtra("EXTRA_PATROCINADO", cocinaPatrocinado)
                 it.putExtra("EXTRA_FORMATTED_TIME", tvChallengeTimer.text.toString())
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ", retoCocina)
                 startActivity(it)
             }
 
@@ -183,6 +199,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "growth")
                 it.putExtra("EXTRA_PATROCINADO", crecimientoPatrocinado)
                 it.putExtra("EXTRA_FORMATTED_TIME", tvChallengeTimer.text.toString())
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ", retoCrecimientoPersonal)
                 startActivity(it)
             }
         }
@@ -194,6 +211,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "social")
                 it.putExtra("EXTRA_PATROCINADO", socialPatrocinado)
                 it.putExtra("EXTRA_FORMATTED_TIME", tvChallengeTimer.text.toString())
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ", retoSocial)
 
                 startActivity(it)
             }
@@ -206,6 +224,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "culture")
                 it.putExtra("EXTRA_PATROCINADO", culturaPatrocinado)
                 it.putExtra("EXTRA_FORMATTED_TIME", tvChallengeTimer.text.toString())
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ", retoCultura)
                 startActivity(it)
             }
        }
@@ -217,6 +236,7 @@ class SeleccionarRetoActivity : AppCompatActivity() {
                 it.putExtra("EXTRA_CATEGORY_CHALLENGE", "sport")
                 it.putExtra("EXTRA_PATROCINADO", deportesPatrocinado)
                 it.putExtra("EXTRA_FORMATTED_TIME", tvChallengeTimer.text.toString())
+                it.putExtra("EXTRA_CHOOSEN_CHALLENGE_OBJ", retoDeportes)
                 startActivity(it)
             }
         }

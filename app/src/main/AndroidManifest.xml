@@ -38,8 +38,7 @@
         <activity
             android:name=".presentation.CalendarGaleryActivity"
             android:exported="false"
-            android:label="@string/title_activity_calendar_galery"
-            android:theme="@style/NoActionBar" />
+             />
         <activity
             android:name=".presentation.ReactionActivity"
             android:exported="false" />

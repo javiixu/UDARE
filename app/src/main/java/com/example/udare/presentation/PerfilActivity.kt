@@ -44,6 +44,9 @@ class PerfilActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
 
+        //layout purpose
+        supportActionBar?.hide()
+
         //Buttons & Views
         var tvSocialPoints = findViewById<TextView>(R.id.tvSocialPoints)
         var tvSportPoints = findViewById<TextView>(R.id.tvSportPoints)
@@ -58,8 +61,8 @@ class PerfilActivity : AppCompatActivity() {
         var tvUserName = findViewById<TextView>(R.id.tvUserName)
         var tvUserNameTag = findViewById<TextView>(R.id.tvUserNameTag)
         var tvUserPointsMessage = findViewById<TextView>(R.id.tvUserPointsMessage)
-        var buttonFollowers = findViewById<Button>(R.id.btnFollowers)
-        var buttonFollowing = findViewById<Button>(R.id.btnFollowing)
+        //var buttonFollowers = findViewById<Button>(R.id.btnFollowers)
+        //var buttonFollowing = findViewById<Button>(R.id.btnFollowing)
 
         //TODO
         // if user updates profile pic send it to database
@@ -96,8 +99,11 @@ class PerfilActivity : AppCompatActivity() {
 
 
         //set followers and following
+        /*
         buttonFollowers.text = "Followers\n" + thisUser.profile.followers.size.toString()
         buttonFollowing.text = "Following\n" + thisUser.profile.following.size.toString()
+
+         */
 
 
 
@@ -140,7 +146,7 @@ class PerfilActivity : AppCompatActivity() {
             this@PerfilActivity.startActivity(intent)
         }
 
-
+        /*
         buttonFollowers.setOnClickListener(){
             val intent = Intent(this@PerfilActivity, FollowersActivity::class.java)
             this@PerfilActivity.startActivity(intent)
@@ -150,6 +156,8 @@ class PerfilActivity : AppCompatActivity() {
             val intent = Intent(this@PerfilActivity, FollowingActivity::class.java)
             this@PerfilActivity.startActivity(intent)
         }
+
+         */
 
         btnBackFromProfile.setOnClickListener(){
             Intent(this, Inicio::class.java).also{
