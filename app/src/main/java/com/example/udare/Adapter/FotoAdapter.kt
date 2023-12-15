@@ -37,6 +37,7 @@ class FotoAdapter(private val Lista: List<PostData>, private val context: Contex
         val avatarView: ImageView = itemView.findViewById(R.id.avatar)
         val iconoView: ImageView = itemView.findViewById(R.id.icono_categoria)
         val contenedorUser : View = itemView.findViewById(R.id.contenedor_user)
+        val nameView: TextView = itemView.findViewById(R.id.name_foto)
 
         val captureButton = itemView.findViewById<ImageView>(R.id.capture_button)
 
@@ -148,6 +149,8 @@ class FotoAdapter(private val Lista: List<PostData>, private val context: Contex
             .into(holder.imageView)
 
         holder.usernameView.text = "@" + Lista[position].username
+        holder.nameView.text = Lista[position].name
+
         Glide.with(holder.avatarView)
             .load(Lista[position].profilePic) // Asegúrate de que CommentData tenga un campo profilePic
             .apply(RequestOptions.circleCropTransform())

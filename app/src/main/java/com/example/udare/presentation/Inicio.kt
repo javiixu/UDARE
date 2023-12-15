@@ -100,7 +100,8 @@ class Inicio : AppCompatActivity() {
                                 override fun onSuccess(challenge: Challenge) {
                                     val profilePic = user.profile.profilePic
                                     val username = user.username
-                                    val elem = PostData(post, profilePic, username, challenge)
+                                    val name = user.profile.name
+                                    val elem = PostData(post, profilePic, username, challenge, name)
                                     Lista.add(elem)
                                     updatePostList(Lista)
                                 }

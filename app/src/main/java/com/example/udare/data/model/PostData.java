@@ -6,12 +6,14 @@ public class PostData {
     public String username;
     public Post post;
     public Challenge challenge;
+    public String name;
 
-    public PostData(Post post, String profilePic, String username, Challenge challenge){
+    public PostData(Post post, String profilePic, String username, Challenge challenge, String name){
         this.post = post;
         this.profilePic = profilePic;
         this.username = username;
         this.challenge = challenge;
+        this.name = name;
     }
 
     public String getProfilePic() {
@@ -44,5 +46,13 @@ public class PostData {
 
     public void setChallenge(Challenge challenge) {
         this.challenge = challenge;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

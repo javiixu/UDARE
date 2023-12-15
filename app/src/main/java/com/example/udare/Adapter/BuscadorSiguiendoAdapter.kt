@@ -29,6 +29,7 @@ class BuscadorSiguiendoAdapter(private val Lista: List<User>, private val contex
         val usernameView: TextView = itemView.findViewById(R.id.username_seguidor)
         val profilePicView: ImageView = itemView.findViewById(R.id.foto_user_seguidor)
         val botonEliminarAmigo: ImageView = itemView.findViewById(R.id.boton_eliminar_amigo)
+        val nameView: TextView = itemView.findViewById(R.id.name_seguidor)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextoHolder {
@@ -46,10 +47,13 @@ class BuscadorSiguiendoAdapter(private val Lista: List<User>, private val contex
         val elem = Lista[position]
         val profilePic = elem.profile.profilePic
         val username = elem.username
+        val name = elem.profile.name
 
         Log.d("tag-comments", username + profilePic)
 
-        holder.usernameView.text = username
+        holder.usernameView.text = "@" + username
+        holder.nameView.text = name
+
         Glide.with(holder.profilePicView)
             .load(profilePic) // Asegúrate de que CommentData tenga un campo profilePic
             .apply(RequestOptions.circleCropTransform())
