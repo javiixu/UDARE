@@ -78,6 +78,12 @@ class BuscadorUsuario : AppCompatActivity() {
             }
         }
 
+        fotoPerfil.setOnClickListener() {
+            Intent(this, PerfilActivity::class.java).also {
+                startActivity(it)
+            }
+        }
+
         sugerenciasButton.setOnClickListener() {
             setButtons(sugerenciasButton, seguidoresButton, siguiendoButton)
 
