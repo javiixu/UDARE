@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.SeleccionarRetoActivity">
+
+    <!-- Componente de arriba -->
+
+    <!-- Componente central -->
+    <LinearLayout
+        android:id="@+id/topLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#171717"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Flecha a la izquierda -->
+        <ImageView
+            android:id="@+id/btnBackFromTakingPhoto3"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/flecharound" />
+
+        <!-- Flash centrado tanto horizontal como verticalmente -->
+        <ImageView
+            android:id="@+id/btnFlash3"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#171717"
+            android:src="@drawable/flash_camara" />
+
+        <!-- Cámara a la derecha -->
+        <ImageView
+            android:id="@+id/btnAjustes3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="15dp"
+            android:background="#171717"
+            android:src="@drawable/ajustes" />
+
+    </LinearLayout>
+
+
+
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/viewFinder3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/bottomLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.60"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topLayout3">
+        <!-- Aquí se mostrará la vista de la cámara -->
+    </androidx.camera.view.PreviewView>
+
+    <!-- Componente de abajo -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomLayout3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="2dp"
+        android:background="#171717"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewFinder3">
+
+        <ImageView
+            android:id="@+id/btnSwitchCamera3"
+            android:layout_width="79dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="84dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="87dp"
+            android:background="#171717"
+            android:src="@drawable/cambiar_camara"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnTakePhoto3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btnTakePhoto3"
+            android:layout_width="110dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/boton_hacer_foto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

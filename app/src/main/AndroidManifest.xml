@@ -2,18 +2,78 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
+        android:name=".di.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/logo_udare"
+        android:label="@string/UDARE"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@drawable/logo_udare"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        
         <activity
-            android:name=".Inicio"
+            android:name=".presentation.LandingPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.CalendarGaleryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ReactionActivity"
+            android:exported="false" />
+        <activity android:name=".presentation.LoginActivity" />
+        <activity
+            android:name=".presentation.ComentariosActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".presentation.FollowersActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".presentation.FollowingActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".presentation.PerfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.HacerFotoActivityMejora"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.SeleccionarRetoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.RegistrationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.Inicio"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.BuscadorUsuario"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

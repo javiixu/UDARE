@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    >
+
+    <ImageView
+        android:id="@+id/ivCalendarViewerLandscape"
+        android:layout_width="170dp"
+        android:layout_height="160dp"
+        android:background="@drawable/rectangle_calendar_image_landscape"
+        android:src="@drawable/reto_crecimiento_dummy"
+        android:radius="30dp"
+        android:translationZ="1dp"
+        android:clipToOutline="true"
+        android:scaleType="centerCrop"
+
+        />
+
+    <TextView
+        android:id="@+id/tvChallengeDateCalendarLandscape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_calendar_date_landscape"
+        android:fontFamily="@font/cabinetgrotesk_regular"
+        android:gravity="bottom"
+        android:paddingLeft="20dp"
+        android:text="11 / 11 / 23 "
+        android:textSize="15sp"
+        android:textColor="#E7EE86" />
+
+    <ImageView
+        android:id="@+id/ivCategoryIconCalendarLandscape"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:translationZ="90dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/icono_crec_pers" />
+
+
+</RelativeLayout>

@@ -1,24 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Inicio">
+    tools:context=".presentation.Inicio"
+    android:background="#171717">
 
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+    <!-- Toolbar -->
+    <include
+        layout="@layout/tool_bar_inicio"
+        android:id="@+id/toolbar"/>
 
-        <Button
-            android:id="@+id/retos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="+" />
-    </LinearLayout>
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerFotos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+    <!-- CircleImageView en el centro inferior -->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/challenges"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/boton_retos"/>
+</RelativeLayout>

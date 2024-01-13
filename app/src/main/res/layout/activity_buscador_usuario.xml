@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#171717">
+
+    <!-- Toolbar -->
+    <include
+        android:id="@+id/toolbar_buscador"
+        layout="@layout/tool_bar_buscador_amigos" />
+
+    <EditText
+        android:id="@+id/buscar_usuario"
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/toolbar_buscador"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/buscador_style"
+        android:drawableStart="@drawable/lupa_buscador"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/aileron_regular"
+        android:hint="Buscar amigos"
+        android:paddingLeft="20dp"
+        android:textColor="#F9F4F1"
+        android:textColorHint="#F9F4F1"
+        android:textSize="13sp"
+        android:singleLine="true"/>
+
+    <LinearLayout
+        android:id="@+id/layout_botones"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/buscar_usuario"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/boton_sugerencias"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/botones_buscador_pressed"
+            android:fontFamily="@font/aileron_regular"
+            android:text="Sugerencias"
+            android:textAllCaps="false"
+            android:textColor="#171717"
+            android:textSize="13sp" />
+
+
+        <Button
+            android:id="@+id/boton_seguidores"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/botones_buscador"
+            android:fontFamily="@font/aileron_regular"
+            android:text="Seguidores"
+            android:textAllCaps="false"
+            android:textColor="#F9F4F1"
+            android:textSize="13sp" />
+
+
+        <Button
+            android:id="@+id/boton_siguiendo"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/botones_buscador"
+            android:fontFamily="@font/aileron_regular"
+            android:text="Siguiendo"
+            android:textAllCaps="false"
+            android:textColor="#F9F4F1"
+            android:textSize="13sp" />
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerBuscador"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_botones"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+</RelativeLayout>

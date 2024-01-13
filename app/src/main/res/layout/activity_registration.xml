@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<RelativeLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".presentation.RegistrationActivity">-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/teacher"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:gravity="center"-->
+<!--        android:text="Sign Up Here"-->
+<!--        android:textColor="@color/colorBlack"-->
+<!--        android:textSize="28sp"-->
+<!--        android:textStyle="bold|italic" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/names"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/teacher"-->
+<!--        android:layout_marginStart="35dp"-->
+<!--        android:layout_marginTop="120dp"-->
+<!--        android:text="Name"-->
+<!--        android:textColor="@color/colorBlack" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/register_name"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/names"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginLeft="30dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:background="@drawable/edit"-->
+<!--        android:hint="Your Name..."-->
+<!--        android:inputType="text"-->
+<!--        android:padding="8dp" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/email"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/register_name"-->
+<!--        android:layout_marginStart="35dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:text="Email"-->
+<!--        android:textColor="@color/colorBlack" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/register_email"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/email"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginLeft="30dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:background="@drawable/edit"-->
+<!--        android:drawableStart="@drawable/ic_email"-->
+<!--        android:hint="Email..."-->
+<!--        android:inputType="textEmailAddress"-->
+<!--        android:padding="8dp" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/pass"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/register_email"-->
+<!--        android:layout_marginStart="35dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:text="Password"-->
+<!--        android:textColor="@color/colorBlack" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/register_password"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/pass"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginLeft="30dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:background="@drawable/edit"-->
+<!--        android:hint="Password..."-->
+<!--        android:inputType="textPassword"-->
+<!--        android:padding="8dp" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/register_button"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/register_password"-->
+<!--        android:layout_marginLeft="30dp"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:background="@drawable/buttonss"-->
+<!--        android:padding="4dp"-->
+<!--        android:text="Create Account"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@android:color/background_light"-->
+<!--        android:textSize="24sp" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/homepage"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/register_button"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginStart="15dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginEnd="23dp"-->
+<!--        android:text=" Already Have a Account?Sign In"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textColor="@color/colorBlack"-->
+<!--        android:textSize="17sp"-->
+<!--        android:textStyle="bold" />-->
+
+
+
+<!-- res/layout/activity_registration.xml -->
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="none"
+    android:background="#E7EE86"
+    android:clipToOutline="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.RegistrationActivity">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#E7EE86"
+    android:clipToOutline="true"
+    tools:context=".presentation.RegistrationActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/buttonBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/flecharound_black" />
+
+    <TextView
+        android:id="@+id/welcom_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="70dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/welcome_to"
+        android:textAppearance="@style/welcome_to"
+        android:fontFamily="@font/cabinetgrotesk_regular"
+    />
+
+    <TextView
+        android:id="@+id/udare_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/welcom_to"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="3dp"
+        android:gravity="top"
+        android:text="@string/udare"
+        android:textAppearance="@style/udare_register"
+        android:fontFamily="@font/neuemetananext"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/udare_register"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="21dp"
+        android:gravity="center_vertical"
+        android:text="@string/name"
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_alignParentLeft="true"
+        android:hint="Introduce tu name"
+        android:fontFamily="@font/aileron_regular"/>
+
+    <TextView
+        android:id="@+id/correo"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/editTextName"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="21dp"
+        android:gravity="center_vertical"
+        android:text="@string/correo"
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/correo"
+        android:layout_alignParentLeft="true"
+        android:hint="udare@gmail.com"
+        android:inputType="textEmailAddress"
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
+
+    <TextView
+        android:id="@+id/usuario"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/editTextEmail"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="21dp"
+        android:gravity="center_vertical"
+        android:text="@string/usuario"
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
+
+    <EditText
+        android:id="@+id/editTextUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/usuario"
+        android:layout_alignParentLeft="true"
+        android:drawableStart="@drawable/ic_users"
+        android:hint="@string/some_id"
+        android:inputType="text"
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
+    
+    <TextView
+        android:id="@+id/contrase_a"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/editTextUsername"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="21dp"
+        android:gravity="center_vertical"
+        android:text="@string/contrase_a"
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
+    
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contrase_a"
+        android:layout_alignParentLeft="true"
+        android:hint="*********"
+        android:inputType="textPassword"
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
+    
+    <TextView
+        android:id="@+id/repetir_con"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/editTextPassword"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="21dp"
+        android:gravity="center_vertical"
+        android:text="@string/repetir_con"
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
+    
+    <EditText
+        android:id="@+id/editTextConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/repetir_con"
+        android:layout_alignParentLeft="true"
+        android:hint="*********"
+        android:inputType="textPassword"
+        android:textAppearance="@style/register_titles"
+        android:fontFamily="@font/aileron_regular"/>
+
+    <TextView
+        android:id="@+id/ya_tienes_c"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editTextConfirmPassword"
+        android:text="@string/ya_tienes_c"
+        android:textAppearance="@style/ya_tienes_c"
+        android:gravity="center_vertical"
+        android:fontFamily="@font/aileron_regular"
+        />
+
+    <Button
+        android:id="@+id/button_register"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/ya_tienes_c"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rectangle_button_register"
+        android:text="@string/registrarse"
+        android:textAppearance="@style/registrarse"
+        android:fontFamily="@font/aileron_regular"/>
+
+
+    <!--    <EditText-->
+<!--        android:id="@+id/editTextName"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Name"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:layout_marginBottom="16dp"/>-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/editTextEmail"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Email"-->
+<!--        android:inputType="textEmailAddress"-->
+<!--        android:layout_below="@id/editTextName"-->
+<!--        android:layout_marginBottom="16dp"/>-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/editTextUsername"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Username"-->
+<!--        android:inputType="text"-->
+<!--        android:layout_below="@id/editTextEmail"-->
+<!--        android:layout_marginBottom="16dp"/>-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/editTextPassword"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Password"-->
+<!--        android:inputType="textPassword"-->
+<!--        android:layout_below="@id/editTextUsername"-->
+<!--        android:layout_marginBottom="16dp"/>-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/editTextConfirmPassword"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Confirm Password"-->
+<!--        android:inputType="textPassword"-->
+<!--        android:layout_below="@id/editTextPassword"-->
+<!--        android:layout_marginBottom="16dp"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/buttonRegister"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Register"-->
+<!--        android:layout_below="@id/editTextConfirmPassword"/>-->
+
+</RelativeLayout>
+</ScrollView>
